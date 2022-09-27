@@ -40,14 +40,14 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     price: DataTypes.DECIMAL,
-    createdAt: {
-      allowNull: false,
-      type: Sequelize.DATE
-    },
-    updatedAt: {
-      allowNull: false,
-      type: Sequelize.DATE
-    }
+    // createdAt: {
+    //   allowNull: false,
+    //   type: Sequelize.DATE
+    // },
+    // updatedAt: {
+    //   allowNull: false,
+    //   type: Sequelize.DATE
+    // }
   }, {
     sequelize,
     modelName: 'Spot',
