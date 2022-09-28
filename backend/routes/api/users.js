@@ -32,7 +32,7 @@ const validateSignup = [
     .withMessage('Password must be 6 characters or more.'),
   handleValidationErrors
 ];
-
+//signup a user?
 router.post(
   '/',
   validateSignup,

@@ -10,12 +10,33 @@ const { SpotImage } = require('../../db/models');
 const { ReviewImage } = require('../../db/models');
 const { User } = require('../../db/models');
 const { route } = require('./users');
-// const { check } = require('express-validator');
+const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+router.post('/:spotId/images', requireAuth, async(req, res, next) => {
+    if (req.user){
+        
+    }
+})
+
+
+// GET spots of current user
+router.get('/current', requireAuth, async(req, res, next) => {
+    if (req.user){
+        // const owner = await User.findByPk(req.user.id)
+        const currentHomes = await Spot.findAll({
+            where: {
+                ownerId: req.user.id
+            }
+            
+        })
+        console.log(currentHomes)
+        res.json({currentHomes})
+    }
+})
 //GET details of spot by spotId
 router.get('/:spotId', async (req, res, next) => {
-
+    console.log(req.params.spotId)
     const spots = await Spot.findAll({
         where: {
             id: req.params.spotId
@@ -24,7 +45,7 @@ router.get('/:spotId', async (req, res, next) => {
             model: SpotImage
         },
         {
-            model: User
+            model: User,
         }]
     });
     if (spots.length === 0) {
@@ -48,7 +69,7 @@ router.get('/:spotId', async (req, res, next) => {
             spotId: req.params.spotId
         }
     })
-    console.log(spots)
+    // console.log(spots)
     const reviewAvg = await (reviewSum / reviewCount)
 
     const spotImages = await SpotImage.findAll({
@@ -58,20 +79,13 @@ router.get('/:spotId', async (req, res, next) => {
         attributes: ['id', 'url', 'preview']
     })
 
-    const Owner = await User.findAll({
-        where: {
-            id: spots.ownerId
-        },
-        attributes: ['id', 'firstName', 'lastName']
-    })
 
 
-    res.json({
-        array
-    })
+    res.json({spots})
 
 })
 
+//GET all spots
 router.get('/', async (req, res) => {
     let spots = await Spot.findAll({
         include: [{
@@ -81,18 +95,31 @@ router.get('/', async (req, res) => {
             model: Review
         }]
     })
+    const reviewCount = await Review.count({
+        where: {
+            spotId: req.params.spotId
+        }
+    })
 
+    const reviewSum = await Review.sum('stars', {
+        where:
+        {
+            spotId: req.params.spotId
+        }
+    })
+
+    const reviewAvg = await (reviewSum / reviewCount)
     let spotsList = []
     spots.forEach(spot => {
         spotsList.push(spot.toJSON())
     })
 
-    // spotsList.forEach(spot => {
-    //     spot.Reviews.forEach(rating => {
-    //         let average = sequelize.fn("AVG", sequelize.col("stars"))
-    //         console.log(average)
-    //     })
-    // })
+    spotsList.forEach(spot => {
+        spot.Reviews.forEach(rating => {
+            let average = sequelize.fn("AVG", sequelize.col("stars"))
+            console.log(average)
+        })
+    })
     spotsList.forEach(spot => {
         spot.SpotImages.forEach(image => {
             if (image.preview === true) {
@@ -102,11 +129,15 @@ router.get('/', async (req, res) => {
             }
         })
     })
+    spotsList.forEach(spot => {
+        spot.spotReviews.forEach(rating => {
+        
+        })
+    })
+
+    res.json(sportsList)
 
 })
-
-// router.put('/:spotId', async (req, res) => {
-// })
 
 //Delete a spot by spotid
 router.delete('/:spotId', async (req, res) => {
@@ -132,17 +163,20 @@ console.log(spot)
         })
     } else res.send('hi')
 })
+//Create a new spot
 router.post('/', requireAuth, handleValidationErrors, async (req, res, next) => {
    
     if (req.user){
        let newSpot = await Spot.create(req.body)
-       ownerId = newSpot.id
-       newSpot.ownerId = newSpot.id
+       console.log(newSpot)
+       newSpot.ownerId = req.user.id
+        console.log(newSpot)
+        await newSpot.save()
        res.status(201)
        res.json(newSpot)
     }
-    if (handleValidationErrors){
-        console.log(hi)
-    }
+    // if (handleValidationErrors){
+    //     console.log(hi)
+    // }
 })
 module.exports = router;
