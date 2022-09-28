@@ -1,4 +1,5 @@
 const express = require('express');
+const { json } = require('sequelize');
 const router = express.Router();
 // const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Spot } = require('../../db/models');
@@ -13,6 +14,14 @@ const { User } = require('../../db/models');
 
 router.get('/:spotId', async (req, res, next) => {
     const spots = await Spot.findByPk(req.params.spotId);
+    if (!spots) {
+        const err = new Error('No spot found')
+        err.status = 404
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
     const reviewCount = await Review.count({
         where: {
             spotId: req.params.spotId
@@ -38,9 +47,9 @@ router.get('/:spotId', async (req, res, next) => {
         },
         attributes: ['id', 'firstName', 'lastName']
     })
-  
 
-  
+
+
     res.json({
         spots,
         numReviews: reviewCount,
@@ -48,6 +57,7 @@ router.get('/:spotId', async (req, res, next) => {
         SpotImages: spotImages,
         Owner
     })
+
 })
 
 // router.put('/:spotId', async (req, res) => {
