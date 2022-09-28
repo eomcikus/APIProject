@@ -32,19 +32,29 @@ router.get('/:spotId', async (req, res, next) => {
         },
         attributes: ['id', 'url', 'preview']
     })
+    const Owner = await User.findAll({
+        where: {
+            id: spots.ownerId
+        },
+        attributes: ['id', 'firstName', 'lastName']
+    })
+  
 
-    // console.log(spotImages)
-
+  
     res.json({
         spots,
         numReviews: reviewCount,
         avgStarRating: reviewAvg,
-        SpotImages: spotImages
+        SpotImages: spotImages,
+        Owner
     })
 })
 
 router.put('/:spotId', async (req, res) => {
-if (document.cookie = token)
+
+
+
+
 })
 
 
