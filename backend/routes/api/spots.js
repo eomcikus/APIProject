@@ -9,8 +9,9 @@ const { Review } = require('../../db/models');
 const { SpotImage } = require('../../db/models');
 const { ReviewImage } = require('../../db/models');
 const { User } = require('../../db/models');
+const { route } = require('./users');
 // const { check } = require('express-validator');
-// const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors } = require('../../utils/validation');
 
 //GET details of spot by spotId
 router.get('/:spotId', async (req, res, next) => {
@@ -121,15 +122,27 @@ router.delete('/:spotId', async (req, res) => {
             "statusCode": 404
         })
     }
-
-    if (req.user.id = spot.ownerId) {
-        spot.destroy()
+console.log(spot)
+    if (req.user.id === spot.ownerId) {
+       await spot.destroy()
         res.status(200);
         res.json({
             "message": "Successfully deleted",
             "statusCode": 200
         })
+    } else res.send('hi')
+})
+router.post('/', requireAuth, handleValidationErrors, async (req, res, next) => {
+   
+    if (req.user){
+       let newSpot = await Spot.create(req.body)
+       ownerId = newSpot.id
+       newSpot.ownerId = newSpot.id
+       res.status(201)
+       res.json(newSpot)
+    }
+    if (handleValidationErrors){
+        console.log(hi)
     }
 })
-
 module.exports = router;
