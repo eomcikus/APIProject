@@ -6,14 +6,14 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 const validateSignup = [
-  check('firstName')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 2 })
-    .withMessage('Please provide a name'),
-  check('lastName')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 2 })
-    .withMessage('Please provide a name'),
+  // check('firstName')
+  //   .exists({ checkFalsy: true })
+  //   .isLength({ min: 2 })
+  //   .withMessage('Please provide a name'),
+  // check('lastName')
+  //   .exists({ checkFalsy: true })
+  //   .isLength({ min: 2 })
+  //   .withMessage('Please provide a name'),
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
@@ -32,19 +32,22 @@ const validateSignup = [
     .withMessage('Password must be 6 characters or more.'),
   handleValidationErrors
 ];
-
+//signup a user?
 router.post(
   '/',
   validateSignup,
   async (req, res) => {
     const { firstName, lastName, email, password, username } = req.body;
     const user = await User.signup({ firstName, lastName, email, username, password });
-
-    await setTokenCookie(res, user);
-
-    return res.json({
-      user
-    });
+    let token =  setTokenCookie(res, user);
+ 
+    if (token){
+    // user.toJSON()
+   user.dataValues.token = token
+    }
+   
+    console.log(user)
+    return res.json(user);
   }
 );
 module.exports = router;
