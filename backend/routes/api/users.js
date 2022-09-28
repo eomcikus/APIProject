@@ -6,6 +6,14 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 const validateSignup = [
+  check('firstName')
+    .exists({ checkFalsy: true })
+    .isLength({ min: 2 })
+    .withMessage('Please provide a name'),
+  check('lastName')
+    .exists({ checkFalsy: true })
+    .isLength({ min: 2 })
+    .withMessage('Please provide a name'),
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
@@ -26,17 +34,17 @@ const validateSignup = [
 ];
 
 router.post(
-    '/',
-    validateSignup,
-    async (req, res) => {
-      const { email, password, username } = req.body;
-      const user = await User.signup({ email, username, password });
-  
-      await setTokenCookie(res, user);
-  
-      return res.json({
-        user
-      });
-    }
-  );
+  '/',
+  validateSignup,
+  async (req, res) => {
+    const { firstName, lastName, email, password, username } = req.body;
+    const user = await User.signup({ firstName, lastName, email, username, password });
+
+    await setTokenCookie(res, user);
+
+    return res.json({
+      user
+    });
+  }
+);
 module.exports = router;
