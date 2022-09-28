@@ -32,7 +32,12 @@ router.post(
       err.errors = ['The provided credentials were invalid.'];
       return next(err);
     }
-
+    if (user.firstName === '' || user.lastName === '' || user.email === ''){
+      const err = new Error('Violation')
+      err.status = 400;
+      err.title = 'User failed'
+      err.errors = ['Provided credentials on your account are invaled']
+    }
     await setTokenCookie(res, user);
 
     return res.json({

@@ -50,12 +50,12 @@ router.get('/:spotId', async (req, res, next) => {
     })
 })
 
-router.put('/:spotId', async (req, res) => {
+// router.put('/:spotId', async (req, res) => {
 
 
 
 
-})
+// })
 
 
 
