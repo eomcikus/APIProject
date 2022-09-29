@@ -218,19 +218,7 @@ router.get('/', async (req, res) => {
             model: Review
         }]
     })
-    // console.log(spots)
-    // const reviewCount = await Review.count({
-    //     where: {
-    //         spotId: req.params.spotId
-    //     }
-    // })
-    // const reviewSum = await Review.sum('stars', {
-    //     where:
-    //     {
-    //         spotId: req.params.spotId
-    //     }
-    // })
-    // const reviewAvg = await (reviewSum / reviewCount)
+
     let spotsList = []
     spots.forEach(spot => {
         spotsList.push(spot.toJSON())
