@@ -41,12 +41,12 @@ router.get('/:spotId', async (req, res, next) => {
         where: {
             id: req.params.spotId
         },
-        include: [{
-            model: SpotImage
-        },
-        {
-            model: User,
-        }]
+        // include: [{
+        //     model: SpotImage
+        // },
+        // {
+        //     model: User,
+        // }]
     });
     if (spots.length === 0) {
         const err = new Error('No spot found')
@@ -57,27 +57,27 @@ router.get('/:spotId', async (req, res, next) => {
         })
     }
 
-    const reviewCount = await Review.count({
-        where: {
-            spotId: req.params.spotId
-        }
-    })
+    // const reviewCount = await Review.count({
+    //     where: {
+    //         spotId: req.params.spotId
+    //     }
+    // })
 
-    const reviewSum = await Review.sum('stars', {
-        where:
-        {
-            spotId: req.params.spotId
-        }
-    })
+    // const reviewSum = await Review.sum('stars', {
+    //     where:
+    //     {
+    //         spotId: req.params.spotId
+    //     }
+    // })
     // console.log(spots)
-    const reviewAvg = await (reviewSum / reviewCount)
+    // const reviewAvg = await (reviewSum / reviewCount)
 
-    const spotImages = await SpotImage.findAll({
-        where: {
-            spotId: req.params.spotId
-        },
-        attributes: ['id', 'url', 'preview']
-    })
+    // const spotImages = await SpotImage.findAll({
+    //     where: {
+    //         spotId: req.params.spotId
+    //     },
+    //     attributes: ['id', 'url', 'preview']
+    // })
 
 
 
