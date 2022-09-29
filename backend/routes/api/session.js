@@ -38,11 +38,14 @@ router.post(
     //   err.title = 'User failed'
     //   err.errors = ['Provided credentials on your account are invaled']
     // }
-    await setTokenCookie(res, user);
-
-    return res.json({
-      user, 
-    });
+    // await setTokenCookie(res, user);
+    let token =  setTokenCookie(res, user);
+ 
+    if (token){
+    // user.toJSON()
+   user.dataValues.token = token
+    }
+    return res.json(user);
   }
 );
 

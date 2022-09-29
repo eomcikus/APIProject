@@ -46,7 +46,6 @@ router.post(
    user.dataValues.token = token
     }
    
-    console.log(user)
     return res.json(user);
   }
 );
