@@ -36,7 +36,7 @@ router.get('/current', requireAuth, async(req, res, next) => {
 })
 //GET details of spot by spotId
 router.get('/:spotId', async (req, res, next) => {
-    console.log(req.params.spotId)
+
     const spots = await Spot.findAll({
         where: {
             id: req.params.spotId
@@ -46,6 +46,7 @@ router.get('/:spotId', async (req, res, next) => {
         },
         {
             model: User,
+            as: 'Owner'
         }]
     });
     if (spots.length === 0) {
@@ -56,32 +57,32 @@ router.get('/:spotId', async (req, res, next) => {
             "statusCode": 404
         })
     }
+    let spotsFixed = spots[0].toJSON()
+  
+        if (spotsFixed.SpotImages.preview === true){
+             return spotsFixed.previewImage = image.url
+        }
+        if (spotsFixed.SpotImages.preview === false) {
+            spotsFixed.previewImage = 'No preview Image found'
+        }
+    const reviewCount = await Review.count({
+        where: {
+            spotId: req.params.spotId
+        }
+    })
+console.log(reviewCount)
+    const reviewSum = await Review.sum('stars', {
+        where:
+        {
+            spotId: req.params.spotId
+        }
+    })
+    
+    const reviewAvg = await (reviewSum / reviewCount)
 
-    // const reviewCount = await Review.count({
-    //     where: {
-    //         spotId: req.params.spotId
-    //     }
-    // })
-
-    // const reviewSum = await Review.sum('stars', {
-    //     where:
-    //     {
-    //         spotId: req.params.spotId
-    //     }
-    // })
-    // console.log(spots)
-    // const reviewAvg = await (reviewSum / reviewCount)
-
-    // const spotImages = await SpotImage.findAll({
-    //     where: {
-    //         spotId: req.params.spotId
-    //     },
-    //     attributes: ['id', 'url', 'preview']
-    // })
-
-
-
-    res.json({spots})
+    spotsFixed.numReviews = reviewCount
+    spotsFixed.avgStarRating = reviewAvg
+    res.json(spotsFixed)
 
 })
 
