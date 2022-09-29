@@ -13,27 +13,67 @@ const { route } = require('./users');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-// router.post('/:spotId/images', requireAuth, async(req, res, next) => {
-//     if (req.user){
-        
-//     }
-// })
 
 
 // GET spots of current user
-router.get('/current', requireAuth, async(req, res, next) => {
-    if (req.user){
+router.get('/current', requireAuth, async (req, res, next) => {
+    if (req.user) {
         // const owner = await User.findByPk(req.user.id)
         const currentHomes = await Spot.findAll({
             where: {
                 ownerId: req.user.id
             }
-            
+
         })
         console.log(currentHomes)
-        res.json({currentHomes})
+        res.json({ currentHomes })
     }
 })
+//ppost a new review based on spot id
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+    let spot = await Spot.findAll({
+        where: {
+            id: req.params.spotId
+        },
+        include: {
+            model: Review,
+            where: {
+                userId: req.user.id
+            }
+        }
+    })
+
+    if (!spot.length) {
+        res.status(404)
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+    spot = spot[0].toJSON()
+    if (spot.Reviews.length) {
+        res.status(403)
+        return res.json({
+            "message": "User already has a review for this spot",
+            "statusCode": 403
+        })
+    }
+
+
+
+    const newReview = await Review.create({
+        userId: req.user.id,
+        spotId: req.params.spotId,
+        review: req.body.review,
+        stars: req.body.stars
+    })
+    res.status(201)
+    return res.json(newReview)
+
+})
+
+
+
 //GET details of spot by spotId
 router.get('/:spotId', async (req, res, next) => {
 
@@ -59,26 +99,26 @@ router.get('/:spotId', async (req, res, next) => {
         })
     }
     let spotsFixed = spots[0].toJSON()
-  
-        if (spotsFixed.SpotImages.preview === true){
-             return spotsFixed.previewImage = image.url
-        }
-        if (spotsFixed.SpotImages.preview === false) {
-            spotsFixed.previewImage = 'No preview Image found'
-        }
+
+    if (spotsFixed.SpotImages.preview === true) {
+        return spotsFixed.previewImage = image.url
+    }
+    if (spotsFixed.SpotImages.preview === false) {
+        spotsFixed.previewImage = 'No preview Image found'
+    }
     const reviewCount = await Review.count({
         where: {
             spotId: req.params.spotId
         }
     })
-console.log(reviewCount)
+    console.log(reviewCount)
     const reviewSum = await Review.sum('stars', {
         where:
         {
             spotId: req.params.spotId
         }
     })
-    
+
     const reviewAvg = await (reviewSum / reviewCount)
 
     spotsFixed.numReviews = reviewCount
@@ -86,7 +126,40 @@ console.log(reviewCount)
     res.json(spotsFixed)
 
 })
+//Edit a Spot
+router.put('/:spotId', requireAuth, handleValidationErrors, async (req, res, next) => {
+    const spot = await Spot.findOne({
+        where: {
+            id: req.params.spotId
+        }
+    })
+    let spotNew = spot
+    if (!spotNew.length) {
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+    console.log(spotNew)
+    if (!req.user.id === spotNew.ownerId) {
+        res.status(403)
+        res.json('Unauthorized to make these changes')
+    } else {
+        spotNew.update({
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            country: req.body.country,
+            lat: req.body.lat,
+            lng: req.body.lng,
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price
+        })
+        res.json(spot)
+    }
 
+})
 //GET all spots
 router.get('/', async (req, res) => {
     let spots = await Spot.findAll({
@@ -114,7 +187,7 @@ router.get('/', async (req, res) => {
     spots.forEach(spot => {
         spotsList.push(spot.toJSON())
     })
-console.log(spotsList)
+    console.log(spotsList)
     // spotsList.forEach(spot => {
     //     spot.Reviews.forEach(rating => {
     //         let average = sequelize.fn("AVG", sequelize.col("stars"))
@@ -133,7 +206,7 @@ console.log(spotsList)
     res.json(spots)
     // spotsList.forEach(spot => {
     //     spot.spotReviews.forEach(rating => {
-        
+
     //     })
     // })
 
@@ -154,9 +227,9 @@ router.delete('/:spotId', async (req, res) => {
             "statusCode": 404
         })
     }
-console.log(spot)
+    console.log(spot)
     if (req.user.id === spot.ownerId) {
-       await spot.destroy()
+        await spot.destroy()
         res.status(200);
         res.json({
             "message": "Successfully deleted",
@@ -166,15 +239,15 @@ console.log(spot)
 })
 //Create a new spot
 router.post('/', requireAuth, handleValidationErrors, async (req, res, next) => {
-   
-    if (req.user){
-       let newSpot = await Spot.create(req.body)
-       console.log(newSpot)
-       newSpot.ownerId = req.user.id
+
+    if (req.user) {
+        let newSpot = await Spot.create(req.body)
+        console.log(newSpot)
+        newSpot.ownerId = req.user.id
         console.log(newSpot)
         await newSpot.save()
-       res.status(201)
-       res.json(newSpot)
+        res.status(201)
+        res.json(newSpot)
     }
     // if (handleValidationErrors){
     //     console.log(hi)
@@ -182,7 +255,7 @@ router.post('/', requireAuth, handleValidationErrors, async (req, res, next) => 
 })
 
 //create an image for a spot based on spots id
-router.post('/:spotId/images', requireAuth, async(req, res, next)=> {
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     // let { spotId } = req.params.spotId
     const spot = await Spot.findByPk(req.params.spotId)
     // const spot = await Spot.findAll({
@@ -191,28 +264,28 @@ router.post('/:spotId/images', requireAuth, async(req, res, next)=> {
     //     }
 
     // })
-    if (!spot){
+    if (!spot) {
         let err = new Error()
         res.status(404)
         res.send({
             "message": "Spot couldn't be found",
             "statusCode": 404
-          })
-    } else {
-    
-    let newSpot= spot.toJSON()
-    if (!req.user.id === newSpot.ownerId){
-        let err = new Error()
-        res.status(403)
-        res.send('Unauthorized to make these changes')
-    } else {
-        
-        const newPic = await SpotImage.create({
-           url: req.body.url,
-           preview: req.body.preview 
         })
-        return res.json(newPic)
-    }
+    } else {
+
+        let newSpot = spot.toJSON()
+        if (!req.user.id === newSpot.ownerId) {
+            let err = new Error()
+            res.status(403)
+            res.send('Unauthorized to make these changes')
+        } else {
+            const newPic = await SpotImage.create({
+                url: req.body.url,
+                spotId: req.params.spotId,
+                preview: req.body.preview
+            })
+            return res.json(newPic)
+        }
     }
     // return console.log(newSpot)
 })
