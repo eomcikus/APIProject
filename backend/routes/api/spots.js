@@ -13,11 +13,11 @@ const { route } = require('./users');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-router.post('/:spotId/images', requireAuth, async(req, res, next) => {
-    if (req.user){
+// router.post('/:spotId/images', requireAuth, async(req, res, next) => {
+//     if (req.user){
         
-    }
-})
+//     }
+// })
 
 
 // GET spots of current user
@@ -42,7 +42,8 @@ router.get('/:spotId', async (req, res, next) => {
             id: req.params.spotId
         },
         include: [{
-            model: SpotImage
+            model: SpotImage,
+            attributes: ['id', 'url', 'preview']
         },
         {
             model: User,
@@ -96,31 +97,30 @@ router.get('/', async (req, res) => {
             model: Review
         }]
     })
-    const reviewCount = await Review.count({
-        where: {
-            spotId: req.params.spotId
-        }
-    })
-
-    const reviewSum = await Review.sum('stars', {
-        where:
-        {
-            spotId: req.params.spotId
-        }
-    })
-
-    const reviewAvg = await (reviewSum / reviewCount)
+    // console.log(spots)
+    // const reviewCount = await Review.count({
+    //     where: {
+    //         spotId: req.params.spotId
+    //     }
+    // })
+    // const reviewSum = await Review.sum('stars', {
+    //     where:
+    //     {
+    //         spotId: req.params.spotId
+    //     }
+    // })
+    // const reviewAvg = await (reviewSum / reviewCount)
     let spotsList = []
     spots.forEach(spot => {
         spotsList.push(spot.toJSON())
     })
-
-    spotsList.forEach(spot => {
-        spot.Reviews.forEach(rating => {
-            let average = sequelize.fn("AVG", sequelize.col("stars"))
-            console.log(average)
-        })
-    })
+console.log(spotsList)
+    // spotsList.forEach(spot => {
+    //     spot.Reviews.forEach(rating => {
+    //         let average = sequelize.fn("AVG", sequelize.col("stars"))
+    //         console.log(average)
+    //     })
+    // })
     spotsList.forEach(spot => {
         spot.SpotImages.forEach(image => {
             if (image.preview === true) {
@@ -130,13 +130,13 @@ router.get('/', async (req, res) => {
             }
         })
     })
-    spotsList.forEach(spot => {
-        spot.spotReviews.forEach(rating => {
+    res.json(spots)
+    // spotsList.forEach(spot => {
+    //     spot.spotReviews.forEach(rating => {
         
-        })
-    })
+    //     })
+    // })
 
-    res.json(sportsList)
 
 })
 
@@ -180,4 +180,44 @@ router.post('/', requireAuth, handleValidationErrors, async (req, res, next) => 
     //     console.log(hi)
     // }
 })
+
+//create an image for a spot based on spots id
+router.post('/:spotId/images', requireAuth, async(req, res, next)=> {
+    // let { spotId } = req.params.spotId
+    const spot = await Spot.findByPk(req.params.spotId)
+    // const spot = await Spot.findAll({
+    //     where: {
+    //         id: req.params.spotId
+    //     }
+
+    // })
+    if (!spot){
+        let err = new Error()
+        res.status(404)
+        res.send({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          })
+    } else {
+    
+    let newSpot= spot.toJSON()
+    if (!req.user.id === newSpot.ownerId){
+        let err = new Error()
+        res.status(403)
+        res.send('Unauthorized to make these changes')
+    } else {
+        
+        const newPic = await SpotImage.create({
+           url: req.body.url,
+           preview: req.body.preview 
+        })
+        return res.json(newPic)
+    }
+    }
+    // return console.log(newSpot)
+})
+//check if spotId/ownerId match req.user id
+//find the spot
+////create new picture 
+//add picture to SpotImages object in Spot Object
 module.exports = router;
