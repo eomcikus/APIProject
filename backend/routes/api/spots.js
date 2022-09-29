@@ -41,12 +41,12 @@ router.get('/:spotId', async (req, res, next) => {
         where: {
             id: req.params.spotId
         },
-        // include: [{
-        //     model: SpotImage
-        // },
-        // {
-        //     model: User,
-        // }]
+        include: [{
+            model: SpotImage
+        },
+        {
+            model: User,
+        }]
     });
     if (spots.length === 0) {
         const err = new Error('No spot found')
