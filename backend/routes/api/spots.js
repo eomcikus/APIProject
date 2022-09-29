@@ -31,18 +31,14 @@ router.get('/current', requireAuth, async (req, res, next) => {
 })
 //ppost a new review based on spot id
 router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+    // const spot = await Spot.findByPk(req.params.spotId)
+    // console.log(req.params.spotId)
     let spot = await Spot.findAll({
         where: {
             id: req.params.spotId
-        },
-        include: {
-            model: Review,
-            where: {
-                userId: req.user.id
-            }
         }
     })
-
+    console.log(spot)
     if (!spot.length) {
         res.status(404)
         return res.json({
@@ -51,16 +47,20 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
         })
     }
     spot = spot[0].toJSON()
-    if (spot.Reviews.length) {
+    const reviews = await Review.findAll({
+        where: {
+            spotId: req.params.spotId,
+            userId: req.user.id
+        }
+    })
+    console.log(reviews)
+    if (reviews.length) {
         res.status(403)
         return res.json({
             "message": "User already has a review for this spot",
             "statusCode": 403
         })
     }
-
-
-
     const newReview = await Review.create({
         userId: req.user.id,
         spotId: req.params.spotId,
@@ -72,7 +72,55 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
 
 })
 
+//create a booking from a spot based on the spots id
+router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req, res) => {
+    const bookings = await Booking.findByPk(req.params.spotId)
 
+    console.log(bookings)
+    // if (!spot){
+    //     res.status(404)
+    //     res.json({
+    //         "message": "Spot couldn't be found",
+    //         "statusCode": 404
+    //       })
+    // }
+    // if (req.params.spot.ownerId === req.user.id){
+    //     res.status(403)
+    //     res.json('Not authorized to make these reservations')
+    // } else {
+        const newBooking = await Booking.create({
+            spotId: req.params.spotId,
+            userId: req.user.id,
+            startDate: req.body.startDate,
+            endDate: req.body.endDate
+        })
+        res.json(newBooking)
+    
+})
+
+router.get('/:spotId/reviews', async (req, res, next) => {
+    const reviews = await Review.findAll({
+        where: {
+            spotId: req.params.spotId
+        },
+        include: [{
+            model: ReviewImage,
+            attributes: ['id', 'url']
+        },
+        {
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+        }]
+    })
+    if (!reviews.length){
+        res.status(404)
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          })
+    } 
+    res.json(reviews)
+})
 
 //GET details of spot by spotId
 router.get('/:spotId', async (req, res, next) => {
@@ -140,7 +188,7 @@ router.put('/:spotId', requireAuth, handleValidationErrors, async (req, res, nex
             "statusCode": 404
         })
     }
-    console.log(spotNew)
+
     if (!req.user.id === spotNew.ownerId) {
         res.status(403)
         res.json('Unauthorized to make these changes')

@@ -14,48 +14,94 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 //GET all reviews of the current User
-// router.get('/current', async (req, res) => {
-// const reviews = Review.findAll({
-//     where: {
-//         id: req.user.id
-//     },
-//     include: [{
-//         model: Spot
-//     },
-//     {
-//         model: ReviewImage
-//     }]
-// })
-// res.json(reviews)
-// })
+router.get('/current', requireAuth, async (req, res) => {
+    const reviews = await Review.findAll({
+        where: {
+            id: req.user.id
+        },
+        include: [{
+            model: Spot,
+            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price']
+        },
+        {
+            model: ReviewImage,
+            attributes: ['id', 'url']
+        },
+        {
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+        }]
+    })
+    res.json(reviews)
+
+})
 
 //add an image to a review based on review id
-router.post('/:reviewId/images', requireAuth, async (req, res)=> {
-   let currReview = await Review.findOne({
-    where: {
-        id: req.params.reviewId
-    }
-   })
-   if (!currReview.length){
-       res.status(404)
-       return res.json({
-           "message": "Review couldn't be found",
-           "statusCode": 404
+router.post('/:reviewId/images', requireAuth, async (req, res) => {
+    let currReview = await Review.findAll({
+        where: {
+            id: req.params.reviewId
+        }
+    })
+    console.log(currReview)
+    if (!currReview.length) {
+        res.status(404)
+        return res.json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
         })
     }
-    currReview = currReview.toJSON()
+    const reviewImages = ReviewImage.findAll({
+        where: {
+            reviewId: req.params.reviewId
+        }
+    })
+    if (reviewImages.length === 10) {
+        res.status(403)
+        res.json({
+            "message": "Maximum number of images for this resource was reached",
+            "statusCode": 403
+        })
+    }
     if (!req.user.id === currReview.userId) {
-        let err = new Error()
         res.status(403)
         res.json('Unauthorized to make these changes')
     } else {
         const newPic = await ReviewImage.create({
             reviewId: req.params.reviewId,
+            userId: req.user.id,
             url: req.body.url,
         })
         return res.json(newPic)
     }
-}
-)
+})
+
+//Edit a review
+router.put('/:reviewId', requireAuth, async (req, res) => {
+    let review = await Review.findAll({
+        where: {
+            id: req.params.reviewId
+        }
+    })
+    if (!review.length){
+        res.status(404)
+        res.json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+          })
+    }
+    if (!req.user.id === review.userId) {
+        res.status(403)
+        return res.json('Unauthorized to make these changes')
+    } else {
+        review.update({
+            review: req.body.review,
+            stars: req.body.stars
+        })
+        await review.save()
+        res.json(review)
+    }
+
+})
 
 module.exports = router;
