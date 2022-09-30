@@ -295,11 +295,8 @@ router.get('/', async (req, res) => {
 
 //Delete a spot by spotid
 router.delete('/:spotId', async (req, res) => {
-    const spot = await Spot.findAll({
-        where: {
-            id: req.params.spotId
-        },
-    })
+    let spot = await Spot.findByPk(req.params.spotId)
+    spot = spot.toJSON()
     if (spot.length === 0) {
         res.status(404)
         res.json({
@@ -307,7 +304,8 @@ router.delete('/:spotId', async (req, res) => {
             "statusCode": 404
         })
     }
-
+// console.log(req.user.id)
+console.log(spot)
     if (req.user.id === spot.ownerId) {
         await spot.destroy()
         res.status(200);
