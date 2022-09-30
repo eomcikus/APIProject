@@ -56,8 +56,9 @@ router.delete('/:bookingId', requireAuth, async(req, res) => {
 })
 
 router.put('/:bookingId', requireAuth, async (req, res) => {
-    const booking = await Booking.findByPk(req.params.bookingId)
-
+    let booking = await Booking.findByPk(req.params.bookingId)
+    booking = booking.toJSON()
+    
     if (!booking){
         return res.json({
             "message": "Booking couldn't be found",
@@ -70,9 +71,17 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             message: 'Unauthorized to make these changes'
         })
     }
-    let stringStart = booking.startDate.toDateString()
-    let stringEnd = booking.endDate.toDateString()
+    booking.startDate = booking.startDate.toDateString()
+    booking.endDate = booking.endDate.toDateString()
+    let currentStart = new Date(booking.startDate).getTime()
+    let currentEnd = new Date(booking.endDate).getTime()
     
+    const {startDate, endDate} = req.body
+    console.log(new Date(startDate).getTime())
+
+    // booking.update({
+
+    // })
 })
 
 // } else {

@@ -108,6 +108,7 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
     bookArray.forEach(booking => {
         booking.startDate = (booking.startDate.toDateString())
         booking.endDate = (booking.endDate.toDateString())
+
     })
     // calling getTime on each
     bookArray.forEach(booking => {
@@ -142,15 +143,15 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
     })
 
     if (!spot) {
-        res.status(404)
-        res.json({
+        // res.status(404)
+        return res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
     }
     if (spot.ownerId === req.user.id) {
-        res.status(403)
-        res.json('Not authorized to make these reservations')
+        // res.status(403)
+        return res.json('Not authorized to make these reservations')
     } else {
         const newBooking = await Booking.create({
             spotId: req.params.spotId,
@@ -248,7 +249,6 @@ router.put('/:spotId', requireAuth, handleValidationErrors, async (req, res, nex
             "statusCode": 404
         })
     }
-
     if (req.user.id !== spotNew.ownerId) {
         res.status(403)
         res.json('Unauthorized to make these changes')
@@ -270,27 +270,16 @@ router.put('/:spotId', requireAuth, handleValidationErrors, async (req, res, nex
 })
 //GET all spots
 router.get('/', async (req, res) => {
-    let spots = await Spot.findAll({
-        include: [{
-            model: SpotImage
-        },
-        {
-            model: Review
-        }]
-    })
-
+    let spots = await Spot.findAll()
+    console.log(spots)
+    
     let spotsList = []
     spots.forEach(spot => {
-        spotsList.push(spot.toJSON())
+        spotsList.push()
     })
-    console.log(spotsList)
-    // spotsList.forEach(spot => {
-    //     spot.Reviews.forEach(rating => {
-    //         let average = sequelize.fn("AVG", sequelize.col("stars"))
-    //         console.log(average)
-    //     })
-    // })
+
     spotsList.forEach(spot => {
+        spot.toJSON()
         spot.SpotImages.forEach(image => {
             if (image.preview === true) {
                 return spot.previewImage = image.url
@@ -299,7 +288,7 @@ router.get('/', async (req, res) => {
             }
         })
     })
-    res.json(spots)
+    res.json({Spots: spots})
     // spotsList.forEach(spot => {
     //     spot.spotReviews.forEach(rating => {
 
