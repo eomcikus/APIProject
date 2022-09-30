@@ -29,8 +29,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
 })
 //ppost a new review based on spot id
 router.post('/:spotId/reviews', requireAuth, async (req, res) => {
-    // const spot = await Spot.findByPk(req.params.spotId)
-    // console.log(req.params.spotId)
     let spot = await Spot.findAll({
         where: {
             id: req.params.spotId

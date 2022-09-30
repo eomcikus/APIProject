@@ -14,10 +14,12 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 router.delete('/:imageId', requireAuth, async (req, res) => {
-    let image = await ReviewImage.findByPk(req.params.imageId)
-    // image = image.toJSON()
-    console.log(image)
-    // console.log(spotCheck)
+    let image = await SpotImage.findByPk(req.params.imageId, {
+        include: {
+            model: Spot
+        }
+    })
+
     if (!image) {
         res.status(404)
         return res.json({
@@ -25,17 +27,15 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
             "statusCode": 404
         })
     }
-    let spotCheck = await Spot.findByPk(req.params.imageId)
-    spotCheck = spotCheck.toJSON()
 
-    if (!spotCheck.ownerId === req.user.id) {
+    if (image.Spot.ownerId !== req.user.id) {
         res.status(403)
         return res.json({
             "message": "Forbidden",
             "statusCode": 403
         })
     } 
-    else if (spotCheck.ownerId === req.user.id){
+    else if (image.Spot.ownerId === req.user.id){
         await image.destroy()
         res.status(200)
         return res.json({
