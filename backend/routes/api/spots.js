@@ -220,20 +220,16 @@ router.get('/:spotId', async (req, res, next) => {
 })
 //Edit a Spot
 router.put('/:spotId', requireAuth, handleValidationErrors, async (req, res, next) => {
-    const spot = await Spot.findOne({
-        where: {
-            id: req.params.spotId
-        }
-    })
-    let spotNew = spot
-    if (!spotNew.length) {
+    const spotNew = await Spot.findByPk(req.params.spotId)
+    // let spotNew = spot
+    if (!spotNew) {
         res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
     }
 
-    if (!req.user.id === spotNew.ownerId) {
+    if (req.user.id !== spotNew.ownerId) {
         res.status(403)
         res.json('Unauthorized to make these changes')
     } else {
@@ -248,7 +244,7 @@ router.put('/:spotId', requireAuth, handleValidationErrors, async (req, res, nex
             description: req.body.description,
             price: req.body.price
         })
-        res.json(spot)
+        res.json(spotNew)
     }
 
 })
@@ -296,24 +292,21 @@ router.get('/', async (req, res) => {
 //Delete a spot by spotid
 router.delete('/:spotId', async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId)
-    spot = spot.toJSON()
-    if (spot.length === 0) {
+    if (!spot) {
         res.status(404)
-        res.json({
+       return res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
     }
-// console.log(req.user.id)
-console.log(spot)
     if (req.user.id === spot.ownerId) {
         await spot.destroy()
         res.status(200);
-        res.json({
+        return res.json({
             "message": "Successfully deleted",
             "statusCode": 200
         })
-    } else res.send('hi')
+    } 
 })
 //Create a new spot
 router.post('/', requireAuth, handleValidationErrors, async (req, res, next) => {

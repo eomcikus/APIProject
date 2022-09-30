@@ -14,24 +14,18 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 router.delete('/:imageId', requireAuth, async (req, res) => {
-    let image = await ReviewImage.findOne({
-        where: {
-            id: req.params.imageId
-        },
-        include: {
-            model: Review
-        }
-    })
+    let image = await ReviewImage.findByPk(req.params.imageId)
     // image = image.toJSON()
-    let spotCheck = await Spot.findByPk(req.params.imageId)
+    console.log(image)
     // console.log(spotCheck)
-    if (!spotCheck) {
+    if (!image) {
         res.status(404)
         return res.json({
             "message": "Review image couldn't be found",
             "statusCode": 404
         })
     }
+    let spotCheck = await Spot.findByPk(req.params.imageId)
     spotCheck = spotCheck.toJSON()
 
     if (!spotCheck.ownerId === req.user.id) {
