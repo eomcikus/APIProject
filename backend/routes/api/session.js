@@ -17,6 +17,10 @@ const validateLogin = [
   handleValidationErrors
 ];
 
+const validateUpdateSpot = [
+  check
+]
+
 router.post(
   '/',
   validateLogin,

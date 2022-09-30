@@ -17,7 +17,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 router.get('/current', requireAuth, async (req, res) => {
     const reviews = await Review.findAll({
         where: {
-            id: req.user.id
+            userId: req.user.id
         },
         include: [{
             model: Spot,
@@ -25,6 +25,7 @@ router.get('/current', requireAuth, async (req, res) => {
         },
         {
             model: ReviewImage,
+            as: 'ReviewImages',
             attributes: ['id', 'url']
         },
         {
@@ -103,19 +104,15 @@ if (!req.user.id === review.userId){
 
 //Edit a review
 router.put('/:reviewId', requireAuth, async (req, res) => {
-    let review = await Review.findAll({
-        where: {
-            id: req.params.reviewId
-        }
-    })
-    if (!review.length){
+    let review = await Review.findByPk(req.params.reviewId)
+    if (!review){
         res.status(404)
         res.json({
             "message": "Review couldn't be found",
             "statusCode": 404
           })
     }
-    if (!req.user.id === review.userId) {
+    if (req.user.id !== review.userId) {
         res.status(403)
         return res.json('Unauthorized to make these changes')
     } else {
@@ -123,7 +120,7 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
             review: req.body.review,
             stars: req.body.stars
         })
-        await review.save()
+
         res.json(review)
     }
 

@@ -98,28 +98,50 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
             spotId: req.params.spotId
         }
     })
-    const spot = await Spot.findAll({
-        where: {
-            id: req.params.spotId
-        }
-    })
-    // console.log(bookings)
+    const spot = await Spot.findByPk(req.params.spotId)
+    
     let bookArray = []
     bookings.forEach(booking => {
         bookArray.push(booking.toJSON())
     })
-    console.log(bookArray)
+    // making datestrings on each start and end day
     bookArray.forEach(booking => {
-        if (booking.startDate === req.body.startDate) {
-
-        }
+        booking.startDate = (booking.startDate.toDateString())
+        booking.endDate = (booking.endDate.toDateString())
     })
-    // bookings.forEach(booking => {
-    //     if (Date.parse(booking.startDate) <= Date.parse(booking.endDate)){
+    // calling getTime on each
+    bookArray.forEach(booking => {
+        booking.startDate = new Date(booking.startDate).getTime()
+        booking.endDate = new Date(booking.startDate).getTime()
+    })
+    
+    let requestedStart = new Date(req.body.startDate).getTime()
+    let requestedEnd = new Date(req.body.endDate).getTime()
 
-    //     }
-    // })
-    if (!spot.length) {
+    bookArray.forEach(booking => {
+        if ((requestedStart >= booking.startDate)){
+            res.status(403)
+            return res.json({
+                "message": "Sorry, this spot is already booked for the specified dates",
+                "statusCode": 403,
+                "errors": {
+                  "startDate": "Start date conflicts with an existing booking",
+                }
+              })
+            }
+            if (requestedEnd <= booking.endDate){
+                // res.status(403)
+                return res.json({
+                    "message": "Sorry, this spot is already booked for the specified dates",
+                    "statusCode": 403,
+                    "errors": {
+                      "endDate": "End date conflicts with an existing booking"
+                    }
+                  })
+            }
+    })
+
+    if (!spot) {
         res.status(404)
         res.json({
             "message": "Spot couldn't be found",

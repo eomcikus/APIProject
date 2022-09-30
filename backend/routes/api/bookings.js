@@ -55,4 +55,39 @@ router.delete('/:bookingId', requireAuth, async(req, res) => {
       })
 })
 
+router.put('/:bookingId', requireAuth, async (req, res) => {
+    const booking = await Booking.findByPk(req.params.bookingId)
+
+    if (!booking){
+        return res.json({
+            "message": "Booking couldn't be found",
+            "statusCode": 404
+          })
+    }
+    if (booking.userId !== req.user.id){
+        return res.json({
+            statusCode: 403,
+            message: 'Unauthorized to make these changes'
+        })
+    }
+    let stringStart = booking.startDate.toDateString()
+    let stringEnd = booking.endDate.toDateString()
+    
+})
+
+// } else {
+//     spotNew.update({
+//         address: req.body.address,
+//         city: req.body.city,
+//         state: req.body.state,
+//         country: req.body.country,
+//         lat: req.body.lat,
+//         lng: req.body.lng,
+//         name: req.body.name,
+//         description: req.body.description,
+//         price: req.body.price
+//     })
+//     res.json(spotNew)
+// }
+
 module.exports = router;
