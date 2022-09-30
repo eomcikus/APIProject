@@ -75,6 +75,31 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
         return res.json(newPic)
     }
 })
+//delete a review
+router.delete('/:reviewId', requireAuth, async (req, res) => {
+    const review = await Review.findByPk(req.params.reviewId)
+
+if (!review){
+    res.status(404)
+    return res.json({
+        "message": "Review couldn't be found",
+        "statusCode": 404
+      })
+    }
+if (!req.user.id === review.userId){
+    res.status(403)
+    return res.json('Unauthorized to make these changes')
+} else {
+    await review.destroy()
+    res.status(200);
+    res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+    })
+}
+})
+
+
 
 //Edit a review
 router.put('/:reviewId', requireAuth, async (req, res) => {

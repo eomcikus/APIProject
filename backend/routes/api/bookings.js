@@ -20,10 +20,39 @@ router.get('/current', requireAuth, async (req, res) => {
         const currentBookings = await Booking.findAll({
             where: {
                 userId: req.user.id
-            }
+            }, 
+            include: [{
+                model: Spot
+            }]
         })
-        console.log(currentBookings)
+       res.json({ Bookings: currentBookings})
     // }
+})
+
+router.delete('/:bookingId', requireAuth, async(req, res) => {
+    const thebook = await Booking.findOne({
+        where: {
+            id: req.params.bookingId
+        },
+        include: {
+            model: Spot
+        }
+    })
+
+    if (!thebook){
+        res.status(404)
+        res.json({
+            "message": "Booking couldn't be found",
+            "statusCode": 404
+          })
+    }
+    if (req.user.id === thebook.userId || thebook.Spot.ownerId){
+        await thebook.destroy()
+    }
+    res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+      })
 })
 
 module.exports = router;

@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       )
       Spot.belongsTo(
         models.User,
-        { foreignKey: 'ownerId', as: 'Owner', onDelete: 'CASCADE', hooks: true }
+        { foreignKey: 'ownerId', as: 'Owner'}
       )
       Spot.hasMany(
         models.Booking,
