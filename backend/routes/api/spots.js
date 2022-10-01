@@ -24,7 +24,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 ownerId: req.user.id
             }
         })
-        res.json({Spots: currentHomes})
+        res.json({ Spots: currentHomes })
     }
 })
 //ppost a new review based on spot id
@@ -112,18 +112,15 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
             spotId: req.params.spotId
         }
     })
-    const spot = await Spot.findOne({
-        where: {
-            id: req.params.spotId
-        }
-    })
-        if (!spot) {
-            res.status(404)
-             return res.json({
-                "message": "Spot couldn't be found",
-                "statusCode": 404
-            })
-        }
+    const spot = await Spot.findByPk(req.params.spotId)
+    // console.log(spot)
+    if (!spot) {
+        res.status(404)
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
 
     let bookArray = []
     bookings.forEach(booking => {
@@ -144,9 +141,9 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
     let requestedStart = new Date(req.body.startDate).getTime()
     let requestedEnd = new Date(req.body.endDate).getTime()
 
-    for(let i = 0; i < bookArray.length; i++){
+    for (let i = 0; i < bookArray.length; i++) {
         let booking = bookArray[i]
-        if ((requestedStart >= booking.startDate && requestedStart <= booking.endDate )) {
+        if ((requestedStart >= booking.startDate && requestedStart <= booking.endDate)) {
             res.status(403)
             return res.json({
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -167,13 +164,13 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
             })
         }
     }
-    
+
     if (spot.ownerId === req.user.id) {
         res.status(403)
         return res.json({
             "message": "Forbidden",
             "statusCode": 403
-          })
+        })
     } else {
         const newBooking = await Booking.create({
             spotId: req.params.spotId,
@@ -222,7 +219,9 @@ router.get('/:spotId', async (req, res, next) => {
         },
         {
             model: User,
-            as: 'Owner'
+            as: 'Owner',
+            attributes: ['id', 'firstName', 'lastName']
+
         }]
     });
     if (spots.length === 0) {
@@ -292,26 +291,24 @@ router.put('/:spotId', requireAuth, handleValidationErrors, async (req, res, nex
 })
 //GET all spots
 router.get('/', async (req, res) => {
-//    let query = {
-//     where: {},
-//     include: [],
-//    }
-   
-//     if (req.query.page === undefined){
-//         page = 1
-//     } else {
-//         page = parseInt(req.query.page)
-//     }
-//     if (req.query.size === undefined){
-//         size = 20
-//     } else {
-//         size = parseInt(req.query.size)
-//     }
-   
-//     if (req.query.minLat){
-//         query.where.minLat = req.query.minLat
-//     }
-let spots = await Spot.findAll({
+    let pagination = {}
+    let { page, size } = req.query
+    page = parseInt(page)
+    size = parseInt(size)
+    if (page === undefined|| page <= 0 || isNaN(page)) {
+        page = 1
+    } else {
+        page = parseInt(page)
+    }
+    if (size === undefined || size <= 0 || isNaN(size)) {
+        size = 20
+    } else {
+        size = parseInt(size)
+    }
+    pagination.limit = size    
+    pagination.offset = (page - 1) * size 
+
+    let spots = await Spot.findAll({
         include: [{
             model: Review,
             attributes: []
@@ -320,33 +317,34 @@ let spots = await Spot.findAll({
             model: SpotImage,
             attributes: []
         }],
-        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt', 
-        [sequelize.fn('AVG', sequelize.col('Reviews.stars')),'avgRating' ]],
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
+            [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']],
         group: ['Spot.id'],
-        raw: true
-    })
+        raw: true,
+
+    }, {...pagination})
     // let spotsList = []
     // spots.forEach(spot => {
     //     spotsList.push(spot.toJSON())
     // })
     // console.log(spotsList)
-    for (let i = 0; i < spots.length; i++){
+    for (let i = 0; i < spots.length; i++) {
         console.log(spots[i])
         let curr = spots[i]
-            const spotImage = await SpotImage.findOne({
-                where: {
-                    spotId: curr.id,
-                    preview: true
-                }
-            })
-            // if (!spotImage) res.send('broken')
-        if (!spotImage){ 
+        const spotImage = await SpotImage.findOne({
+            where: {
+                spotId: curr.id,
+                preview: true
+            }
+        })
+        // if (!spotImage) res.send('broken')
+        if (!spotImage) {
             spots[i].previewImage = 'No picture found';
         } else {
-        spots[i].previewImage = spotImage.url 
+            spots[i].previewImage = spotImage.url
         }
     }
-    res.json({Spots: spots})
+    res.json({ Spots: spots, page, size })
 
 })
 
@@ -417,6 +415,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
             let finalPic = newPic.toJSON()
             delete finalPic.createdAt
             delete finalPic.updatedAt
+            delete finalPic.spotId
             return res.json(finalPic)
         }
     }
