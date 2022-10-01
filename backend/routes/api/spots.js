@@ -24,7 +24,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 ownerId: req.user.id
             }
         })
-        res.json(currentHomes)
+        res.json({Spots: currentHomes})
     }
 })
 //ppost a new review based on spot id
@@ -302,13 +302,16 @@ router.get('/', async (req, res) => {
     // spots.forEach(spot => {
     //     spotsList.push(spot.toJSON())
     // })
-    // // console.log(spotsList)
+    // console.log(spotsList)
     for (let i = 0; i < spots.length; i++){
-            const spotImage = await SpotImage.findOne({
+        let curr = spots[i]
+            const spotImage = await SpotImage.findAll({
                 where: {
-                    spotId: spots[i].id
+                    spotId: curr.id
                 }
             })
+            if (!spotImage) res.send('broken')
+        if (spotImage.url === null) spots.previewImage = 'No picture found';
         spots[i].previewImage = spotImage.url 
     }
     res.json({Spots: spots})
