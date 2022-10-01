@@ -69,11 +69,13 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
         res.json('Unauthorized to make these changes')
     } else {
         const newPic = await ReviewImage.create({
-            reviewId: req.params.reviewId,
             userId: req.user.id,
             url: req.body.url,
         })
-        return res.json(newPic)
+        let finalPic = newPic.toJSON()
+        delete finalPic.createdAt
+        delete finalPic.updatedAt
+        return res.json(finalPic)
     }
 })
 //delete a review

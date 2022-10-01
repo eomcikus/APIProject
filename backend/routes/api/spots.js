@@ -133,7 +133,8 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
     let requestedStart = new Date(req.body.startDate).getTime()
     let requestedEnd = new Date(req.body.endDate).getTime()
 
-    bookArray.forEach(booking => {
+    for(let i = 0; i < bookArray.length; i++){
+        let booking = bookArray[i]
         if ((requestedStart >= booking.startDate)) {
             res.status(403)
             return res.json({
@@ -145,7 +146,7 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
             })
         }
         if (requestedEnd <= booking.endDate) {
-            // res.status(403)
+            res.status(403)
             return res.json({
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
@@ -154,18 +155,22 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
                 }
             })
         }
-    })
+    }
+    
 
     if (!spot) {
-        // res.status(404)
-        return res.json({
+        res.sendStatus(404)
+         return res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
     }
     if (spot.ownerId === req.user.id) {
-        // res.status(403)
-        return res.json('Not authorized to make these reservations')
+        res.status(403)
+        return res.json({
+            "message": "Forbidden",
+            "statusCode": 403
+          })
     } else {
         const newBooking = await Booking.create({
             spotId: req.params.spotId,
@@ -173,7 +178,7 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
             startDate: req.body.startDate,
             endDate: req.body.endDate
         })
-        res.json(newBooking)
+        return res.json(newBooking)
     }
 })
 
@@ -218,8 +223,7 @@ router.get('/:spotId', async (req, res, next) => {
         }]
     });
     if (spots.length === 0) {
-        const err = new Error('No spot found')
-        err.status = 404
+        res.status(404)
         res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
@@ -258,6 +262,7 @@ router.put('/:spotId', requireAuth, handleValidationErrors, async (req, res, nex
     const spotNew = await Spot.findByPk(req.params.spotId)
     // let spotNew = spot
     if (!spotNew) {
+        res.status(404)
         res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
@@ -304,15 +309,20 @@ router.get('/', async (req, res) => {
     // })
     // console.log(spotsList)
     for (let i = 0; i < spots.length; i++){
+        console.log(spots[i])
         let curr = spots[i]
-            const spotImage = await SpotImage.findAll({
+            const spotImage = await SpotImage.findOne({
                 where: {
-                    spotId: curr.id
+                    spotId: curr.id,
+                    preview: true
                 }
             })
-            if (!spotImage) res.send('broken')
-        if (spotImage.url === null) spots.previewImage = 'No picture found';
+            // if (!spotImage) res.send('broken')
+        if (!spotImage){ 
+            spots[i].previewImage = 'No picture found';
+        } else {
         spots[i].previewImage = spotImage.url 
+        }
     }
     res.json({Spots: spots})
 
