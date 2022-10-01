@@ -112,7 +112,18 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
             spotId: req.params.spotId
         }
     })
-    const spot = await Spot.findByPk(req.params.spotId)
+    const spot = await Spot.findOne({
+        where: {
+            id: req.params.spotId
+        }
+    })
+        if (!spot) {
+            res.status(404)
+             return res.json({
+                "message": "Spot couldn't be found",
+                "statusCode": 404
+            })
+        }
 
     let bookArray = []
     bookings.forEach(booking => {
@@ -135,7 +146,7 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
 
     for(let i = 0; i < bookArray.length; i++){
         let booking = bookArray[i]
-        if ((requestedStart >= booking.startDate)) {
+        if ((requestedStart >= booking.startDate && requestedStart <= booking.endDate )) {
             res.status(403)
             return res.json({
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -145,7 +156,7 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
                 }
             })
         }
-        if (requestedEnd <= booking.endDate) {
+        if (requestedEnd >= booking.endDate && !requestedEnd <= booking.startDate) {
             res.status(403)
             return res.json({
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -157,14 +168,6 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
         }
     }
     
-
-    if (!spot) {
-        res.sendStatus(404)
-         return res.json({
-            "message": "Spot couldn't be found",
-            "statusCode": 404
-        })
-    }
     if (spot.ownerId === req.user.id) {
         res.status(403)
         return res.json({

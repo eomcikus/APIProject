@@ -19,7 +19,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
             model: Review
         }
     })
-
+    console.log(image)
     if (!image) {
         res.status(404)
         return res.json({

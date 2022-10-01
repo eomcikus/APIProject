@@ -39,13 +39,13 @@ router.get('/current', requireAuth, async (req, res) => {
 
 //add an image to a review based on review id
 router.post('/:reviewId/images', requireAuth, async (req, res) => {
-    let currReview = await Review.findAll({
+    let currReview = await Review.findOne({
         where: {
             id: req.params.reviewId
         }
     })
     console.log(currReview)
-    if (!currReview.length) {
+    if (!currReview) {
         res.status(404)
         return res.json({
             "message": "Review couldn't be found",
@@ -66,7 +66,10 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     }
     if (!req.user.id === currReview.userId) {
         res.status(403)
-        res.json('Unauthorized to make these changes')
+        res.json({
+            "message": "Forbidden",
+            "statusCode": 403
+          })
     } else {
         const newPic = await ReviewImage.create({
             userId: req.user.id,
@@ -75,7 +78,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
         let finalPic = newPic.toJSON()
         delete finalPic.createdAt
         delete finalPic.updatedAt
-        return res.json(finalPic)
+        res.json(finalPic)
     }
 })
 //delete a review
@@ -91,7 +94,10 @@ if (!review){
     }
 if (!req.user.id === review.userId){
     res.status(403)
-    return res.json('Unauthorized to make these changes')
+    return res.json({
+        "message": "Forbidden",
+        "statusCode": 403
+      })
 } else {
     await review.destroy()
     res.status(200);

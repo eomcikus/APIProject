@@ -65,6 +65,8 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         })
     }
     booking = booking.toJSON()
+
+    // console.log(booking)
     // if (booking.userId !== req.user.id){
     //     return res.json({
     //         "message": "Forbidden",
@@ -72,15 +74,16 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     //       })
     // }
     //add todatestring()
+    booking.startDate = booking.startDate.toDateString()
+    booking.endDate = booking.endDate.toDateString()
     let currentStart = new Date(booking.startDate).getTime()
     let currentEnd = new Date(booking.endDate).getTime()
-
     const { startDate, endDate } = req.body
+
     let requestedStart = new Date(startDate).getTime()
     let requestedEnd = new Date(endDate).getTime()
-
-    console.log('curr', currentStart, currentEnd)
-    console.log('req', requestedStart, requestedEnd)
+    // console.log('curr', currentStart, currentEnd)
+    // console.log('req', requestedStart, requestedEnd)
     if (requestedStart > requestedEnd) {
         return res.json({
             "message": "Validation error",
@@ -90,12 +93,12 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             }
         })
     }
-    // if (Date.now() < requestedEnd){
-    //     return res.json({
-    //         "message": "Past bookings can't be modified",
-    //         "statusCode": 403
-    //       })
-    // }
+    if (Date.now() > requestedEnd){
+        return res.json({
+            "message": "Past bookings can't be modified",
+            "statusCode": 403
+          })
+    }
 
     if ((requestedStart >= currentStart)) {
         res.status(403)
