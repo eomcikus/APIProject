@@ -156,7 +156,7 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
                 }
             })
         }
-        if (requestedEnd >= booking.endDate && !requestedEnd <= booking.startDate) {
+        if (requestedEnd >= booking.startDate && !requestedEnd <= booking.endDate) {
             res.status(403)
             return res.json({
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -292,7 +292,26 @@ router.put('/:spotId', requireAuth, handleValidationErrors, async (req, res, nex
 })
 //GET all spots
 router.get('/', async (req, res) => {
-    let spots = await Spot.findAll({
+//    let query = {
+//     where: {},
+//     include: [],
+//    }
+   
+//     if (req.query.page === undefined){
+//         page = 1
+//     } else {
+//         page = parseInt(req.query.page)
+//     }
+//     if (req.query.size === undefined){
+//         size = 20
+//     } else {
+//         size = parseInt(req.query.size)
+//     }
+   
+//     if (req.query.minLat){
+//         query.where.minLat = req.query.minLat
+//     }
+let spots = await Spot.findAll({
         include: [{
             model: Review,
             attributes: []
@@ -395,7 +414,10 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
                 spotId: req.params.spotId,
                 preview: req.body.preview
             })
-            return res.json(newPic)
+            let finalPic = newPic.toJSON()
+            delete finalPic.createdAt
+            delete finalPic.updatedAt
+            return res.json(finalPic)
         }
     }
 

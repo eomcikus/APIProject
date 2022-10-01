@@ -44,7 +44,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
             id: req.params.reviewId
         }
     })
-    console.log(currReview)
+
     if (!currReview) {
         res.status(404)
         return res.json({
@@ -72,12 +72,14 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
           })
     } else {
         const newPic = await ReviewImage.create({
+            reviewId: req.params.reviewId,
             userId: req.user.id,
             url: req.body.url,
         })
         let finalPic = newPic.toJSON()
         delete finalPic.createdAt
         delete finalPic.updatedAt
+        delete finalPic.reviewId
         res.json(finalPic)
     }
 })

@@ -56,24 +56,17 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 })
 
 router.put('/:bookingId', requireAuth, async (req, res) => {
-    let booking = await Booking.findByPk(req.params.bookingId)
+    let rawBooking = await Booking.findByPk(req.params.bookingId)
 
-    if (!booking) {
+    if (!rawBooking) {
         return res.json({
             "message": "Booking couldn't be found",
             "statusCode": 404
         })
     }
-    booking = booking.toJSON()
+   let booking = rawBooking.toJSON()
 
-    // console.log(booking)
-    // if (booking.userId !== req.user.id){
-    //     return res.json({
-    //         "message": "Forbidden",
-    //         "statusCode": 403
-    //       })
-    // }
-    //add todatestring()
+
     booking.startDate = booking.startDate.toDateString()
     booking.endDate = booking.endDate.toDateString()
     let currentStart = new Date(booking.startDate).getTime()
@@ -82,8 +75,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
     let requestedStart = new Date(startDate).getTime()
     let requestedEnd = new Date(endDate).getTime()
-    // console.log('curr', currentStart, currentEnd)
-    // console.log('req', requestedStart, requestedEnd)
+
     if (requestedStart > requestedEnd) {
         return res.json({
             "message": "Validation error",
@@ -93,14 +85,13 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             }
         })
     }
-    if (Date.now() > requestedEnd){
+    if (Date.now() > requestedEnd) {
         return res.json({
             "message": "Past bookings can't be modified",
             "statusCode": 403
-          })
+        })
     }
-
-    if ((requestedStart >= currentStart)) {
+    if ((requestedStart >= currentStart && requestedStart <= currentEnd)) {
         res.status(403)
         return res.json({
             "message": "Sorry, this spot is already booked for the specified dates",
@@ -110,8 +101,8 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             }
         })
     }
-    if (requestedEnd <= currentEnd) {
-        // res.status(403)
+    if (requestedEnd >= currentStart && !requestedEnd <= currentEnd) {
+        res.status(403)
         return res.json({
             "message": "Sorry, this spot is already booked for the specified dates",
             "statusCode": 403,
@@ -119,15 +110,15 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
                 "endDate": "End date conflicts with an existing booking"
             }
         })
+    } else {
 
+        rawBooking.update({
+
+            startDate: req.body.startDate,
+            endDate: req.body.endDate
+        })
+        res.json(rawBooking)
     }
-    booking.update({
+})
 
-        "startDate": req.body.startDate,
-        "endDate": req.body.endDate
-    })
-    res.json(booking)
-
-    })
-
-    module.exports = router;
+module.exports = router;
