@@ -19,21 +19,41 @@ router.get('/current', requireAuth, async (req, res) => {
         where: {
             userId: req.user.id
         },
-        include: [{
-            model: Spot,
-            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price']
-        },
-        {
-            model: ReviewImage,
-            as: 'ReviewImages',
-            attributes: ['id', 'url']
-        },
-        {
-            model: User,
-            attributes: ['id', 'firstName', 'lastName']
-        }]
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: Spot,
+                attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price']
+            },
+            {
+                model: ReviewImage,
+                as: 'ReviewImages',
+                attributes: ['id', 'url'],
+            }],
     })
-    res.json(reviews)
+    for (let i = 0; i < reviews.length; i++) {
+        reviews[i].toJSON()
+    }
+    for (let i = 0; i < reviews.length; i++) {
+
+        const spotImage = await SpotImage.findOne({
+            where: {
+                spotId: reviews[i].Spot.id,
+                preview: true
+            }
+        })
+
+
+        if (!spotImage) {
+            reviews[i].Spot.dataValues.previewImage = 'No picture found';
+        } else {
+            reviews[i].Spot.dataValues.previewImage = spotImage.url
+        }
+    }
+    res.json({ Reviews: reviews })
 
 })
 
@@ -69,7 +89,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
         res.json({
             "message": "Forbidden",
             "statusCode": 403
-          })
+        })
     } else {
         const newPic = await ReviewImage.create({
             reviewId: req.params.reviewId,
@@ -87,27 +107,27 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 router.delete('/:reviewId', requireAuth, async (req, res) => {
     const review = await Review.findByPk(req.params.reviewId)
 
-if (!review){
-    res.status(404)
-    return res.json({
-        "message": "Review couldn't be found",
-        "statusCode": 404
-      })
+    if (!review) {
+        res.status(404)
+        return res.json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+        })
     }
-if (!req.user.id === review.userId){
-    res.status(403)
-    return res.json({
-        "message": "Forbidden",
-        "statusCode": 403
-      })
-} else {
-    await review.destroy()
-    res.status(200);
-    res.json({
-        "message": "Successfully deleted",
-        "statusCode": 200
-    })
-}
+    if (!req.user.id === review.userId) {
+        res.status(403)
+        return res.json({
+            "message": "Forbidden",
+            "statusCode": 403
+        })
+    } else {
+        await review.destroy()
+        res.status(200);
+        res.json({
+            "message": "Successfully deleted",
+            "statusCode": 200
+        })
+    }
 })
 
 
@@ -115,12 +135,12 @@ if (!req.user.id === review.userId){
 //Edit a review
 router.put('/:reviewId', requireAuth, async (req, res) => {
     let review = await Review.findByPk(req.params.reviewId)
-    if (!review){
+    if (!review) {
         res.status(404)
         res.json({
             "message": "Review couldn't be found",
             "statusCode": 404
-          })
+        })
     }
     if (req.user.id !== review.userId) {
         res.status(403)

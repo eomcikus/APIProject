@@ -22,9 +22,29 @@ router.get('/current', requireAuth, async (req, res) => {
             userId: req.user.id
         },
         include: [{
-            model: Spot
+            model: Spot,
+            attributes: {
+                exclude: ['description', 'createdAt', 'updatedAt'],
+            } 
         }]
     })
+    for (let i = 0; i < currentBookings.length; i++) {
+        
+        let curr = currentBookings[i].toJSON()
+
+        const spotImage = await SpotImage.findOne({
+            where: {
+                spotId: curr.Spot.id,
+                preview: true
+            }
+        })
+        console.log(spotImage)
+        if (!spotImage) {
+            currentBookings[i].Spot.dataValues.previewImage = 'No picture found';
+        } else {
+            currentBookings[i].Spot.dataValues.previewImage = spotImage.url
+        }
+    }
     res.json({ Bookings: currentBookings })
     // }
 })
@@ -35,8 +55,8 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
             id: req.params.bookingId
         },
         include: {
-            model: Spot
-        }
+            model: Spot,
+        },
     })
 
     if (!thebook) {
@@ -59,6 +79,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     let rawBooking = await Booking.findByPk(req.params.bookingId)
 
     if (!rawBooking) {
+        res.status(404)
         return res.json({
             "message": "Booking couldn't be found",
             "statusCode": 404
