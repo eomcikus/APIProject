@@ -52,7 +52,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
             },
 
         })
-        console.log('count', reviewCount)
         if (reviewCount === 0) {
             spots[i].dataValues.avgReview = 0
         }
@@ -186,13 +185,18 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
 
     })
     // calling getTime on each
+    // bookArray.forEach(booking => {
+    //     booking.startDate = new Date(booking.startDate).getTime()
+    //     booking.endDate = new Date(booking.startDate).getTime()
+    // })
     bookArray.forEach(booking => {
-        booking.startDate = new Date(booking.startDate).getTime()
-        booking.endDate = new Date(booking.startDate).getTime()
+        booking.startDate = Date.parse(booking.startDate)
+        booking.endDate = Date.parse(booking.startDate)
     })
 
-    let requestedStart = new Date(req.body.startDate).getTime()
-    let requestedEnd = new Date(req.body.endDate).getTime()
+let requestedStart = Date.parse(req.body.startDate)
+let requestedEnd = Date.parse(req.body.endDate)
+
 
     for (let i = 0; i < bookArray.length; i++) {
         let booking = bookArray[i]
@@ -203,7 +207,7 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
                 "statusCode": 403,
                 "errors": {
                     "startDate": "Start date conflicts with an existing booking",
-                    "endDate": "End date conflicts with an existing booking"
+                    // "endDate": "End date conflicts with an existing booking"
                 }
             })
         }
@@ -213,7 +217,7 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
                 "errors": {
-                    "startDate": "Start date conflicts with an existing booking",
+                    // "startDate": "Start date conflicts with an existing booking",
                     "endDate": "End date conflicts with an existing booking"
                 }
             })
