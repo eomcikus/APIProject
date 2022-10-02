@@ -23,7 +23,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
     if (!image) {
         res.status(404)
         return res.json({
-            "message": "Review image couldn't be found",
+            "message": "Spot image couldn't be found",
             "statusCode": 404
         })
     }
