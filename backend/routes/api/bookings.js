@@ -38,7 +38,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 preview: true
             }
         })
-        console.log(spotImage)
+   
         if (!spotImage) {
             currentBookings[i].Spot.dataValues.previewImage = 'No picture found';
         } else {

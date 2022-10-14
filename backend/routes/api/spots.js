@@ -80,7 +80,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
             id: req.params.spotId
         }
     })
-    console.log(spot)
+
     if (!spot.length) {
         res.status(404)
         return res.json({
@@ -95,7 +95,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
             userId: req.user.id
         }
     })
-    console.log(reviews)
+
     if (reviews.length) {
         res.status(403)
         return res.json({
@@ -145,7 +145,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
         })
     }
     spotCheck = spotCheck.toJSON()
-    console.log(req.user.id)
+
     if (req.user.id === spotCheck.ownerId) {
         res.json({ Bookings: bookList })
     } else {
@@ -199,15 +199,10 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
 let requestedStart = Date.parse(req.body.startDate)
 let requestedEnd = Date.parse(req.body.endDate)
 
-// console.log(parsedStartDate)
-// console.log(parsedEndDate)
-
-// console.log('requestedstart', requestedStart)
-// console.log('requestedEnd', requestedEnd)
 
     for (let i = 0; i < bookArray.length; i++) {
         let booking = bookArray[i]
-        console.log(booking)
+
         if ((requestedStart >= booking.startDate && requestedEnd <= booking.endDate)) {
             res.status(403)
             return res.json({
@@ -299,7 +294,7 @@ router.get('/:spotId', async (req, res, next) => {
             "statusCode": 404
         })
     }
-    console.log(spots)
+
     let spotsFixed = spots[0].toJSON()
 
     if (spotsFixed.SpotImages.preview === true) {
@@ -313,7 +308,7 @@ router.get('/:spotId', async (req, res, next) => {
             spotId: req.params.spotId
         }
     })
-    // console.log(reviewCount)
+
     const reviewSum = await Review.sum('stars', {
         where:
         {
@@ -394,7 +389,7 @@ router.get('/', async (req, res) => {
     }, { ...pagination })
 
     for (let i = 0; i < spots.length; i++) {
-        console.log(spots[i])
+
         let curr = spots[i]
         const spotImage = await SpotImage.findOne({
             where: {
