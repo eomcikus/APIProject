@@ -1,1 +1,15 @@
 /* TODO Add site wide styles */
+button {
+    background-color: #ff385c;
+    color: white;
+    border-radius: 12%;
+    text-align: center;
+    margin: 4px 2px;
+    border: none;
+    padding: 15fr
+}
+
+ul, html, body, input, textarea, button {
+    font-family: 'Arial';
+    font-size: 16px;
+}
