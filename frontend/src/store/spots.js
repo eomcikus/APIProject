@@ -2,6 +2,8 @@
 //types
 const LOAD = '/spots/LOAD'
 const VIEWONE = '/spots/VIEWONE'
+const UPDATE = '/spots/UPDATE'
+const CREATE = '/spots/CREATE'
 //actions
 const load = spots => ({
     type: LOAD,
@@ -10,6 +12,16 @@ const load = spots => ({
 
 const viewOne = spot => ({
     type: VIEWONE,
+    spot
+})
+
+const update = spot => ({
+    type: UPDATE,
+    spot
+})
+
+const create = spot => ({
+    type: CREATE,
     spot
 })
 //thunks
@@ -23,12 +35,41 @@ export const getSpots = () => async (dispatch) => {
 
 export const getSingleSpot = (spotId) => async dispatch => {
     const response = await fetch(`/api/spots/${spotId}`)
+    console.log('spotid in spots', spotId)
     if (response.ok) {
         const oneSpot = await response.json()
+        // console.log(oneSpot)
         dispatch(viewOne(oneSpot))
     }
 }
 
+export const updateSpot = (spot, spotId) => async dispatch => {
+    const response = await fetch(`/api/spots/${spotId}`, {
+        method: 'PUT',
+        body: JSON.stringify(spot),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    if (response.ok) {
+        const oneSpot = await response.json()
+        dispatch(update(oneSpot))
+    }
+}
+
+export const createSpot = (spot, spotId) => async dispatch => {
+    const response = await fetch('/api/spots', {
+        method: 'POST',
+        body: JSON.stringify(spot),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    if (response.ok){
+        const spot = await response.json()
+        dispatch(create(spot))
+    }
+}
 let initialState = {}
 //reducer
 const spotReducer = (state = initialState, action) => {
@@ -42,8 +83,26 @@ const spotReducer = (state = initialState, action) => {
             return newState;
         }
         case VIEWONE: {
-            newState = { ...action.oneSpot };
+            newState = { ...state }
+            newState['singleSpot'] = action.spot;
             return newState
+        }
+        case CREATE: {
+          if (!state[action.spot.id]) {
+            const newState = {
+                ...state,
+                [action.spot.id]: action.spot
+            }
+            return newState;
+        }
+        return {
+            ...state,
+            [action.spot.id]: {
+                ...state[action.spot.id],
+                ...action.spot
+            }
+        }
+
         }
         default:
             return state;
