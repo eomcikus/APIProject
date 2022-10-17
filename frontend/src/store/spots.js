@@ -32,7 +32,7 @@ const remove = spotId => ({
 })
 //thunks
 export const getSpots = () => async (dispatch) => {
-    const response = await fetch(`/api/spots`)
+    const response = await csrfFetch(`/api/spots`)
     if (response.ok) {
         const spots = await response.json()
         dispatch(load(spots))
@@ -40,7 +40,7 @@ export const getSpots = () => async (dispatch) => {
 }
 
 export const getSingleSpot = (spotId) => async dispatch => {
-    const response = await fetch(`/api/spots/${spotId}`)
+    const response = await csrfFetch(`/api/spots/${spotId}`)
     console.log('spotid in spots', spotId)
     if (response.ok) {
         const oneSpot = await response.json()
@@ -50,7 +50,7 @@ export const getSingleSpot = (spotId) => async dispatch => {
 }
 
 export const updateSpot = (spot, spotId) => async dispatch => {
-    const response = await fetch(`/api/spots/${spotId}`, {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
         body: JSON.stringify(spot),
         headers: {
@@ -88,6 +88,22 @@ export const removeSpot = (spotId) => async dispatch => {
         }
 }
 
+export const editSpot = (spot, spotId) => async dispatch => {
+    const response = await csrfFetch(`/spots/${spotId}`, {
+      method: 'PUT',
+      body: JSON.stringify(spot),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if(response.ok){
+      const spot = await response.json();
+      dispatch(create(spot))
+    }
+};
+
+
 let initialState = {}
 //reducer
 const spotReducer = (state = initialState, action) => {
@@ -121,6 +137,9 @@ const spotReducer = (state = initialState, action) => {
             }
         }
         }
+        // case UPDATE: {
+
+        // }
         case REMOVE: {
             const deletedState = {...state}
             delete deletedState[action.spotId]
