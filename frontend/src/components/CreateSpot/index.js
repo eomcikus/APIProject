@@ -16,6 +16,7 @@ const CreateSpotForm = ({ hideForm }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    //test comment
     
     
     const resetClick = (e) => {
