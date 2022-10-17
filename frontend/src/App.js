@@ -6,6 +6,8 @@ import * as SpotActions from "./store/spots"
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
 import SingleSpot from "./components/SingleSpot";
+import CreateSpotForm from "./components/CreateSpot";
+import DeleteSpot from "./components/DeleteSpot";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -14,7 +16,7 @@ function App() {
   }, [dispatch]);
   useEffect(() => {
     dispatch(SpotActions.getSpots())
-}, [dispatch])
+  }, [dispatch])
   return (
     <>
       <Navigation isLoaded={isLoaded} />
@@ -22,10 +24,13 @@ function App() {
         <Switch>
           <Route exact path="/spots">
             <AllSpots />
+            <CreateSpotForm />
           </Route>
           <Route path='/spots/:spotId'>
             <SingleSpot />
+            <DeleteSpot />
           </Route>
+
         </Switch>
       )}
     </>

@@ -4,6 +4,7 @@ const LOAD = '/spots/LOAD'
 const VIEWONE = '/spots/VIEWONE'
 const UPDATE = '/spots/UPDATE'
 const CREATE = '/spots/CREATE'
+const REMOVE = '/spots/REMOVE'
 //actions
 const load = spots => ({
     type: LOAD,
@@ -23,6 +24,11 @@ const update = spot => ({
 const create = spot => ({
     type: CREATE,
     spot
+})
+
+const remove = spotId => ({
+    type: REMOVE,
+    spotId
 })
 //thunks
 export const getSpots = () => async (dispatch) => {
@@ -70,6 +76,15 @@ export const createSpot = (spot, spotId) => async dispatch => {
         dispatch(create(spot))
     }
 }
+
+export const removeSpot = (spotId) => async dispatch => {
+        const response = await fetch(`/api/spots/${spotId}`)
+        if (response.ok){
+             const spot = await response.json()
+             dispatch(remove(spot))
+        }
+}
+
 let initialState = {}
 //reducer
 const spotReducer = (state = initialState, action) => {
@@ -102,7 +117,11 @@ const spotReducer = (state = initialState, action) => {
                 ...action.spot
             }
         }
-
+        }
+        case REMOVE: {
+            const deletedState = {...state}
+            delete deletedState[action.spotId]
+            return deletedState;
         }
         default:
             return state;
