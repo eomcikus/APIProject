@@ -271,7 +271,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
 //GET details of spot by spotId
 router.get('/:spotId', async (req, res, next) => {
-
+    console.log('print')
     const spots = await Spot.findAll({
         where: {
             id: req.params.spotId
@@ -413,6 +413,7 @@ router.get('/', async (req, res) => {
 
 //Delete a spot by spotid
 router.delete('/:spotId', async (req, res) => {
+    console.log('IN THE DELETE ROUTE!')
     let spot = await Spot.findByPk(req.params.spotId)
     if (!spot) {
         res.status(404)
