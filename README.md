@@ -19,5 +19,5 @@ JavaScript, HTML5, CSS3, Node.js, Express.js, React, Redux <p>
 PostGres<p>
 ### Hosting:
 Heroku
-<p>
+
 ## Landing Page <p>
