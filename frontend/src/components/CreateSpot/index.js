@@ -6,6 +6,7 @@ import { createSpot } from '../../store/spots'
 const CreateSpotForm = ({ hideForm }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const sessionUser = useSelector(state => state.session.user);
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
@@ -15,10 +16,26 @@ const CreateSpotForm = ({ hideForm }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    
+    
+    const resetClick = (e) => {
+        e.preventDefault()
+        setAddress('')
+        setCity('')
+        setState('')
+        setCountry('')
+        setLat('')
+        setLng('')
+        setName('')
+        setDescription('')
+        setPrice('')
+        // dispatch()
+    }
     const handleSubmit = async (e) => {
         e.preventDefault()
         let createdSpot;
         const payload = {
+            // ownerId: sessionUser.id,
             address,
             city,
             state,
@@ -30,14 +47,9 @@ const CreateSpotForm = ({ hideForm }) => {
             price
         }
         createdSpot = await dispatch(createSpot(payload))
-        if (createdSpot) {
-            history.push(`/pokemon/${createdSpot.id}`);
-            hideForm();
-        }
-    }
-    const handleCancelClick = (e) => {
-        e.preventDefault()
-        hideForm()
+        // console.log('createdSpot', createdSpot)
+         history.push(`/spots/${createdSpot.id}`);
+        
     }
     return (
         <section>
@@ -107,8 +119,10 @@ const CreateSpotForm = ({ hideForm }) => {
                     value={price}
                     onChange={e => setPrice(e.target.value)}
                 />
-                <button type="submit">Create new Spot</button>
-                <button type="reset" onClick={handleCancelClick}>Cancel</button>
+                <button type="submit"
+               >Create new Spot</button>
+                <button type="button" 
+                onClick={resetClick}>Cancel</button>
             </form>
         </section>
     )

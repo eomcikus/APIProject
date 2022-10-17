@@ -7,6 +7,11 @@ import { useHistory, useParams } from 'react-router-dom';
 const DeleteSpot = () => {
 const { spotId } = useParams();
 const dispatch = useDispatch();
+const history = useHistory()
+const sessionUser = useSelector(state => state.session.user);
+console.log(sessionUser)
+//if session user id === spot.ownerid then display delete button 
+
 
 // useEffect(() => {
 //     dispatch(removeSpot(spotId))
@@ -15,6 +20,7 @@ const dispatch = useDispatch();
 const removeIt = (e) => {
     e.preventDefault()
     dispatch(removeSpot(spotId))
+    history.push(`/api/spots`)
 }
 return (
     <div>
