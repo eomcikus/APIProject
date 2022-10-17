@@ -40,11 +40,13 @@ export const getSpots = () => async (dispatch) => {
 }
 
 export const getSingleSpot = (spotId) => async dispatch => {
+    console.log('spotId', spotId)
     const response = await csrfFetch(`/api/spots/${spotId}`)
-    console.log('spotid in spots', spotId)
+    // console.log('spotid in spots', spotId)
+    console.log('response', response)
     if (response.ok) {
         const oneSpot = await response.json()
-        // console.log(oneSpot)
+        console.log('onespot', oneSpot)
         dispatch(viewOne(oneSpot))
     }
 }
@@ -88,21 +90,6 @@ export const removeSpot = (spotId) => async dispatch => {
         }
 }
 
-export const editSpot = (spot, spotId) => async dispatch => {
-    const response = await csrfFetch(`/spots/${spotId}`, {
-      method: 'PUT',
-      body: JSON.stringify(spot),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-
-    if(response.ok){
-      const spot = await response.json();
-      dispatch(create(spot))
-    }
-};
-
 
 let initialState = {}
 //reducer
@@ -137,9 +124,9 @@ const spotReducer = (state = initialState, action) => {
             }
         }
         }
-        // case UPDATE: {
-
-        // }
+        case UPDATE: {
+        
+        }
         case REMOVE: {
             const deletedState = {...state}
             delete deletedState[action.spotId]
