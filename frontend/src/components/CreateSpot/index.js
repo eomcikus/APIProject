@@ -17,7 +17,7 @@ const CreateSpotForm = ({ hideForm }) => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     //test comment
-    
+
     
     const resetClick = (e) => {
         e.preventDefault()
@@ -48,9 +48,9 @@ const CreateSpotForm = ({ hideForm }) => {
             price
         }
         createdSpot = await dispatch(createSpot(payload))
-        // console.log('createdSpot', createdSpot)
+    if (createdSpot){
          history.push(`/spots/${createdSpot.id}`);
-        
+    }
     }
     return (
         <section>

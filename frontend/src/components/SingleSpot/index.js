@@ -6,12 +6,12 @@ import * as SpotActions from "../../store/spots";
 const SingleSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
-    
+    console.log('spotId', spotId)
     useEffect(() => {
         dispatch(SpotActions.getSingleSpot(spotId))
     },[dispatch, spotId])
     const spot = useSelector(state => state.spots.singleSpot)
-    
+    console.log('spot in singlespot', spot)
   
      return (
         <div>
