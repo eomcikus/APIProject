@@ -46,7 +46,7 @@ export const getSingleSpot = (spotId) => async dispatch => {
     console.log('response', response)
     if (response.ok) {
         const oneSpot = await response.json()
-        console.log('onespot', oneSpot)
+        // console.log('onespot', oneSpot)
         dispatch(viewOne(oneSpot))
     }
 }

@@ -271,7 +271,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
 //GET details of spot by spotId
 router.get('/:spotId', async (req, res, next) => {
-
+    console.log('print')
     const spots = await Spot.findAll({
         where: {
             id: req.params.spotId
