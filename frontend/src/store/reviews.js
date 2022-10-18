@@ -92,7 +92,8 @@ const reviewReducer = (state = initialState, action) => {
         }
         case CREATE: {
             newState = { ...state }
-            newState.reviews.spot[action.review.id] = action.review
+            console.log('create', newState)
+            newState.spot[action.review.id] = action.review
             return newState;
         }
         default:
