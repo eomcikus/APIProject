@@ -6,11 +6,11 @@ import EditSpot from '../EditSpot';
 const SingleSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
+    const spot = useSelector(state => state.spots.singleSpot)
     
     useEffect(() => {
         dispatch(SpotActions.getSingleSpot(spotId))
     },[dispatch, spotId])
-    const spot = useSelector(state => state.spots.singleSpot)
     
   
      return (
