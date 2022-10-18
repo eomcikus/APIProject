@@ -10,7 +10,7 @@ const AllSpots = () => {
 
 
     return (
-        <div>
+        <div className="spots-container">
             <ul>
                 {spotArray.map(spot => (<li key={spot.id}>{spot.name}</li>))}
             </ul>

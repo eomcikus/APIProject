@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as SpotActions from "../../store/spots";
-
+import EditSpot from '../EditSpot';
 const SingleSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
@@ -17,11 +17,12 @@ const SingleSpot = () => {
         <div>
              <ul>
                 <li key={spot?.id}>
-                    {spot?.name}
+                    <h1>{spot?.name}</h1>
                     {spot?.description} 
                 </li> 
 
             </ul>
+            <EditSpot />
         </div>
     )
 }

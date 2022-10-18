@@ -8,6 +8,7 @@ import AllSpots from "./components/AllSpots";
 import SingleSpot from "./components/SingleSpot";
 import CreateSpotForm from "./components/CreateSpot";
 import DeleteSpot from "./components/DeleteSpot";
+import EditSpot from "./components/EditSpot";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -26,11 +27,14 @@ function App() {
             <AllSpots />
             <CreateSpotForm />
           </Route>
-          <Route path='/spots/:spotId'>
+          <Route exact path='/spots/:spotId'>
             <SingleSpot />
             <DeleteSpot />
+            {/* <EditSpot /> */}
           </Route>
-
+          {/* <Route path='/spots/:spotId/edit'>
+            <EditSpot />
+          </Route> */}
         </Switch>
       )}
     </>
