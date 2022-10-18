@@ -60,8 +60,11 @@ export const updateSpot = (spot, spotId) => async dispatch => {
         }
     })
     if (response.ok) {
+        console.log('res', response)
         const oneSpot = await response.json()
+        console.log('---', oneSpot)
         dispatch(update(oneSpot))
+        return oneSpot
     }
 }
 
@@ -125,9 +128,14 @@ const spotReducer = (state = initialState, action) => {
         }
         }
         case UPDATE: {
-            //return state
-            //find the id u want to update
-            // set the object to the new payload?
+        let updateState = { ...state}
+        return {
+            updateState,
+            [action.spot.id]: {
+                ...state[action.spot.id],
+                ...action.spot
+            }
+        }
         }
         case REMOVE: {
             const deletedState = {...state}

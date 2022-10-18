@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Redirect } from 'react-router-dom';
 import { updateSpot } from '../../store/spots'
 
 
 
 const EditSpot = () => {
     const dispatch = useDispatch()
-    const {spotId } = useParams()
+    const { spotId } = useParams()
     const history = useHistory()
-    console.log(spotId)
+    // console.log(spotId)
     const currentSpot = useSelector(state => state.spots[spotId]);
-    console.log(currentSpot)
-//     const history = useHistory();
-//     const sessionUser = useSelector(state => state.session.user);
-    const [address, setAddress] = useState(currentSpot.address)
-    const [city, setCity] = useState(currentSpot.city)
-    const [state, setState] = useState(currentSpot.state)
-    const [country, setCountry] = useState(currentSpot.country);
-    const [lat, setLat] = useState(currentSpot.lat);
-    const [lng, setLng] = useState(currentSpot.lng);
-    const [name, setName] = useState(currentSpot.name);
-    const [description, setDescription] = useState(currentSpot.description);
-    const [price, setPrice] = useState(currentSpot.price);
+    // console.log(currentSpot)
+
+    //     const sessionUser = useSelector(state => state.session.user);
+    const [address, setAddress] = useState(currentSpot?.address)
+    const [city, setCity] = useState(currentSpot?.city)
+    const [state, setState] = useState(currentSpot?.state)
+    const [country, setCountry] = useState(currentSpot?.country);
+    const [lat, setLat] = useState(currentSpot?.lat);
+    const [lng, setLng] = useState(currentSpot?.lng);
+    const [name, setName] = useState(currentSpot?.name);
+    const [description, setDescription] = useState(currentSpot?.description);
+    const [price, setPrice] = useState(currentSpot?.price);
 
     const updateAddress = (e) => setAddress(e.target.value)
     const updateCity = (e) => setCity(e.target.value)
@@ -33,7 +33,7 @@ const EditSpot = () => {
     const updateName = (e) => setName(e.target.value)
     const updateDescription = (e) => setDescription(e.target.value)
     const updatePrice = (e) => setPrice(e.target.value)
-    
+
     const resetClick = (e) => {
         e.preventDefault()
         setAddress('')
@@ -47,9 +47,9 @@ const EditSpot = () => {
         setPrice('')
         // dispatch()
     }
-    
-    
-    
+
+
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         let updatedSpot;
@@ -65,15 +65,20 @@ const EditSpot = () => {
             description,
             price
         }
-        updatedSpot = await dispatch(updateSpot(payload))
+        updatedSpot = await dispatch(updateSpot(payload, spotId))
+        console.log('updated', updatedSpot)
+        if (updatedSpot) {
+            setTimeout(() => {
+                console.log('settimeout')
+                // <Redirect to={`/spots/${spotId}`} />;
+            }, 1000)
 
-         history.push(`/spots/${updatedSpot.id}`);
-        
-}
-return (
-    <section>
-        <form onSubmit={handleSubmit}>
-         Address:
+        }
+    }
+    return (
+        <section>
+            <form onSubmit={handleSubmit}>
+                Address:
                 <input
                     type="text"
                     placeholder='Address'
@@ -139,12 +144,12 @@ return (
                     onChange={updatePrice}
                 />
                 <button type="submit"
-               >Update Spot</button>
-                <button type="button" 
-                onClick={resetClick}>Cancel</button>
-        </form>
-    </section>
-)
+                >Update Spot</button>
+                <button type="button"
+                    onClick={resetClick}>Cancel</button>
+            </form>
+        </section>
+    )
 }
 
 export default EditSpot;

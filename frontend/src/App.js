@@ -27,14 +27,14 @@ function App() {
             <AllSpots />
             <CreateSpotForm />
           </Route>
-          <Route path='/spots/:spotId'>
+          <Route exact path='/spots/:spotId'>
             <SingleSpot />
             <DeleteSpot />
-      
+            {/* <EditSpot /> */}
           </Route>
-          <Route path='/spots/:spotId/edit'>
-          <EditSpot />
-          </Route>
+          {/* <Route path='/spots/:spotId/edit'>
+            <EditSpot />
+          </Route> */}
         </Switch>
       )}
     </>

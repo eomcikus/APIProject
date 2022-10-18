@@ -30,13 +30,12 @@ const CreateSpotForm = ({  }) => {
         setName('')
         setDescription('')
         setPrice('')
-        // dispatch()
+
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
         let createdSpot;
         const payload = {
-            // ownerId: sessionUser.id,
             address,
             city,
             state,

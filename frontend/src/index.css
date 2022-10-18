@@ -4,12 +4,34 @@ button {
     color: white;
     border-radius: 12%;
     text-align: center;
-    margin: 4px 2px;
+    margin: 10px 3px;
     border: none;
-    padding: 15fr
+    padding: 10px 30px;
 }
 
-ul, html, body, input, textarea, button {
+ html, body, input, textarea, button {
     font-family: 'Arial';
     font-size: 16px;
+}
+
+form {
+    width:200px;
+    padding: 20px;
+    margin: 30px;
+    border: 1px black solid;
+    border-radius: 3%;
+}
+
+.spots-container {
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+li {
+ order: 5;
+ align-self: center;
+ 
 }
