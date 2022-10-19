@@ -12,15 +12,10 @@ const sessionUser = useSelector(state => state.session.user);
 console.log(sessionUser)
 //if session user id === spot.ownerid then display delete button 
 
-
-// useEffect(() => {
-//     dispatch(removeSpot(spotId))
-// }, [dispatch, spotId])
-
 const removeIt = (e) => {
     e.preventDefault()
     dispatch(removeSpot(spotId))
-    history.push(`/api/spots`)
+    history.push(`/spots`)
 }
 return (
     <div>

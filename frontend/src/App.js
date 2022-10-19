@@ -33,7 +33,7 @@ function App() {
           </Route>
           <Route exact path='/spots/:spotId'>
             <SingleSpot />
-            <DeleteSpot />
+            
             {/* <EditSpot /> */}
           </Route>
           {/* <Route path='/spots/:spotId/edit'>

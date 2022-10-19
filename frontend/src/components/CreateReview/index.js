@@ -9,7 +9,7 @@ const CreateReviewForm = () => {
     const history = useHistory()
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
-    const {spotId} = useParams()
+    const { spotId } = useParams()
     const resetClick = (e) => {
         e.preventDefault()
         setReview('')
@@ -17,7 +17,7 @@ const CreateReviewForm = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        
+
         const payload = {
             review,
             stars
@@ -29,22 +29,26 @@ const CreateReviewForm = () => {
     return (
         <section>
             <form onSubmit={handleSubmit}>
-                Stars: 
+                Stars:
                 <input
-                type="number"
-                placeholder="Rate your stay"
-                min={1}
-                max={5}
-                required
-                value={stars}
-                onChange={e=> setStars(e.target.value)} />
+                    type="number"
+                    placeholder="Rate your stay"
+                    min={1}
+                    max={5}
+                    required
+                    value={stars}
+                    onChange={e => {
+                        // setValidationErrors([])
+                        setStars(e.target.value)
+                    }}
+                />
                 Review:
-                <input 
-                type="text"
-                placeholder="Tell us about it"
-                required
-                value={review}
-                onChange={e => setReview(e.target.value)} />
+                <input
+                    type="text"
+                    placeholder="Tell us about it"
+                    required
+                    value={review}
+                    onChange={e => setReview(e.target.value)} />
                 <button type="submit">Create new Review</button>
                 <button type="button" onClick={resetClick}>Cancel</button>
             </form>

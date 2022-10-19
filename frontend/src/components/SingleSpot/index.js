@@ -3,11 +3,13 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as SpotActions from "../../store/spots";
 import EditSpot from '../EditSpot';
+import DeleteSpot from '../DeleteSpot';
+import CreateReviewForm from '../CreateReview'
 const SingleSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot)
-    
+    const sessionUser = useSelector(state => state.session.user)
     useEffect(() => {
         dispatch(SpotActions.getSingleSpot(spotId))
     },[dispatch, spotId])
@@ -22,7 +24,14 @@ const SingleSpot = () => {
                 </li> 
 
             </ul>
-            <EditSpot />
+      
+            {spot.ownerId === sessionUser.id && (
+                <>
+                <DeleteSpot />
+                <EditSpot />
+                </>
+            )}
+            <CreateReviewForm />
         </div>
     )
 }

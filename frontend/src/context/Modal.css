@@ -22,4 +22,12 @@
   #modal-content {
     position: absolute;
     background-color:white;
+    color: #ff385c;
+    
   }
+input {
+  width: 100%;
+  padding: 12px 12px;
+  margin: 1px;
+  justify-content: center;
+}

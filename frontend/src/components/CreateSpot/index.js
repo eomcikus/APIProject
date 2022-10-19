@@ -16,9 +16,24 @@ const CreateSpotForm = ({  }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    const [validationErrors, setValidationErrors] = useState([])
     //test comment
     
-    
+    useEffect(() => {
+        let errors = []
+        if (!address) errors.push("Spot must have an address")
+        if (!city) errors.push("Spot must have a city")
+        if (!state) errors.push("Spot must have a state")
+        if (!country) errors.push("Spot must have a country")
+        if (!name) errors.push("spot must have a name")
+        if (!description) errors.push("Spot must have a description")
+        if (!price) errors.push("Spot must have a price ")
+        //passwords match
+        //lat mustb e between -90 and 90
+        //lng must be between -180 and 180
+        //price must be a number 
+
+    })
     const resetClick = (e) => {
         e.preventDefault()
         setAddress('')
@@ -48,7 +63,7 @@ const CreateSpotForm = ({  }) => {
         }
         createdSpot = await dispatch(createSpot(payload))
         // console.log('createdSpot', createdSpot)
-         history.push(`/spots/${createdSpot.id}`);
+         history.push(`/spots`);
         
     }
     return (
@@ -113,7 +128,7 @@ const CreateSpotForm = ({  }) => {
                 />
                 Price:
                 <input
-                    type='text'
+                    type='number'
                     placeholder='$'
                     required
                     value={price}

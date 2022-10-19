@@ -83,12 +83,13 @@ export const createSpot = (spot, spotId) => async dispatch => {
 }
 
 export const removeSpot = (spotId) => async dispatch => {
-    console.log('---spotId', spotId)
+    console.log('---spotId in delete', spotId)
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     })
+    console.log('response after fetch', response)
     if (response.ok) {
-        const spot = await response.json()
+        console.log('response', response)
         dispatch(remove(spotId))
     }
 }
@@ -128,9 +129,11 @@ const spotReducer = (state = initialState, action) => {
             return newState
         }
         case REMOVE: {
-            newState = { ...state }
-            delete newState.allSpots[action.spot.id]
-            newState.singleSpot = {}
+            newState = { ...state, allSpots: {...state.allSpots}, singleSpot: {} }
+      
+            delete newState.allSpots[action.spotId]
+
+   
             return newState;
         }
         default:

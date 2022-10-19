@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
-import { updateSpot } from '../../store/spots'
+import { getSpots, updateSpot } from '../../store/spots'
 
 
 
@@ -10,9 +10,22 @@ const EditSpot = () => {
     const { spotId } = useParams()
     const history = useHistory()
     // console.log(spotId)
-    const currentSpot = useSelector(state => state.spots[spotId]);
+    const currentSpot = useSelector(state => state.spots.allSpots[spotId]);
     // console.log(currentSpot)
-
+    useEffect(() => {
+        dispatch(getSpots())
+    }, [dispatch])
+    useEffect(() => {
+        setAddress(currentSpot?.address)
+        setCity(currentSpot?.city)
+        setState(currentSpot?.state)
+        setCountry(currentSpot?.country)
+        setLat(currentSpot?.lat)
+        setLng(currentSpot?.lng)
+        setName(currentSpot?.name)
+        setDescription(currentSpot?.description)
+        setPrice(currentSpot?.price)
+    }, [currentSpot])
     //     const sessionUser = useSelector(state => state.session.user);
     const [address, setAddress] = useState(currentSpot?.address)
     const [city, setCity] = useState(currentSpot?.city)

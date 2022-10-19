@@ -61,12 +61,12 @@ router.get('/current', requireAuth, async (req, res, next) => {
                     spotId: spots[i].id,
                 }
             })
-            if (reviewSum === null){
-                spots[i].dataValues.avgReview = 0
-            } else {
-        const reviewAvg = (parseInt(reviewSum) / parseInt(reviewCount))
-        spots[i].dataValues.avgReview = reviewAvg
-            }
+        if (reviewSum === null) {
+            spots[i].dataValues.avgReview = 0
+        } else {
+            const reviewAvg = (parseInt(reviewSum) / parseInt(reviewCount))
+            spots[i].dataValues.avgReview = reviewAvg
+        }
 
     }
     res.json({ Spots: spots })
@@ -196,8 +196,8 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
         parsedEndDate = Date.parse(booking.startDate)
     })
 
-let requestedStart = Date.parse(req.body.startDate)
-let requestedEnd = Date.parse(req.body.endDate)
+    let requestedStart = Date.parse(req.body.startDate)
+    let requestedEnd = Date.parse(req.body.endDate)
 
 
     for (let i = 0; i < bookArray.length; i++) {
@@ -412,9 +412,10 @@ router.get('/', async (req, res) => {
 
 
 //Delete a spot by spotid
-router.delete('/:spotId', async (req, res) => {
-    console.log('IN THE DELETE ROUTE!')
+router.delete('/:spotId', requireAuth, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId)
+    // console.log('IN THE DELETE ROUTE!', spot)
+    // console.log('******************', req)
     if (!spot) {
         res.status(404)
         return res.json({
@@ -422,6 +423,7 @@ router.delete('/:spotId', async (req, res) => {
             "statusCode": 404
         })
     }
+    console.log('made it here!', req.user.id, spot.ownerId)
     if (req.user.id === spot.ownerId) {
         await spot.destroy()
         res.status(200);
@@ -430,6 +432,9 @@ router.delete('/:spotId', async (req, res) => {
             "statusCode": 200
         })
     }
+    return res.json({
+        "message": "not successful"
+    })
 })
 //Create a new spot
 router.post('/', requireAuth, handleValidationErrors, async (req, res, next) => {

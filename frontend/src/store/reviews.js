@@ -119,7 +119,7 @@ const reviewReducer = (state = initialState, action) => {
         //     return newState
         // }
         case REMOVE: {
-            newState = { ...state }
+            newState = { ...state, spot: {...state.spot}, user: {...state.user} }
             delete newState.user[action.reviewId]
             delete newState.spot[action.reviewId]
           
