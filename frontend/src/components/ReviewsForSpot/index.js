@@ -18,7 +18,8 @@ const ReviewsForSpot = () => {
         dispatch(ReviewsActions.getReviews(spotId))
     }, [dispatch])
     // console.log('spotId', spotId)
-
+//if current user matches review.userid, then display deletereview button
+    
     return (
         <div>
             {finalArr.map(review => (<li key={review.id}>{review.review}, {review.stars}</li>))}

@@ -67,11 +67,14 @@ export const createReview = (review, spotId) => async dispatch => {
 }
 
 export const removeReview = (reviewId) => async dispatch => {
-    const response = await csrfFetch(`/reviews/${reviewId}`, {
+    console.log('were in the thunk at least')
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     })
     console.log('---response in removereview', response)
     if (response.ok) {
+        // const review = await response.json()
+        // console.log('response', response)
         dispatch(remove(reviewId))
     }
 }
@@ -103,14 +106,23 @@ const reviewReducer = (state = initialState, action) => {
         }
         case CREATE: {
             newState = { ...state, spot: { ...state.spot }, user: { ...state.user } }
+            console.log('action.review', action.review)
             newState.spot[action.review.id] = action.review
             newState.user[action.review.id] = action.review
             return newState;
         }
+        // case REMOVE: {
+        //     newState = { ...state, spot: { ...state.spot }, user: { ...state.user } }
+        //     delete newState.user[action.reviewId]
+        //     delete newState.spot[action.reviewId]
+        //     console.log(newState.user)
+        //     return newState
+        // }
         case REMOVE: {
-            newState = { ...state, spot: { ...state.spot }, user: { ...state.user } }
-            delete newState.spot[action.review.id]
-            // delete newState.user[action.review.id]
+            newState = { ...state }
+            delete newState.user[action.reviewId]
+            delete newState.spot[action.reviewId]
+          
             return newState
         }
         default:
