@@ -40,10 +40,10 @@ export const getSpots = () => async (dispatch) => {
 }
 
 export const getSingleSpot = (spotId) => async dispatch => {
-    console.log('spotId', spotId)
+    // console.log('spotId', spotId)
     const response = await csrfFetch(`/api/spots/${spotId}`)
     // console.log('spotid in spots', spotId)
-    console.log('response', response)
+    // console.log('response', response)
     if (response.ok) {
         const oneSpot = await response.json()
         // console.log('onespot', oneSpot)
@@ -60,8 +60,11 @@ export const updateSpot = (spot, spotId) => async dispatch => {
         }
     })
     if (response.ok) {
+        console.log('res', response)
         const oneSpot = await response.json()
+        console.log('---', oneSpot)
         dispatch(update(oneSpot))
+        return oneSpot
     }
 }
 
@@ -73,7 +76,7 @@ export const createSpot = (spot, spotId) => async dispatch => {
             'Content-Type': 'application/json'
         }
     })
-    if (response.ok){
+    if (response.ok) {
         const spot = await response.json()
         dispatch(create(spot))
     }
@@ -81,56 +84,54 @@ export const createSpot = (spot, spotId) => async dispatch => {
 
 export const removeSpot = (spotId) => async dispatch => {
     console.log('---spotId', spotId)
-        const response = await csrfFetch(`/api/spots/${spotId}`, {
-            method: 'DELETE'
-        })
-        if (response.ok){
-             const spot = await response.json()
-             dispatch(remove(spotId))
-        }
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE'
+    })
+    if (response.ok) {
+        const spot = await response.json()
+        dispatch(remove(spotId))
+    }
 }
 
 
-let initialState = {}
+let initialState = {
+    allSpots: {},
+    singleSpot: {},
+}
 //reducer
 const spotReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD: {
-            newState = {};
+            newState = { ...state };
+            newState.allSpots = {}
             action.spots.Spots.forEach(spot => {
-                newState[spot.id] = spot
+                newState.allSpots[spot.id] = spot
             })
             return newState;
         }
         case VIEWONE: {
             newState = { ...state }
-            newState['singleSpot'] = action.spot;
+            newState.singleSpot = action.spot;
             return newState
         }
         case CREATE: {
-          if (!state[action.spot.id]) {
-            const newState = {
-                ...state,
-                [action.spot.id]: action.spot
-            }
+
+            newState = { ...state }
+            newState.allSpots[action.spot.id] = action.spot
+
             return newState;
         }
-        return {
-            ...state,
-            [action.spot.id]: {
-                ...state[action.spot.id],
-                ...action.spot
-            }
-        }
-        }
         case UPDATE: {
-        
+            newState = { ...state }
+            newState.singleSpot = action.spot
+            return newState
         }
         case REMOVE: {
-            const deletedState = {...state}
-            delete deletedState[action.spotId]
-            return deletedState;
+            newState = { ...state }
+            delete newState.allSpots[action.spot.id]
+            newState.singleSpot = {}
+            return newState;
         }
         default:
             return state;

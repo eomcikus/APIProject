@@ -8,6 +8,11 @@ import AllSpots from "./components/AllSpots";
 import SingleSpot from "./components/SingleSpot";
 import CreateSpotForm from "./components/CreateSpot";
 import DeleteSpot from "./components/DeleteSpot";
+import EditSpot from "./components/EditSpot";
+import ReviewsForSpot from "./components/ReviewsForSpot";
+import CreateReviewForm from "./components/CreateReview";
+import RemoveReview from "./components/RemoveReview";
+import CurrentUsersReviews from "./components/CurrentUsersReviews";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -26,11 +31,25 @@ function App() {
             <AllSpots />
             <CreateSpotForm />
           </Route>
-          <Route path='/spots/:spotId'>
+          <Route exact path='/spots/:spotId'>
             <SingleSpot />
             <DeleteSpot />
+            {/* <EditSpot /> */}
           </Route>
-
+          {/* <Route path='/spots/:spotId/edit'>
+            <EditSpot />
+          </Route> */}
+          <Route exact path='/spots/:spotId/reviews'>
+            <ReviewsForSpot />
+            <CreateReviewForm />
+   
+          </Route>
+          <Route exact path='/reviews/current'>
+            <CurrentUsersReviews />
+          </Route>
+          <Route exact path='/reviews/:reviewId'>
+          <RemoveReview />
+          </Route>
         </Switch>
       )}
     </>

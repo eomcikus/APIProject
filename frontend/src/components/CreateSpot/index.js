@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createSpot } from '../../store/spots'
 
-const CreateSpotForm = ({ hideForm }) => {
+const CreateSpotForm = ({  }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
@@ -30,13 +30,12 @@ const CreateSpotForm = ({ hideForm }) => {
         setName('')
         setDescription('')
         setPrice('')
-        // dispatch()
+
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
         let createdSpot;
         const payload = {
-            // ownerId: sessionUser.id,
             address,
             city,
             state,
