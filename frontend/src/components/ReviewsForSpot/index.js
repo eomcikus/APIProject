@@ -10,7 +10,7 @@ const ReviewsForSpot = () => {
     console.log('reviews', reviews)
     // let reviewArr = Object.values(reviews)
     // console.log('reviewArr', reviewArr)
-    let finalArr = reviews.filter(review => review.spotId === +spotId)
+    let finalArr = reviews.filter(review => +review.spotId === +spotId)
     console.log('filteredArr', finalArr)
 
     const dispatch = useDispatch()

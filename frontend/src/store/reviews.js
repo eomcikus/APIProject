@@ -1,7 +1,7 @@
 import { csrfFetch } from "./csrf";
 //types
 const LOAD = '/reviews/LOAD'
-const VIEWONE = '/reviews/VIEWONE'
+const USER = '/reviews/USER'
 const CREATE = '/reviews/NEW'
 const REMOVE = '/reviews/REMOVE'
 
@@ -11,9 +11,9 @@ const load = reviews => ({
     reviews
 })
 
-const viewUserRevs = review => ({
-    type: VIEWONE,
-    review
+const viewUserRevs = userId => ({
+    type: USER,
+    userId
 })
 
 const create = review => ({
@@ -31,19 +31,21 @@ const remove = reviewId => ({
 export const getReviews = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
     if (response.ok) {
-        const reviews = await response.json()
+        const data = await response.json()
         // console.log('--reviews in thunk', reviews)
-        dispatch(load(reviews))
+        dispatch(load(data.Reviews))
         // console.log('...after dispatch', reviews)
-        return reviews;
+        // return reviews;
     }
 }
 
 export const getUserReviews = () => async dispatch => {
     const response = await csrfFetch(`/api/reviews/current`)
+    console.log('getUserRes', response)
     if (response.ok) {
-        const userReviews = await response.json()
-        dispatch(viewUserRevs(userReviews))
+        const data = await response.json()
+        console.log('---data after .json', data)
+        dispatch(viewUserRevs(data.Reviews))
     }
 }
 
@@ -68,6 +70,7 @@ export const removeReview = (reviewId) => async dispatch => {
     const response = await csrfFetch(`/reviews/${reviewId}`, {
         method: 'DELETE'
     })
+    console.log('---response in removereview', response)
     if (response.ok) {
         dispatch(remove(reviewId))
     }
@@ -75,26 +78,40 @@ export const removeReview = (reviewId) => async dispatch => {
 
 let initialState = {
 
-        spot: {},
-        user: {}
-    
+    spot: {},
+    user: {}
+
 }
 
 const reviewReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD: {
-            newState = { ...state }
-            action.reviews.Reviews.forEach(review => {
+            newState = { spot: {} }
+            action.reviews.forEach(review => {
                 newState.spot[review.id] = review
             })
             return newState;
         }
-        case CREATE: {
-            newState = { ...state }
-            console.log('create', newState)
-            newState.spot[action.review.id] = action.review
+        case USER: {
+            newState = { user: {} }
+            console.log('action.reviews', action)
+            action.userId.forEach(review => {
+                newState.user[review.id] = review
+            })
             return newState;
+        }
+        case CREATE: {
+            newState = { ...state, spot: { ...state.spot }, user: { ...state.user } }
+            newState.spot[action.review.id] = action.review
+            newState.user[action.review.id] = action.review
+            return newState;
+        }
+        case REMOVE: {
+            newState = { ...state, spot: { ...state.spot }, user: { ...state.user } }
+            delete newState.spot[action.review.id]
+            // delete newState.user[action.review.id]
+            return newState
         }
         default:
             return state;
