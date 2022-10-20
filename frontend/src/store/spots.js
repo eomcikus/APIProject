@@ -1,3 +1,4 @@
+
 import { csrfFetch } from "./csrf"
 //types
 const LOAD = '/spots/LOAD'
@@ -68,7 +69,7 @@ export const updateSpot = (spot, spotId) => async dispatch => {
     }
 }
 
-export const createSpot = (spot, spotId) => async dispatch => {
+export const createSpot = (spot) => async dispatch => {
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify(spot),
@@ -77,9 +78,28 @@ export const createSpot = (spot, spotId) => async dispatch => {
         }
     })
     if (response.ok) {
-        const spot = await response.json()
-        dispatch(create(spot))
+        const newSpot = await response.json()
+        dispatch(create(newSpot))
+        return newSpot;
     }
+}
+
+export const createSpotImage = (url, spotId) => async dispatch => {
+    let spotImage = {url: url, spotId: spotId, preview: true } 
+    const response = await csrfFetch(`/api/spots/${spotId}/images`, 
+    {
+        method: 'POST',
+        body: JSON.stringify(spotImage),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    if (response.ok){
+        const newSpotImage = await response.json()
+        dispatch(create(newSpotImage))
+        return newSpotImage;
+    }
+    //create
 }
 
 export const removeSpot = (spotId) => async dispatch => {
@@ -119,8 +139,10 @@ const spotReducer = (state = initialState, action) => {
         case CREATE: {
 
             newState = { ...state }
-            newState.allSpots[action.spot.id] = action.spot
-
+           newState.allSpots[action.spot.id] = action.spot
+            if (newState.allSpots[action.spot.id].SpotImages){
+                newState.allSpots[action.spot.id].previewImage = newState.allSpots[action.spot.id].SpotImages[0].url
+            } 
             return newState;
         }
         case UPDATE: {
@@ -129,11 +151,11 @@ const spotReducer = (state = initialState, action) => {
             return newState
         }
         case REMOVE: {
-            newState = { ...state, allSpots: {...state.allSpots}, singleSpot: {} }
-      
+            newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: {} }
+
             delete newState.allSpots[action.spotId]
 
-   
+
             return newState;
         }
         default:

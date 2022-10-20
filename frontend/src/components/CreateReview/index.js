@@ -24,7 +24,7 @@ const CreateReviewForm = () => {
         }
         let createdReview = await dispatch(reviewActions.createReview(payload, spotId))
         console.log(createdReview)
-        history.push(`/spots/${spotId}/reviews`)
+        // history.push(`/spots/${spotId}/reviews`)
     }
     return (
         <section>
@@ -35,7 +35,7 @@ const CreateReviewForm = () => {
                     placeholder="Rate your stay"
                     min={1}
                     max={5}
-                    required
+                    // required
                     value={stars}
                     onChange={e => {
                         // setValidationErrors([])

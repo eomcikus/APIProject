@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as reviewActions from "../../store/reviews";
+import RemoveReview from '../RemoveReview';
 
 
 
@@ -19,7 +20,11 @@ const CurrentUsersReviews = () => {
         <div>
             <ul>
             {finalArr.map(review => (<li key={review.id}>{review.review}, {review.stars}</li>))}
-        
+            {finalArr.map(review => review.userId === sessionUser.id && (
+                <>
+                <RemoveReview />
+                </>
+            ))}
             </ul>
         </div>
     )

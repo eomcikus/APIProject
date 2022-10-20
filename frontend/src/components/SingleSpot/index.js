@@ -5,10 +5,14 @@ import * as SpotActions from "../../store/spots";
 import EditSpot from '../EditSpot';
 import DeleteSpot from '../DeleteSpot';
 import CreateReviewForm from '../CreateReview'
+import ReviewsForSpot from '../ReviewsForSpot';
+import reviewReducer from '../../store/reviews';
+
 const SingleSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot)
+    console.log('singlespot', spot)
     const sessionUser = useSelector(state => state.session.user)
     useEffect(() => {
         dispatch(SpotActions.getSingleSpot(spotId))
@@ -20,14 +24,14 @@ const SingleSpot = () => {
              <ul>
                 <li key={spot?.id}>
                     <h1>{spot?.name}</h1>
-                    {spot?.description} 
-                    {spot?.price}
-                    {spot?.city}
-                    {spot?.state}
-                    {spot?.Owner.firstName}
-                    
-                </li> 
-
+                    <li>{spot?.description}</li> 
+                    <li>{spot?.price}</li>
+                    <li>{spot?.city}</li>
+                    <li>{spot?.state}</li>
+                    <li>{spot?.Owner?.firstName}</li>
+                    <li>{spot?.Owner?.lastName}</li>
+                    {spot?.SpotImages?.map(image => <img src={image.url} />)}
+                </li>
             </ul>
       
             {spot.ownerId === sessionUser.id && (
@@ -36,7 +40,9 @@ const SingleSpot = () => {
                 <EditSpot />
                 </>
             )}
+            <ReviewsForSpot />
             <CreateReviewForm />
+  
         </div>
     )
 }

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import * as ReviewsActions from '../../store/reviews';
 import { useDispatch } from "react-redux";
+import RemoveReview from "../RemoveReview";
 
 const ReviewsForSpot = () => {
     const { spotId } = useParams()
@@ -12,7 +13,7 @@ const ReviewsForSpot = () => {
     // console.log('reviewArr', reviewArr)
     let finalArr = reviews.filter(review => +review.spotId === +spotId)
     console.log('filteredArr', finalArr)
-
+    const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(ReviewsActions.getReviews(spotId))
@@ -23,7 +24,7 @@ const ReviewsForSpot = () => {
     return (
         <div>
             {finalArr.map(review => (<li key={review.id}>{review.review}, {review.stars}</li>))}
-
+            
         </div>
     )
 }

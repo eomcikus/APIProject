@@ -8,7 +8,7 @@ const AllSpots = () => {
 
     let spots = useSelector(state => state.spots.allSpots)
     let spotArray = Object.values(spots)
-
+    console.log(spotArray)
     useEffect(() => {
         console.log('Allspots, spots', spots)
 
@@ -18,7 +18,8 @@ const AllSpots = () => {
         <div className="spots-container">
             <div className="spot-cards">
             <ul>
-                {spotArray.map(spot => (<li key={spot.id} className="spot-card">{spot.name}</li>))}
+                {spotArray.map(spot => (<li key={spot.id} className="spot-card">{spot.name}<img src={spot.previewImage}></img>)<img src={spot.previewImage}></img>)</li>))}
+                {/* {spotArray.map(spot => (<img src={spot.previewImage}></img>))} */}
                 </ul>
             </div>
         </div>

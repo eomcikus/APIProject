@@ -13,7 +13,7 @@ const RemoveReview = () => {
 //where to send user back to? main page?
     }
     return (
-        <div>
+        <div>            
             <button type="button" onClick={deleteIt}>Delete Review</button>
         </div>
     )

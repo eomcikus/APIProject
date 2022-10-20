@@ -39,15 +39,16 @@ function App() {
           {/* <Route path='/spots/:spotId/edit'>
             <EditSpot />
           </Route> */}
-          <Route exact path='/spots/:spotId/reviews'>
+          {/* <Route exact path='/spots/:spotId/reviews'>
             <ReviewsForSpot />
             <CreateReviewForm />
    
-          </Route>
-          <Route exact path='/reviews/current'>
+          </Route> */}
+          {/* <Route exact path='/reviews/current'>
             <CurrentUsersReviews />
-          </Route>
+          </Route> */}
           <Route exact path='/reviews/:reviewId'>
+          
           <RemoveReview />
           </Route>
         </Switch>

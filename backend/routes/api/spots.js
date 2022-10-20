@@ -478,8 +478,9 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
             let finalPic = newPic.toJSON()
             delete finalPic.createdAt
             delete finalPic.updatedAt
-            delete finalPic.spotId
-            return res.json(finalPic)
+            // delete finalPic.spotId
+            const spotwithImage = await Spot.findByPk(finalPic.spotId, {include: SpotImage})
+            return res.json(spotwithImage)
         }
     }
 

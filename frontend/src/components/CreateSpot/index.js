@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createSpot } from '../../store/spots'
+import { createSpot, createSpotImage } from '../../store/spots'
 
 const CreateSpotForm = ({ }) => {
     const dispatch = useDispatch();
@@ -18,6 +18,7 @@ const CreateSpotForm = ({ }) => {
     const [price, setPrice] = useState('');
     const [validationErrors, setValidationErrors] = useState([])
     const [submit, setSubmit] = useState(false)
+    const [photo, setPhoto] = useState('')
     //test comment
 
     useEffect(() => {
@@ -33,8 +34,10 @@ const CreateSpotForm = ({ }) => {
         if (description.length > 5000) errors.push("Spot description must be less than 5000 characters")
         if (lat < -90 || lat > 90) errors.push("Latitude must be between -90 and 90")
         if (lng < -180 || lng > 180) errors.push("Longitude must be between -180 and 180")
+        if (!photo.includes('.png') && !photo.includes('.jpg') && !photo.includes('.jpeg')) errors.push('Photo must be in .png, .jpeg, or .jpg format')
+        if (photo.length === 0) errors.push('must include an image URL')
         setValidationErrors(errors)
-    }, [name, price, lat, lng, description, address, city, state, country])
+    }, [name, price, lat, lng, description, address, city, state, country, photo])
 
     const resetClick = (e) => {
         e.preventDefault()
@@ -61,16 +64,17 @@ const CreateSpotForm = ({ }) => {
             lng,
             name,
             description,
-            price
+            price,
+            previewImage: photo
         }
+        setSubmit(true)
         createdSpot = await dispatch(createSpot(payload))
+        let createdSpotImage = await dispatch(createSpotImage(photo, createdSpot.id))
         // console.log('createdSpot', createdSpot)
         if (validationErrors.length){
-            setSubmit(true)
             window.alert('Cannot submit form')
         } else {
             history.push(`/spots`);
-            setSubmit(false)
         }
     }
     return (
@@ -147,6 +151,14 @@ const CreateSpotForm = ({ }) => {
                     value={price}
                     onChange={e => setPrice(e.target.value)}
                 />
+                Upload a photo:
+                <input 
+                    type='text'
+                    placeholder='link to photo'
+                    required
+                    value={photo}
+                    onChange={e => setPhoto(e.target.value)}
+                    />
                 <button type="submit"
                 disabled={validationErrors.length ? true : false}
                 >Create new Spot</button>
