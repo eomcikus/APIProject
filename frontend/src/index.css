@@ -2,24 +2,42 @@
 button {
     background-color: #ff385c;
     color: white;
-    border-radius: 12%;
+    border-radius: 10px;
     text-align: center;
-    margin: 10px 3px;
+    margin: 10px;
     border: none;
     padding: 10px 30px;
 }
 
- html, body, input, textarea, button {
+ html, body, input, textarea {
     font-family: 'Arial';
     font-size: 16px;
 }
 
 form {
-    width:200px;
+    width: 50%;
     padding: 20px;
     margin: 30px;
-    /* border: 1px black solid; */
-    border-radius: 3%;
+    border: 1px black solid;
+    border-radius: 10px;
+}
+form input {
+    border: 1px gray solid;
+    width: 90%;
+    border-radius: 10px;
+    outline: none;
+    margin: 10px;
+}
+h1 {
+    color: #ff385c;
+}
+form input:focus {
+    border: 1px #ff385c solid;
+    color: #ff385c;
+}
+
+form text {
+    color: #ff385c;
 }
 
 .spots-container {
@@ -28,6 +46,17 @@ form {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+/* .spot-cards {
+    /* display: flex;
+    flex-direction:column;
+     */
+    /* border: 1px lavender solid; */
+    
+
+.spot-card {
+    border: 1px solid purple
 }
 
 li {

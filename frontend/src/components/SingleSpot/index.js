@@ -14,13 +14,18 @@ const SingleSpot = () => {
         dispatch(SpotActions.getSingleSpot(spotId))
     },[dispatch, spotId])
     
-  
+  console.log(spot)
      return (
         <div>
              <ul>
                 <li key={spot?.id}>
                     <h1>{spot?.name}</h1>
                     {spot?.description} 
+                    {spot?.price}
+                    {spot?.city}
+                    {spot?.state}
+                    {spot?.Owner.firstName}
+                    
                 </li> 
 
             </ul>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createSpot } from '../../store/spots'
 
-const CreateSpotForm = ({  }) => {
+const CreateSpotForm = ({ }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
@@ -17,8 +17,9 @@ const CreateSpotForm = ({  }) => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [validationErrors, setValidationErrors] = useState([])
+    const [submit, setSubmit] = useState(false)
     //test comment
-    
+
     useEffect(() => {
         let errors = []
         if (!address) errors.push("Spot must have an address")
@@ -28,12 +29,13 @@ const CreateSpotForm = ({  }) => {
         if (!name) errors.push("spot must have a name")
         if (!description) errors.push("Spot must have a description")
         if (!price) errors.push("Spot must have a price ")
-        //passwords match
-        //lat mustb e between -90 and 90
-        //lng must be between -180 and 180
-        //price must be a number 
+        if (price < 0) errors.push("Price must be greater than 0")
+        if (description.length > 5000) errors.push("Spot description must be less than 5000 characters")
+        if (lat < -90 || lat > 90) errors.push("Latitude must be between -90 and 90")
+        if (lng < -180 || lng > 180) errors.push("Longitude must be between -180 and 180")
+        setValidationErrors(errors)
+    }, [name, price, lat, lng, description, address, city, state, country])
 
-    })
     const resetClick = (e) => {
         e.preventDefault()
         setAddress('')
@@ -63,62 +65,73 @@ const CreateSpotForm = ({  }) => {
         }
         createdSpot = await dispatch(createSpot(payload))
         // console.log('createdSpot', createdSpot)
-         history.push(`/spots`);
-        
+        if (validationErrors.length){
+            setSubmit(true)
+            window.alert('Cannot submit form')
+        } else {
+            history.push(`/spots`);
+            setSubmit(false)
+        }
     }
     return (
         <section>
             <form onSubmit={handleSubmit}>
-                Address:
+               <h1> Create a Spot</h1>
+                <ul className="errors">
+                    {validationErrors.map((error) => (
+                        <li key={error}>{error}</li>
+                    ))}
+                </ul>
+
                 <input
                     type="text"
                     placeholder='Address'
                     required
                     value={address}
                     onChange={e => setAddress(e.target.value)} />
-                City:
+
                 <input
                     type="text"
                     placeholder='City'
                     required
                     value={city}
                     onChange={e => setCity(e.target.value)} />
-                State:
+
                 <input
                     type='text'
-                    placeholder='state'
+                    placeholder='State'
                     required
                     value={state}
                     onChange={e => setState(e.target.value)} />
-                Country:
+ 
                 <input
                     type='text'
                     placeholder='Country'
                     required
                     value={country}
                     onChange={e => setCountry(e.target.value)} />
-                Latitude:
+
                 <input
                     type='text'
                     placeholder='Latitude'
                     required
                     value={lat}
                     onChange={e => setLat(e.target.value)} />
-                Longitute:
+
                 <input
                     type='text'
                     placeholder='Longitude'
                     required
                     value={lng}
                     onChange={e => setLng(e.target.value)} />
-                Name:
+
                 <input
                     type='text'
                     placeholder='Spot name'
                     required
                     value={name}
                     onChange={e => setName(e.target.value)} />
-                Description:
+
                 <input
                     type='text'
                     placeholder='description'
@@ -126,7 +139,7 @@ const CreateSpotForm = ({  }) => {
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                 />
-                Price:
+
                 <input
                     type='number'
                     placeholder='$'
@@ -135,9 +148,11 @@ const CreateSpotForm = ({  }) => {
                     onChange={e => setPrice(e.target.value)}
                 />
                 <button type="submit"
-               >Create new Spot</button>
-                <button type="button" 
-                onClick={resetClick}>Cancel</button>
+                disabled={validationErrors.length ? true : false}
+                >Create new Spot</button>
+                <button type="button"
+                    onClick={resetClick}
+                    >Cancel</button>
             </form>
         </section>
     )
