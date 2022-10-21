@@ -6,6 +6,7 @@ const VIEWONE = '/spots/VIEWONE'
 const UPDATE = '/spots/UPDATE'
 const CREATE = '/spots/CREATE'
 const REMOVE = '/spots/REMOVE'
+const CLEAR = '/spots/CLEAR'
 //actions
 const load = spots => ({
     type: LOAD,
@@ -30,6 +31,11 @@ const create = spot => ({
 const remove = spotId => ({
     type: REMOVE,
     spotId
+})
+
+export const clear = ()  =>({
+    type: CLEAR,
+  
 })
 //thunks
 export const getSpots = () => async (dispatch) => {
@@ -146,18 +152,17 @@ const spotReducer = (state = initialState, action) => {
             return newState;
         }
         case UPDATE: {
-            newState = { ...state, singleSpot: {...state.singleSpot} }
+            newState = { ...state }
             newState.singleSpot = action.spot
-            newState.allSpots = {...state.spot } 
-            // console.log('state in update', state)
             return newState
         }
         case REMOVE: {
             newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: {} }
-
             delete newState.allSpots[action.spotId]
-
-
+            return newState;
+        }
+        case CLEAR: {
+            newState = {...state, allSpots: {...state.allSpots}, singleSpot: {}}
             return newState;
         }
         default:

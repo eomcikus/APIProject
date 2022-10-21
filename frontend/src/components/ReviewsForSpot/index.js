@@ -24,7 +24,8 @@ const ReviewsForSpot = () => {
     
     return (
         <div>
-            {finalArr.map(review => (<li key={review.id}>{review?.review}, {review?.stars}</li>))}
+            <h1>Reviews</h1>
+            {finalArr.map(review => (<div>{review?.review}, {review?.stars}</div>))}
             
         </div>
     )
