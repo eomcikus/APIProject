@@ -5,7 +5,7 @@ import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
-
+import logo from '../../images/erbnb.png'
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
@@ -27,7 +27,7 @@ function Navigation({ isLoaded }) {
     <div className='topnav-container'>
 
           <div>
-            <NavLink exact to="/spots">Home</NavLink>
+            <NavLink exact to="/spots"><img src={logo}/></NavLink>
             {/* add img tag instead of home */}
           </div>
           <div>

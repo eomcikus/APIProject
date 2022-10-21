@@ -1,11 +1,13 @@
 // import { useState, useEffect } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useParams } from 'react-router-dom';
 // import * as SpotActions from '../../store/spots'
+import SpotCard from '../SpotCard';
 import './AllSpots.css'
 
 const AllSpots = () => {
-
+    let {spotId} = useParams()
     let spots = useSelector(state => state.spots.allSpots)
     let spotArray = Object.values(spots)
     console.log(spotArray)
@@ -15,17 +17,10 @@ const AllSpots = () => {
     }, [spots])
 
     return (
-        <div className="spots-container">
-            <div className="spot-cards">
-                {spotArray.map(spot => (<>
-                <img className="img-card" src={spot.previewImage}></img>
-                <p></p>
-                <div key={spot.id} 
-                className='spot-info'>{spot.name}{spot.avgRating}</div></>))}
-                {/* {spotArray.map(spot => (<img src={spot.previewImage}></img>))} */}
-
-            </div>
-        </div>
+<div className="spotcard-layout">
+    {spotArray.map(spot => (
+        <SpotCard key={spot.id} spot={spot}/>))}
+</div>
     )
 }
 

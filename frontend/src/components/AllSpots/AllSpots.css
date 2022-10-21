@@ -2,17 +2,43 @@
     padding: 5px;
     display: flex;
     flex-direction: row;
-     justify-content: space-around;
-     align-items: center;
+    justify-content: space-evenly; 
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 300px;
+    margin: 0 auto;
+    margin-top: 20vh;
 }
 
-.spots-cards {
-    width: 250px;
+.card-image {
+    width: 300px;
+    border-radius: 10%;
+    height: 300px;
+}
+
+.spotcard-layout {
+    display: flex;
+    flex-direction: row;
+    padding-left: 80px;
+    padding-right: 20px;
+}
+
+.card {
+    width: 300px;
+    padding: 5px;
     border-radius: 10%;
 }
 
-.img-card {
+.spot-card-detail-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 300px;
-    padding: 5px;
-
+}
+.spot-card-details {
+    margin-left: 15px;
+    
+}
+.avg-rating {
+    margin-right: 15px;
 }

@@ -1,0 +1,32 @@
+
+import { NavLink } from "react-router-dom";
+import './spotcard.css'
+
+const SpotCard = ({ spot }) => {
+    return (
+        <NavLink to={`/spots/${spot.id}`}
+            className="spots-container"
+            style={{textDecoration: 'none'}}>
+            <div className='spot-card-image'>
+                <img className='card-image' src={spot.previewImage}></img>
+            </div>
+            <div className="spot-card-detail-container">
+                <div className='spot-card-details'>
+                    <p><b>{spot.name}</b></p>
+                    <p>{spot.city}, {spot.state}</p>
+                    <p>${spot.price}</p>
+
+                </div>
+                <div className='avg-rating'>
+                    <p>★{spot.avgRating}</p>
+                </div>
+            </div>
+
+            <p></p>
+
+       
+        </NavLink>
+    )
+}
+
+export default SpotCard;
