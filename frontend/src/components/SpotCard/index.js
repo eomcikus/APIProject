@@ -1,8 +1,17 @@
 
-import { NavLink } from "react-router-dom";
+import { NavLink,  } from "react-router-dom";
 import './spotcard.css'
+import { useEffect, useDispatch } from "react";
+import { useSelector } from "react-redux";
+import { getReviews } from "../../store/reviews";
 
 const SpotCard = ({ spot }) => {
+//    const reviews = useSelector(state => state.reviews.spot)
+//    const dispatch = useDispatch()
+//    useEffect(() => {
+//         dispatch(getReviews(spot.id))
+//     }, [])
+
     return (
         <NavLink to={`/spots/${spot.id}`}
             className="spots-container"
@@ -18,7 +27,7 @@ const SpotCard = ({ spot }) => {
 
                 </div>
                 <div className='avg-rating'>
-                    <p>★{spot.avgRating}</p>
+                    <p>★{parseFloat(spot.avgRating).toFixed(2)}</p>
                 </div>
             </div>
 

@@ -19,7 +19,7 @@
 .spotcard-layout {
     display: flex;
     flex-direction: row;
-    padding-left: 80px;
+    padding-left: 20px;
     padding-right: 20px;
 }
 

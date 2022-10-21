@@ -15,6 +15,7 @@ const ReviewsForSpot = () => {
     console.log('filteredArr', finalArr)
     const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch()
+    const userReview = useSelector(state => state.reviews.spot)
     useEffect(() => {
         dispatch(ReviewsActions.getReviews(spotId))
     }, [dispatch])
@@ -23,7 +24,7 @@ const ReviewsForSpot = () => {
     
     return (
         <div>
-            {finalArr.map(review => (<li key={review.id}>{review.review}, {review.stars}</li>))}
+            {finalArr.map(review => (<li key={review.id}>{review?.review}, {review?.stars}</li>))}
             
         </div>
     )
