@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import * as SpotActions from '../../store/spots'
-
+import './AllSpots.css'
 
 const AllSpots = () => {
 
@@ -17,10 +17,13 @@ const AllSpots = () => {
     return (
         <div className="spots-container">
             <div className="spot-cards">
-            <ul>
-                {spotArray.map(spot => (<li key={spot.id} className="spot-card">{spot.name}<img src={spot.previewImage}></img>)<img src={spot.previewImage}></img>)</li>))}
+                {spotArray.map(spot => (<>
+                <img className="img-card" src={spot.previewImage}></img>
+                <p></p>
+                <div key={spot.id} 
+                className='spot-info'>{spot.name}{spot.avgRating}</div></>))}
                 {/* {spotArray.map(spot => (<img src={spot.previewImage}></img>))} */}
-                </ul>
+
             </div>
         </div>
     )
