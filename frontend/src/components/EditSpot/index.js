@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
-import { getSpots, updateSpot } from '../../store/spots'
+import { getSingleSpot, updateSpot } from '../../store/spots'
 
 
 
@@ -13,7 +13,7 @@ const EditSpot = () => {
     const currentSpot = useSelector(state => state.spots.allSpots[spotId]);
     // console.log(currentSpot)
     useEffect(() => {
-        dispatch(getSpots())
+        dispatch(getSingleSpot(spotId))
     }, [dispatch])
     useEffect(() => {
         setAddress(currentSpot?.address)
@@ -76,6 +76,7 @@ const EditSpot = () => {
         if (description.length > 5000) errors.push("Spot description must be less than 5000 characters")
         if (lat < -90 || lat > 90) errors.push("Latitude must be between -90 and 90")
         if (lng < -180 || lng > 180) errors.push("Longitude must be between -180 and 180")
+        setValidationErrors(errors)
     },[name, price, lat, lng, description, address, city, state, country])
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -92,13 +93,10 @@ const EditSpot = () => {
             price
         }
         updatedSpot = await dispatch(updateSpot(payload, spotId))
-        console.log('updated', updatedSpot)
+        console.log('made it to if statement with history.push')
         if (updatedSpot) {
-            setTimeout(() => {
-                console.log('settimeout')
-                // <Redirect to={`/spots/${spotId}`} />;
-            }, 1000)
-
+            console.log('made it in if statement')
+            history.push(`/spots/${spotId}`)
         }
     }
     return (

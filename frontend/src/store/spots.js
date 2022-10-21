@@ -146,8 +146,10 @@ const spotReducer = (state = initialState, action) => {
             return newState;
         }
         case UPDATE: {
-            newState = { ...state }
+            newState = { ...state, singleSpot: {...state.singleSpot} }
             newState.singleSpot = action.spot
+            newState.allSpots = {...state.spot } 
+            // console.log('state in update', state)
             return newState
         }
         case REMOVE: {
