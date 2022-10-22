@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
 import { getSingleSpot, updateSpot } from '../../store/spots'
-
+import { clear } from '../../store/spots'
 
 
 const EditSpot = () => {
@@ -10,11 +10,14 @@ const EditSpot = () => {
     const { spotId } = useParams()
     const history = useHistory()
     // console.log(spotId)
-    const currentSpot = useSelector(state => state.spots.allSpots[spotId]);
-    // console.log(currentSpot)
+    const currentSpot = useSelector(state => state.spots.singleSpot);
+    // console.log('current spot in edit', currentSpot)
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
-    }, [dispatch])
+        return(() => {
+            dispatch(clear())
+        })
+    }, [dispatch, spotId])
     useEffect(() => {
         setAddress(currentSpot?.address)
         setCity(currentSpot?.city)
@@ -25,6 +28,7 @@ const EditSpot = () => {
         setName(currentSpot?.name)
         setDescription(currentSpot?.description)
         setPrice(currentSpot?.price)
+
     }, [currentSpot])
     //     const sessionUser = useSelector(state => state.session.user);
     const [address, setAddress] = useState(currentSpot?.address)
@@ -36,6 +40,7 @@ const EditSpot = () => {
     const [name, setName] = useState(currentSpot?.name);
     const [description, setDescription] = useState(currentSpot?.description);
     const [price, setPrice] = useState(currentSpot?.price);
+
     const [validationErrors, setValidationErrors] = useState([])
     
     const updateAddress = (e) => setAddress(e.target.value)
@@ -95,7 +100,7 @@ const EditSpot = () => {
         updatedSpot = await dispatch(updateSpot(payload, spotId))
         console.log('made it to if statement with history.push')
         if (updatedSpot) {
-            console.log('made it in if statement')
+            dispatch(getSingleSpot(spotId))
             history.push(`/spots/${spotId}`)
         }
     }

@@ -97,7 +97,7 @@ const reviewReducer = (state = initialState, action) => {
             return newState;
         }
         case USER: {
-            newState = { user: {} }
+            newState = { ...state, user: {...state.user} }
             console.log('action.reviews', action)
             action.userId.forEach(review => {
                 newState.user[review.id] = review

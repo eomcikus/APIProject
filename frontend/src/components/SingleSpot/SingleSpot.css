@@ -1,0 +1,15 @@
+.single-spot-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    flex-wrap: wrap;
+    max-width: 90%;
+    margin: 0 auto;
+    margin-top: 20vh;
+}
+
+.ss-preview-img {
+    width: 750px;
+    height: 750px
+}
