@@ -28,7 +28,6 @@ function Navigation({ isLoaded }) {
 
           <div>
             <NavLink exact to="/spots"><img src={logo}/></NavLink>
-            {/* add img tag instead of home */}
           </div>
           <div>
           {isLoaded && sessionLinks}
