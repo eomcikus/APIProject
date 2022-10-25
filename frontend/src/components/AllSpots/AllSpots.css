@@ -19,8 +19,10 @@
 .spotcard-layout {
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     padding-left: 20px;
     padding-right: 20px;
+    max-height: 600px;
 }
 
 .card {

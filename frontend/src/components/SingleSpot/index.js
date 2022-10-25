@@ -38,7 +38,7 @@ const SingleSpot = () => {
                     <div>Owned by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>
                     {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
                     <div>{spot?.description}</div> 
-                    <div>{spot?.price}</div>
+                    <div>${spot?.price}</div>
                     <div>{spot?.city}, {spot?.state}</div>
                 </div>
        
