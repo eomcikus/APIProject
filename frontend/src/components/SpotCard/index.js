@@ -35,7 +35,7 @@ console.log('reviews of spot', reviews)
 
                 </div>
                 <div className='avg-rating'>
-                    <p>★{avgRating ? parseFloat(spot.avgRating).toFixed(2) : 'none'}</p>
+                    <p>★{spot.avgRating ? parseFloat(spot.avgRating).toFixed(2) : 'none'}</p>
                 </div>
             </div>
 
