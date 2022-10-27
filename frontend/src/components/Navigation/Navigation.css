@@ -12,3 +12,7 @@
     padding-right: 20px;
     height: 150px;
 }
+
+.profile-dropdown {
+    border: 1px solid black;
+}
