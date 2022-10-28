@@ -17,11 +17,11 @@ const SingleSpot = () => {
     const sessionUser = useSelector(state => state.session.user)
     const reviews = useSelector(state => Object.values(state.reviews.spot))
 
-    let reviewfound = reviews.find(review => sessionUser.id === review.userId)
+    let reviewfound = reviews?.find(review => sessionUser.id === review.userId)
     // reviewfound ? true : false 
     console.log('singlespots', reviewfound)
     useEffect(() => {
-        dispatch(SpotActions.getSingleSpot(spotId))
+        dispatch(getSingleSpot(spotId))
         dispatch(getUserReviews())
     },[dispatch, spotId])
     // useEffect(() => {
