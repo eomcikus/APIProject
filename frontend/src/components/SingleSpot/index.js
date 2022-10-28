@@ -51,11 +51,11 @@ const SingleSpot = () => {
             
             <ReviewsForSpot />
             
-            {!reviewfound && (
-        
+            {/* {!reviewfound && (
+         */}
             <CreateReviewForm />
 
-            )}
+            {/* )} */}
         </div>
     )
 }
