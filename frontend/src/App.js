@@ -6,7 +6,7 @@ import * as SpotActions from "./store/spots"
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
 import SingleSpot from "./components/SingleSpot";
-import CreateSpotForm from "./components/CreateSpot";
+// import CreateSpotForm from "./components/CreateSpot";
 import DeleteSpot from "./components/DeleteSpot";
 import EditSpot from "./components/EditSpot";
 import ReviewsForSpot from "./components/ReviewsForSpot";
@@ -29,7 +29,7 @@ function App() {
         <Switch>
           <Route exact path="/spots">
             <AllSpots />
-            <CreateSpotForm />
+            {/* <CreateSpotForm /> */}
           </Route>
           <Route exact path='/spots/:spotId'>
             <SingleSpot />

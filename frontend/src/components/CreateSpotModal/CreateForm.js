@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createSpot, createSpotImage } from '../../store/spots'
-
+import './CreateSpot.css'
 const CreateSpotForm = ({ }) => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -79,14 +79,16 @@ const CreateSpotForm = ({ }) => {
     }
     return (
         <section>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='create-form-modal'>
                <h1> Create a Spot</h1>
                 <ul className="errors">
-                    {validationErrors.map((error) => (
+
+                   {validationErrors.map((error) => (
                         <li key={error}>{error}</li>
                     ))}
                 </ul>
-
+                <h2>Tell us about your spot.</h2>
+                Where is your spot?
                 <input
                     type="text"
                     placeholder='Address'
@@ -128,14 +130,14 @@ const CreateSpotForm = ({ }) => {
                     required
                     value={lng}
                     onChange={e => setLng(e.target.value)} />
-
+                Give your spot a name.
                 <input
                     type='text'
                     placeholder='Spot name'
                     required
                     value={name}
                     onChange={e => setName(e.target.value)} />
-
+                What makes your spot special? Write a description.
                 <input
                     type='text'
                     placeholder='description'
@@ -143,7 +145,7 @@ const CreateSpotForm = ({ }) => {
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                 />
-
+                Cost per night:
                 <input
                     type='number'
                     placeholder='$'
@@ -160,7 +162,7 @@ const CreateSpotForm = ({ }) => {
                     onChange={e => setPhoto(e.target.value)}
                     />
                 <button type="submit"
-                disabled={validationErrors.length ? true : false}
+                // disabled={validationErrors.length ? true : false}
                 >Create new Spot</button>
                 <button type="button"
                     onClick={resetClick}

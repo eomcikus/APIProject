@@ -5,6 +5,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import { getSpots } from '../../store/spots';
 import SpotCard from '../SpotCard';
 import './AllSpots.css'
+import CreateSpotModal from '../CreateSpotModal';
 
 const AllSpots = () => {
     const dispatch = useDispatch()
@@ -20,6 +21,7 @@ const AllSpots = () => {
         <div className="spotcard-layout">
             {spotArray.map(spot => (
                 <SpotCard key={spot.id} spot={spot} />))}
+                <CreateSpotModal />
         </div>
     )
 }
