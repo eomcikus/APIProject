@@ -42,7 +42,7 @@ const SingleSpot = () => {
                     <div>{spot?.city}, {spot?.state}</div>
                 </div>
        
-            {spot.ownerId === sessionUser.id && (
+            {sessionUser && spot.ownerId === sessionUser.id && (
                 <>
                 <DeleteSpot />
                 <EditSpot />
@@ -51,11 +51,11 @@ const SingleSpot = () => {
             
             <ReviewsForSpot />
             
-            {/* {!reviewfound && (
-         */}
+            {sessionUser && !reviewfound && (
+        
             <CreateReviewForm />
 
-            {/* )} */}
+            )}
         </div>
     )
 }
