@@ -10,6 +10,8 @@ const CreateReviewForm = () => {
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
     const { spotId } = useParams()
+    
+
     const resetClick = (e) => {
         e.preventDefault()
         setReview('')

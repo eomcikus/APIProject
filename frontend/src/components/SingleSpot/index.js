@@ -20,7 +20,7 @@ const SingleSpot = () => {
     let reviewfound; 
     if (sessionUser) reviewfound = reviews?.find(review => sessionUser.id === review.userId)
     // reviewfound ? true : false 
-    // console.log('singlespots', reviewfound)
+    console.log('singlespots reviews', reviewfound)
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
         dispatch(getUserReviews())
@@ -52,7 +52,9 @@ const SingleSpot = () => {
             
             <ReviewsForSpot />
             
-            {sessionUser && !reviewfound && (
+            {sessionUser && 
+            !reviewfound && 
+            spot.ownerId !== sessionUser.id && (
         
             <CreateReviewForm />
 

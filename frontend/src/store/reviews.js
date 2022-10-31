@@ -105,7 +105,7 @@ const reviewReducer = (state = initialState, action) => {
             return newState;
         }
         case CREATE: {
-            newState = { ...state, spot: { ...state.spot }, user: { ...state.user } }
+            newState = { ...state, Spot: { ...state.spot }, User: { ...state.user } }
             console.log('action.review', action.review)
             newState.spot[action.review.id] = action.review
             newState.user[action.review.id] = action.review
