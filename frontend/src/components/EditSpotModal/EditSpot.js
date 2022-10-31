@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
 import { getSingleSpot, updateSpot } from '../../store/spots'
 import { clear } from '../../store/spots'
-
+import './EditSpot.css'
 
 const EditSpot = () => {
     const dispatch = useDispatch()
@@ -106,7 +106,7 @@ const EditSpot = () => {
     }
     return (
         <section>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='edit-spot-form'>
                 <ul className="errors">
                     {validationErrors.map((error) => (
                         <li key={error}>{error}</li>

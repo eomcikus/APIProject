@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as SpotActions from "../../store/spots";
-import EditSpot from '../EditSpot';
+import EditSpotModal from '../EditSpotModal';
 import DeleteSpot from '../DeleteSpot';
 import CreateReviewForm from '../CreateReview'
 import ReviewsForSpot from '../ReviewsForSpot';
@@ -46,7 +46,7 @@ const SingleSpot = () => {
             {sessionUser && spot.ownerId === sessionUser.id && (
                 <>
                 <DeleteSpot />
-                <EditSpot />
+                <EditSpotModal />
                 </>
             )}
             
