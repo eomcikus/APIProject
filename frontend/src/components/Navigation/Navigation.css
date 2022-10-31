@@ -1,15 +1,16 @@
 
 .topnav-container {
     /* border: 1px green solid; */
-    margin: 0;
-    padding: 0;
-    width: 100%;
+    /* margin: 0;
+    padding: 0; */
+    /* width: 100%; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding-left: 0px;
     padding-right: 0px;
+    margin-right: 50px;
     height: 150px;
 }
 
@@ -29,4 +30,5 @@
     /* padding-right: 50px;
     margin-right: 50px; */
     padding-left: 100px;
+    position: fixed;
 }
