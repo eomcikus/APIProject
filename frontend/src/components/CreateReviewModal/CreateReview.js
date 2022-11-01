@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useParams, useHistory } from "react-router-dom"
 import * as reviewActions from "../../store/reviews"
-
+import './CreateReview.css';
 
 const CreateReviewForm = () => {
     const dispatch = useDispatch()

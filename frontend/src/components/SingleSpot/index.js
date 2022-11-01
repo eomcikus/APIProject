@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as SpotActions from "../../store/spots";
 import EditSpotModal from '../EditSpotModal';
 import DeleteSpot from '../DeleteSpotModal';
-import CreateReviewForm from '../CreateReview'
+import CreateReviewModal from '../CreateReviewModal'
 import ReviewsForSpot from '../ReviewsForSpot';
 import reviewReducer from '../../store/reviews';
 import { getUserReviews } from '../../store/reviews';
@@ -56,7 +56,7 @@ const SingleSpot = () => {
             !reviewfound && 
             spot.ownerId !== sessionUser.id && (
         
-            <CreateReviewForm />
+            <CreateReviewModal />
 
             )}
         </div>
