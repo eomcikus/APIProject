@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as SpotActions from "../../store/spots";
 import EditSpotModal from '../EditSpotModal';
-import DeleteSpot from '../DeleteSpot';
+import DeleteSpot from '../DeleteSpotModal';
 import CreateReviewForm from '../CreateReview'
 import ReviewsForSpot from '../ReviewsForSpot';
 import reviewReducer from '../../store/reviews';

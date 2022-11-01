@@ -1,0 +1,7 @@
+.delete-modal {
+    height: auto;
+    width: auto;
+    overflow:scroll;
+    margin: 10%;
+    color: black;
+}
