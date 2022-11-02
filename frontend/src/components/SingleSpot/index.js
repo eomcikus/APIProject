@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as SpotActions from "../../store/spots";
+import * as SpotActions from "../../store/spots"; 
 import EditSpotModal from '../EditSpotModal';
 import DeleteSpot from '../DeleteSpotModal';
 import CreateReviewModal from '../CreateReviewModal'
@@ -19,8 +19,8 @@ const SingleSpot = () => {
     console.log('reviews', reviews)
     let reviewfound; 
     if (sessionUser) reviewfound = reviews?.find(review => sessionUser.id === review.userId)
-    // reviewfound ? true : false 
-    console.log('singlespots reviews', reviewfound)
+    reviewfound ? reviewfound = true : reviewfound = false
+    console.log('reviewfound', reviewfound)
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
         dispatch(getUserReviews())
@@ -53,7 +53,7 @@ const SingleSpot = () => {
             <ReviewsForSpot />
             
             {sessionUser && 
-            !reviewfound && 
+            reviewfound === false && 
             spot.ownerId !== sessionUser.id && (
         
             <CreateReviewModal />

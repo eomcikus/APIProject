@@ -71,7 +71,7 @@ const CreateSpotForm = ({ }) => {
         createdSpot = await dispatch(createSpot(payload))
         let createdSpotImage = await dispatch(createSpotImage(photo, createdSpot.id))
         // console.log('createdSpot', createdSpot)
-        if (validationErrors.length){
+        if (validationErrors.length) {
             window.alert('Cannot submit form')
         } else {
             history.push(`/spots`);
@@ -80,13 +80,13 @@ const CreateSpotForm = ({ }) => {
     return (
         <section>
             <form onSubmit={handleSubmit} className='create-form-modal'>
-               <h1> Create a Spot</h1>
-                <ul className="errors">
-
-                   {validationErrors.map((error) => (
-                        <li key={error}>{error}</li>
-                    ))}
-                </ul>
+                <h1> Create a Spot</h1>
+                {submit && validationErrors.length && (
+                    <ul className="errors">
+                        {validationErrors.map((error) => (
+                            <li key={error}>{error}</li>))}
+                    </ul>
+                )}
                 <h2>Tell us about your spot.</h2>
                 Where is your spot?
                 <input
@@ -109,7 +109,7 @@ const CreateSpotForm = ({ }) => {
                     required
                     value={state}
                     onChange={e => setState(e.target.value)} />
- 
+
                 <input
                     type='text'
                     placeholder='Country'
@@ -154,19 +154,19 @@ const CreateSpotForm = ({ }) => {
                     onChange={e => setPrice(e.target.value)}
                 />
                 Upload a photo:
-                <input 
+                <input
                     type='text'
                     placeholder='link to photo'
                     required
                     value={photo}
                     onChange={e => setPhoto(e.target.value)}
-                    />
+                />
                 <button type="submit"
                 // disabled={validationErrors.length ? true : false}
                 >Create new Spot</button>
                 <button type="button"
                     onClick={resetClick}
-                    >Cancel</button>
+                >Cancel</button>
             </form>
         </section>
     )
