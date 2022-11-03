@@ -10,7 +10,7 @@ import SingleSpot from "./components/SingleSpot";
 // import DeleteSpot from "./components/DeleteSpot";
 // import EditSpot from "./components/EditSpot";
 import ReviewsForSpot from "./components/ReviewsForSpot";
-import CreateReviewForm from "./components/CreateReview";
+import CreateReviewForm from "./components/CreateReviewModal";
 import RemoveReview from "./components/RemoveReview";
 import CurrentUsersReviews from "./components/CurrentUsersReviews";
 function App() {

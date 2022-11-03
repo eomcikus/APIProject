@@ -8,7 +8,7 @@ import RemoveReview from "../RemoveReview";
 const ReviewsForSpot = () => {
     const { spotId } = useParams()
     let reviews = useSelector(state => Object.values(state.reviews.spot))
-    console.log('reviews', reviews)
+    // console.log('reviews', reviews)
     // let reviewArr = Object.values(reviews)
     // console.log('reviewArr', reviewArr)
     let finalArr = reviews.filter(review => +review.spotId === +spotId)
@@ -16,7 +16,7 @@ const ReviewsForSpot = () => {
     const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch()
     const userReview = useSelector(state => state.reviews.spot)
-    console.log(userReview)
+    // console.log(userReview)
     useEffect(() => {
         dispatch(ReviewsActions.getReviews(spotId))
         

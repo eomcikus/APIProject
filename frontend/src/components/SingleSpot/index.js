@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as SpotActions from "../../store/spots";
-import EditSpotModal from '../EditSpotModal';
+import * as SpotActions from "../../store/spots"; 
+import EditSpot from '../EditSpotModal';
 import DeleteSpot from '../DeleteSpotModal';
-import CreateReviewForm from '../CreateReview'
+import CreateReviewModal from '../CreateReviewModal'
 import ReviewsForSpot from '../ReviewsForSpot';
 import reviewReducer from '../../store/reviews';
 import { getUserReviews } from '../../store/reviews';
@@ -16,11 +16,11 @@ const SingleSpot = () => {
     const spot = useSelector(state => state.spots.singleSpot)
     const sessionUser = useSelector(state => state.session.user)
     const reviews = useSelector(state => Object.values(state.reviews.spot))
-    console.log('reviews', reviews)
+    // console.log('reviews', reviews)
     let reviewfound; 
     if (sessionUser) reviewfound = reviews?.find(review => sessionUser.id === review.userId)
-    // reviewfound ? true : false 
-    console.log('singlespots reviews', reviewfound)
+    reviewfound ? reviewfound = true : reviewfound = false
+    // console.log('reviewfound', reviewfound)
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
         dispatch(getUserReviews())
@@ -31,7 +31,7 @@ const SingleSpot = () => {
     //         dispatch(clear())
     //     })
     // })
-  console.log(spot)
+//   console.log(spot)
      return (
         <div className="single-spot-container">
              <div className="singleSpot-card-details">
@@ -46,17 +46,18 @@ const SingleSpot = () => {
             {sessionUser && spot.ownerId === sessionUser.id && (
                 <>
                 <DeleteSpot />
-                <EditSpotModal />
+                <EditSpot />
                 </>
             )}
             
             <ReviewsForSpot />
             
             {sessionUser && 
-            !reviewfound && 
-            spot.ownerId !== sessionUser.id && (
+            reviewfound === false && 
+            spot.ownerId !== sessionUser.id || 
+            !ReviewsForSpot && (
         
-            <CreateReviewForm />
+            <CreateReviewModal />
 
             )}
         </div>
