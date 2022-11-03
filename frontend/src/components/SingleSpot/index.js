@@ -16,14 +16,14 @@ const SingleSpot = () => {
     const spot = useSelector(state => state.spots.singleSpot)
     const sessionUser = useSelector(state => state.session.user)
     const reviews = useSelector(state => Object.values(state.reviews.spot))
-    // console.log('reviews', reviews)
+    console.log('reviews', reviews)
     let reviewfound; 
     if (sessionUser) reviewfound = reviews?.find(review => sessionUser.id === review.userId)
     reviewfound ? reviewfound = true : reviewfound = false
-    // console.log('reviewfound', reviewfound)
+    console.log('reviewfound', reviewfound)
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
-        dispatch(getUserReviews())
+        // dispatch(getUserReviews())
     },[dispatch, spotId])
     // useEffect(() => {
     //     dispatch(getSingleSpot(spotId))
@@ -54,8 +54,7 @@ const SingleSpot = () => {
             
             {sessionUser && 
             reviewfound === false && 
-            spot.ownerId !== sessionUser.id || 
-            !ReviewsForSpot && (
+            spot.ownerId !== sessionUser.id && (
         
             <CreateReviewModal />
 

@@ -11,7 +11,7 @@ const SpotCard = ({ spot }) => {
    useEffect(() => {
         dispatch(getReviews(spot.id))
     }, [])
-console.log('reviews of spot', reviews)
+// console.log('reviews of spot', reviews)
 // if (reviews) {
 //     let arr = Object.values(reviews)
 //     let sum = 0;
