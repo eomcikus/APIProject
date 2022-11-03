@@ -27,7 +27,10 @@ const ReviewsForSpot = () => {
     return (
         <div>
             <h1>Reviews</h1>
-            {finalArr.map(review => (<div>{review?.review}, {review?.stars} by: {review?.User?.firstName} {review?.User?.lastName}</div>))}
+            {finalArr.map(review => (<div>{review?.review}, {review?.stars} by: {review?.User?.firstName} {review?.User?.lastName} 
+            {sessionUser && sessionUser.id === review.userId && (
+                <RemoveReview />
+            )}</div>))}
             
         </div>
     )
