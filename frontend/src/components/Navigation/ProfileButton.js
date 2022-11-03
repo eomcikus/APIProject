@@ -37,14 +37,14 @@ function ProfileButton({ user }) {
       <i className="fa-sharp fa-solid fa-circle-user"></i>
       </button>
       {showMenu && (
-        <ul className="profile-dropdown">
+        <div className="profile-dropdown">
           <h3>Hello, {user.firstName}</h3>
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
+          <div>{user.username}</div>
+          <div>{user.email}</div>
+          <div>
             <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
+          </div>
+        </div>
       )}
     </>
   );
