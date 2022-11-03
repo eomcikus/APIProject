@@ -23,6 +23,8 @@
     overflow: hidden;
     margin-right: 50px;
     background-color: white;
+    width: 150px;
+    padding: 1%;
 }
 
 .profile-button {

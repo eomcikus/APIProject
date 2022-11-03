@@ -31,16 +31,17 @@ const SingleSpot = () => {
     //         dispatch(clear())
     //     })
     // })
-//   console.log(spot)
+//   console.log('spot', spot)
      return (
         <div className="single-spot-container">
              <div className="singleSpot-card-details">
-                    <div><b>{spot?.name}</b></div>
-                    <div>Owned by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>
+                    <div className='singleSpot-name'>{spot?.name}</div><p></p>
+                    <div className='single-spot-stars'>★{spot?.avgStarRating}  ·   {spot?.city}, {spot?.state}</div>
+                    {/* <div>{spot?.city}, {spot?.state}</div> */}<p></p>
                     {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
+                    <div>Hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>
                     <div>{spot?.description}</div> 
-                    <div>${spot?.price}</div>
-                    <div>{spot?.city}, {spot?.state}</div>
+                    <div>${spot?.price} per night</div>
                 </div>
        
             {sessionUser && spot.ownerId === sessionUser.id && (

@@ -10,6 +10,15 @@
 }
 
 .ss-preview-img {
-    width: 750px;
-    height: 750px
+    width: 600px;
+    height: 600px;
+}
+
+.singleSpot-name {
+    color: black;
+    font-size: 32px;
+}
+
+.singleSpot-stars{ 
+    justify-content: space-between;
 }
