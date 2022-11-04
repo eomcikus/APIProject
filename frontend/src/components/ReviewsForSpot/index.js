@@ -17,7 +17,7 @@ const ReviewsForSpot = () => {
     const dispatch = useDispatch()
     const reviewArr = useSelector(state => Object.values(state.reviews.spot))
     const spot = useSelector(state => state.spots.singleSpot)
-
+   
     // console.log(userReview)
     useEffect(() => {
         dispatch(ReviewsActions.getReviews(spotId))
@@ -30,7 +30,7 @@ const ReviewsForSpot = () => {
         <div>
             <p></p>
             <hr size='1' width='200%' color='light gray'></hr>
-            <div className='spot-avg-reviews'>★{spot.avgStarRating} · {reviewArr.length} reviews</div> <p></p>
+            <div className='spot-avg-reviews'>★{spot.avgStarRating} · {reviewArr.length ? reviewArr.length : 'No'} reviews</div> <p></p>
             {finalArr.map(review => (<div>{review?.review}, {review?.stars} by: {review?.User?.firstName} {review?.User?.lastName} 
             {sessionUser && sessionUser.id === review.userId && (
                 <RemoveReview />

@@ -32,7 +32,7 @@ export const getReviews = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
     if (response.ok) {
         const data = await response.json()
-        // console.log('--reviews in thunk', reviews)
+        console.log('--reviews in thunk', data)
         dispatch(load(data.Reviews))
         // console.log('...after dispatch', reviews)
         // return reviews;
