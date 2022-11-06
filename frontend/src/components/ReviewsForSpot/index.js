@@ -28,9 +28,11 @@ const ReviewsForSpot = () => {
 //if current user matches review.userid, then display deletereview button
     
     return (
+        <div className='true-review-container'>
             <div className='spot-avg-reviews'>★{spot.avgStarRating} · {reviewArr.length ? reviewArr.length : 'No'} reviews
             {finalArr.map(review => (<div className='review-card'>
                 <ReviewCard key={review.id} review={review} /></div>))}
+                </div>
                 </div>
     )
 }
