@@ -39,7 +39,7 @@ const SingleSpot = () => {
                     <div className='single-spot-stars'>★{spot?.avgStarRating}  ·   {spot?.city}, {spot?.state}</div>
                     {/* <div>{spot?.city}, {spot?.state}</div> */}<p></p>
                     {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
-                    <div>Hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>
+                    <div className='hosted-by-content'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>
                     <div>{spot?.description}</div> 
                     <div>${spot?.price} per night</div>
                 </div>
