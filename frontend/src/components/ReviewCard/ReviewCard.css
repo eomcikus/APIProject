@@ -1,0 +1,34 @@
+.true-review-container {
+    /* padding: 5px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly; 
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 90%;
+    /* overflow: scroll; */
+    margin-top: 10px;
+    /* border: 1px solid black; */
+    /* border-radius: 10%; */
+    /* margin-top: 20vh; */
+}
+
+.review-card-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-left: 20px;
+    padding-right: 20px;
+    /* height: 300px; */
+    flex-wrap: wrap;
+    border: 1px solid green;
+    border-radius: 10%
+}
+
+.review-content {
+    font-size: 75%
+}
+
+.review-userName {
+    font-size: 90%
+}

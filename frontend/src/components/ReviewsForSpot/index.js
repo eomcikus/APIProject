@@ -5,6 +5,7 @@ import * as ReviewsActions from '../../store/reviews';
 import { useDispatch } from "react-redux";
 import RemoveReview from "../RemoveReview";
 import './ReviewsForSpot.css'
+import ReviewCard from "../ReviewCard";
 const ReviewsForSpot = () => {
     const { spotId } = useParams()
     let reviews = useSelector(state => Object.values(state.reviews.spot))
@@ -27,16 +28,14 @@ const ReviewsForSpot = () => {
 //if current user matches review.userid, then display deletereview button
     
     return (
-        <div>
-            <p></p>
-            <hr size='1' width='200%' color='light gray'></hr>
-            <div className='spot-avg-reviews'>★{spot.avgStarRating} · {reviewArr.length ? reviewArr.length : 'No'} reviews</div> <p></p>
-            {finalArr.map(review => (<div>{review?.review}, {review?.stars} by: {review?.User?.firstName} {review?.User?.lastName} 
-            {sessionUser && sessionUser.id === review.userId && (
-                <RemoveReview />
-            )}</div>))}
-            
-        </div>
+        <div className='true-review-container'>
+            <div className='spot-avg-reviews'>★{spot.avgStarRating} · {reviewArr.length ? reviewArr.length : 'No'} reviews
+            {finalArr.map(review => (<div className='review-card'>
+                <ReviewCard key={review.id} review={review} /></div>))}
+                </div>
+                </div>
     )
 }
+
+   
 export default ReviewsForSpot;
