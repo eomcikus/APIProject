@@ -14,9 +14,9 @@ const EditSpot = () => {
     // console.log('current spot in edit', currentSpot)
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
-        return(() => {
-            dispatch(clear())
-        })
+        // return(() => {
+        //     dispatch(clear())
+        // }) cancelled out because clicking away from edit spot was breaking the single spot rendering
     }, [dispatch, spotId])
     useEffect(() => {
         setAddress(currentSpot?.address)
