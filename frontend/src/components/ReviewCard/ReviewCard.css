@@ -1,12 +1,12 @@
 .true-review-container {
     /* padding: 5px; */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly; 
     align-items: center;
     flex-wrap: wrap;
     max-width: 90%;
-    /* overflow: scroll; */
+    /* verflow: scroll; */
     margin-top: 10px;
     /* border: 1px solid black; */
     /* border-radius: 10%; */
@@ -26,7 +26,9 @@
 }
 
 .review-content {
-    font-size: 75%
+    font-size: 75%;
+    overflow:scroll;
+
 }
 
 .review-userName {
