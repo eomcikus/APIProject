@@ -25,6 +25,7 @@ const CreateReviewForm = () => {
             stars
         }
         let createdReview = await dispatch(reviewActions.createReview(payload, spotId))
+        //dispatch getreviews again
         console.log(createdReview)
         // history.push(`/spots/${spotId}/reviews`)
     }
