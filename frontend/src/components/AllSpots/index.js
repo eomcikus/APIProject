@@ -14,8 +14,8 @@ const AllSpots = () => {
     let spotArray = Object.values(spots)
     console.log(spotArray)
     useEffect(() => {
-        dispatch(getSpots)
-    }, [spots, reviews])
+        dispatch(getSpots())
+    }, [dispatch])
 
     return (
         <div className="spotcard-layout">

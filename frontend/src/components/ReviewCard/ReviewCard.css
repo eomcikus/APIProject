@@ -12,7 +12,9 @@
     /* border-radius: 10%; */
     /* margin-top: 20vh; */
 }
-
+.review-card {
+    width: 70%
+}
 .review-card-layout {
     display: flex;
     flex-direction: row;

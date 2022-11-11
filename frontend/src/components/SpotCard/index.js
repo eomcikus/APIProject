@@ -6,11 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { getReviews } from "../../store/reviews";
 
 const SpotCard = ({ spot }) => {
-   const reviews = useSelector(state => state.reviews.spot)
+//    const reviews = useSelector(state => state.reviews.spot)
    const dispatch = useDispatch()
-   useEffect(() => {
-        dispatch(getReviews(spot.id))
-    }, [])
+//    useEffect(() => {
+//         dispatch(getReviews(spot.id))
+//     }, [])
 // console.log('reviews of spot', reviews)
 // if (reviews) {
 //     let arr = Object.values(reviews)
@@ -30,8 +30,8 @@ const SpotCard = ({ spot }) => {
             <div className="spot-card-detail-container">
                 <div className='spot-card-details'>
                     <p><b>{spot.name}</b></p>
-                    <p>{spot.city}, {spot.state}</p>
-                    <p>${spot.price}</p>
+                    <p div className='spot-card-location'>{spot.city}, {spot.state}</p>
+                    <p><b>${spot.price}</b> night</p>
 
                 </div>
                 <div className='avg-rating'>

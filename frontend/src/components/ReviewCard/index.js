@@ -7,7 +7,8 @@ const ReviewCard = ({ review }) => {
     const spot = useSelector(state => state.spots.singleSpot)
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
-    return (
+    if (!review) return null;
+     return (
 
         <div className='review-container'>
             <div className='review-card-layout'>
