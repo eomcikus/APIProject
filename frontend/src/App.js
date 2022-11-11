@@ -19,9 +19,9 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
-  useEffect(() => {
-    dispatch(SpotActions.getSpots())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(SpotActions.getSpots())
+  // }, [dispatch])
   return (
     <>
       <Navigation isLoaded={isLoaded} />

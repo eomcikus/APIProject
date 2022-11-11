@@ -15,10 +15,11 @@ const SingleSpot = () => {
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot)
     const sessionUser = useSelector(state => state.session.user)
-    const reviews = useSelector(state => Object.values(state.reviews.spot))
-    console.log('reviews', reviews)
+    const reviewsObj = useSelector(state => state.reviews.spot)
+    const reviewsArr = Object.values(reviewsObj)
+    // console.log('reviews', reviews)
     let reviewfound; 
-    if (sessionUser) reviewfound = reviews?.find(review => sessionUser.id === review.userId)
+    if (sessionUser) reviewfound = reviewsArr?.find(review => sessionUser.id === review.userId)
     reviewfound ? reviewfound = true : reviewfound = false
     console.log('reviewfound', reviewfound)
     useEffect(() => {
@@ -32,11 +33,12 @@ const SingleSpot = () => {
     //     })
     // })
 //   console.log('spot', spot)
+if (!spot) return null;
      return (
         <div className="single-spot-container">
              <div className="singleSpot-card-details">
                     <div className='singleSpot-name'>{spot?.name}</div><p></p>
-                    <div className='single-spot-stars'>★{spot?.avgStarRating}  ·   {spot?.city}, {spot?.state}</div>
+                    <div className='single-spot-stars'>★{spot?.avgStarRating}  ·   {spot?.city}, {spot?.state} · {reviewsArr.length ? reviewsArr.length : 'No'} reviews</div>
                     {/* <div>{spot?.city}, {spot?.state}</div> */}<p></p>
                     {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
                     <div className='hosted-by-content'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>

@@ -1,16 +1,17 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { removeReview } from "../../store/reviews";
 
-const RemoveReview = () => {
+const RemoveReview = ({review}) => {
     const {reviewId} = useParams()
     const dispatch = useDispatch()
     const history = useHistory()
+
     console.log('reviewId', reviewId)
     const deleteIt = (e) => {
         e.preventDefault()
         dispatch(removeReview(reviewId))
-//where to send user back to? main page?
+        history.push(`/spots`)
     }
     return (
         <div>            
