@@ -3,3 +3,13 @@
     width: auto;
     overflow:scroll;
 }
+
+.become-host-button {
+    background-color: white;
+    color: gray;
+    font-size: 16px;
+}
+
+.become-host-button:hover {
+    background-color: #F9F6F5;
+}

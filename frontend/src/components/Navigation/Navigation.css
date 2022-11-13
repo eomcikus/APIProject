@@ -21,7 +21,7 @@
     position: fixed;
     z-index: 10;
     overflow: hidden;
-    margin-right: 50px;
+    margin-right: 100px;
     background-color: white;
     width: 150px;
     padding: 1%;
@@ -29,8 +29,13 @@
 
 .profile-button {
     /* position: absolute; */
-    /* padding-right: 50px;
-    margin-right: 50px; */
+    padding-right: 50px;
+    /* margin-right: 50px;  */
     padding-left: 100px;
     position: fixed;
+}
+
+.become-host-button {
+    background-color: white;
+    color: gray;
 }

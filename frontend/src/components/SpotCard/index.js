@@ -35,7 +35,7 @@ const SpotCard = ({ spot }) => {
 
                 </div>
                 <div className='avg-rating'>
-                    <p>★{spot.avgRating ? parseFloat(spot.avgRating).toFixed(2) : 'none'}</p>
+                    <p>★ {spot.avgRating ? parseFloat(spot.avgRating).toFixed(2) : 'none'}</p>
                 </div>
             </div>
 

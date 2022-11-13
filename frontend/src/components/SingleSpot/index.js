@@ -7,7 +7,7 @@ import DeleteSpot from '../DeleteSpotModal';
 import CreateReviewModal from '../CreateReviewModal'
 import ReviewsForSpot from '../ReviewsForSpot';
 import reviewReducer from '../../store/reviews';
-import { getUserReviews } from '../../store/reviews';
+import { getUserReviews, getReviews } from '../../store/reviews';
 import { clear, getSingleSpot } from '../../store/spots';
 import './SingleSpot.css'
 const SingleSpot = () => {
@@ -24,7 +24,9 @@ const SingleSpot = () => {
     console.log('reviewfound', reviewfound)
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
-        // dispatch(getUserReviews())
+        if (reviewsArr.length){
+        dispatch(getReviews(spotId))
+        }
     },[dispatch, spotId])
     // useEffect(() => {
     //     dispatch(getSingleSpot(spotId))
@@ -38,7 +40,7 @@ if (!spot) return null;
         <div className="single-spot-container">
              <div className="singleSpot-card-details">
                     <div className='singleSpot-name'>{spot?.name}</div><p></p>
-                    <div className='single-spot-stars'>★{spot?.avgStarRating}  ·   {spot?.city}, {spot?.state} · {reviewsArr.length ? reviewsArr.length : 'No'} reviews</div>
+                    <div className='single-spot-stars'>★ {spot?.avgStarRating}  ·   {spot?.city}, {spot?.state} · {reviewsArr.length ? reviewsArr.length : 'No'} reviews</div>
                     {/* <div>{spot?.city}, {spot?.state}</div> */}<p></p>
                     {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
                     <div className='hosted-by-content'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>
@@ -52,9 +54,7 @@ if (!spot) return null;
                 <EditSpot />
                 </>
             )}
-            
-            <ReviewsForSpot />
-            
+
             {sessionUser && 
             reviewfound === false && 
             spot.ownerId !== sessionUser.id && (
@@ -62,6 +62,9 @@ if (!spot) return null;
             <CreateReviewModal />
 
             )}
+            <ReviewsForSpot />
+
+
         </div>
     )
 }

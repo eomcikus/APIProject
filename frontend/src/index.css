@@ -7,11 +7,11 @@
 button {
     background-color: #ff385c;
     color: white;
-    border-radius: 10px;
+    border-radius: 15px;
     text-align: center;
     margin: 10px;
     border: none;
-    padding: 10px 30px;
+    padding: 10px 20px;
 }
 
  html, body, input, textarea {

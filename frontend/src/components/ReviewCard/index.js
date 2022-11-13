@@ -14,7 +14,7 @@ const ReviewCard = ({ review }) => {
         <div className='review-container'>
             <div className='review-card-layout'>
                 <div className='review-userName'>
-                    {review?.User.firstName}
+                    {review?.User.firstName}</div>
                     <div className='review-content'>
                         {review?.review}
                         {sessionUser && sessionUser.id === review.userId && (
@@ -24,7 +24,7 @@ const ReviewCard = ({ review }) => {
                     </div>
                 </div>
             </div>
-        </div>
+     
 
     )
 }

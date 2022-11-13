@@ -36,7 +36,10 @@ export const getReviews = (spotId) => async dispatch => {
         dispatch(load(data.Reviews))
         // console.log('...after dispatch', reviews)
         // return reviews;
+    }    else {
+        console.log('debugging')
     }
+    
 }
 
 export const getUserReviews = () => async dispatch => {
@@ -94,7 +97,12 @@ const reviewReducer = (state = initialState, action) => {
             action.reviews.forEach(review => {
                 newState.spot[review.id] = review
             })
+            console.log(action.reviews)
+            if (!action.reviews) {
+                return state.reviews;
+            } else {
             return newState;
+            }
         }
         case USER: {
             newState = { ...state, user: {...state.user} }

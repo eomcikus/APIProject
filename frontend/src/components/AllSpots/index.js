@@ -12,7 +12,7 @@ const AllSpots = () => {
     let spots = useSelector(state => state.spots.allSpots)
     let reviews = useSelector(state => state.reviews.spot)
     let spotArray = Object.values(spots)
-    console.log(spotArray)
+    // console.log(spotArray)
     useEffect(() => {
         dispatch(getSpots())
     }, [dispatch])
@@ -21,7 +21,7 @@ const AllSpots = () => {
         <div className="spotcard-layout">
             {spotArray.map(spot => (
                 <SpotCard key={spot.id} spot={spot} />))}
-                <CreateSpotModal />
+     
         </div>
     )
 }
