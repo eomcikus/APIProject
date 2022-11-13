@@ -34,7 +34,8 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-      <i className="fa-sharp fa-solid fa-circle-user"></i>
+      <link rel="icon" type="image/png" href="/icon.png" />
+      {/* <img src="./icon.png" /> */}
       </button>
       {showMenu && (
         <div className="profile-dropdown">
@@ -42,7 +43,7 @@ function ProfileButton({ user }) {
           <div>{user.username}</div>
           <div>{user.email}</div>
           <div>
-            <button onClick={logout}>Log Out</button>
+            <button onClick={logout} className='logout-button'>Log Out</button>
           </div>
         </div>
       )}
