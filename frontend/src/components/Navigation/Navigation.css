@@ -12,6 +12,9 @@
     padding-right: 0px;
     margin-right: 50px;
     height: 150px;
+    background-color: red;
+    position: fixed;
+    width: 100%;
 }
 
 .profile-dropdown {
@@ -29,26 +32,38 @@
 
 .profile-button {
     /* position: absolute; */
-    padding-right: 50px;
-    /* margin-right: 50px;  */
-    padding-left: 100px;
-    position: fixed;
+    /* padding-right: 50px; */
+    /* margin-right: -500px;  */
+    margin: 0px;
+    margin-left: -20px;
+    margin-top: 70px;
+    /* padding-left: 100px; */
+    /* position: fixed; */
+    background-color: white;
+    color: white;
+    border-radius: 15px;
+    text-align: center;
+    border: none;
+    padding: 0px;
+    align-items: center;
 }
-
+.profile-button>img {
+    width: 100px;
+}
 .become-host-button {
     background-color: white;
     color: gray;
 }
-
+.become-host-button:hover {
+    background-color: #EFF5F7
+}
 .logout-button {
     background-color: white;
     color: black;
     font-size: 16px;
-    padding: 0px;
-    
+    /* padding: 0px; */
+    width: auto
 }
-/* 
-.profile-button{
-    background-image: url('favicon.png');
-    background-repeat: no-repeat;
-} */
+.logout-button:hover {
+    background-color: #EFF5F7;
+}

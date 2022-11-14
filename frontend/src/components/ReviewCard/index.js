@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import RemoveReview from '../RemoveReview';
 
 const ReviewCard = ({ review }) => {
-    console.log('review', review)
+    console.log('reviews in reviewcard', review)
     const spot = useSelector(state => state.spots.singleSpot)
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
+    console.log('sessionUser', sessionUser)
     // const review = useSelector(state => state.review.)
     if (!review) return null;
      return (
@@ -14,9 +15,9 @@ const ReviewCard = ({ review }) => {
         <div className='review-container'>
             <div className='review-card-layout'>
                 <div className='review-userName'>
-                    {review?.User.firstName}</div>
+                    {review.User.firstName}</div>
                     <div className='review-content'>
-                        {review?.review}
+                        {review.review}
                         {sessionUser && sessionUser.id === review.userId && (
                             <RemoveReview />)}
 

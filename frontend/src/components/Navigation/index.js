@@ -31,7 +31,7 @@ function Navigation({ isLoaded }) {
     <div className='topnav-container'>
 
           <div>
-            <NavLink exact to="/spots"><img src={logo}/></NavLink>
+            <NavLink exact to="/"><img src={logo}/></NavLink>
           </div>
           <div>
           {isLoaded && sessionLinks}
