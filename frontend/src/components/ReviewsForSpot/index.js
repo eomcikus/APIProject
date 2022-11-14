@@ -28,7 +28,7 @@ const ReviewsForSpot = () => {
     
     return (
         <div className='true-review-container'>
-            <div className='spot-avg-reviews'>★{spot.avgStarRating} · {reviewArr.length ? reviewArr.length : 'No'} reviews <p></p>
+            <div className='spot-avg-reviews'>★{parseFloat(spot.avgStarRating).toFixed(2)} · {reviewArr.length ? reviewArr.length : 'No'} reviews <p></p>
            <div className='reviews-contained'>{finalArr.map(review => (<div className='review-card'>
                 <ReviewCard key={review.id} review={review} /></div>))}
                 </div> 
