@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { Redirect, useHistory } from 'react-router-dom'
 import './Navigation.css'
+
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -34,8 +35,8 @@ function ProfileButton({ user }) {
   return (
     <>
       < button onClick={openMenu} className='profile-button'>
-      {/* <link rel="icon" type="image/png" href="../../../favicon.png" /> */}
-        <img src="favicon.png" />
+      <i class="fa-solid fa-house-user"></i>
+      
       </button>
       {showMenu && (
         <div className="profile-dropdown">

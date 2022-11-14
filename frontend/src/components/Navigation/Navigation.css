@@ -34,8 +34,8 @@
     /* position: absolute; */
     /* padding-right: 50px; */
     /* margin-right: -500px;  */
-    margin: 0px;
-    margin-left: -20px;
+    /* margin: 0px; */
+    margin-left: -120px;
     margin-top: 70px;
     /* padding-left: 100px; */
     /* position: fixed; */
@@ -47,12 +47,13 @@
     padding: 0px;
     align-items: center;
 }
-.profile-button>img {
+/* .profile-button>img {
     width: 100px;
-}
+} */
 .become-host-button {
-    background-color: white;
+    /* background-color: yellow; */
     color: gray;
+    margin-left: -70px;
 }
 .become-host-button:hover {
     background-color: #EFF5F7

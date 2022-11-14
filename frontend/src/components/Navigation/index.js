@@ -7,6 +7,7 @@ import SignupFormModal from '../SignupFormModal';
 import CreateSpotModal from '../CreateSpotModal'
 import './Navigation.css';
 import logo from '../../images/erbnb.png'
+
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
