@@ -17,7 +17,7 @@ const ReviewCard = ({ review }) => {
         <div className='review-container'>
             <div className='review-card-layout'>
                 <div className='review-userName'>
-                    {review.User.firstName}</div>
+                    {review.User ? review.User.firstName : sessionUser.firstName}</div>
                     <div className='review-content'>
                         {review.review}
                         {sessionUser && sessionUser.id === review.userId && (

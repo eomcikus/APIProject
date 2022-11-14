@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as SpotActions from "../../store/spots"; 
 import EditSpot from '../EditSpotModal';
@@ -13,21 +13,28 @@ import './SingleSpot.css'
 const SingleSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
+    const [reviewBoo, setReviewBoo] = useState(false)
+    
     const spot = useSelector(state => state.spots.singleSpot)
     const sessionUser = useSelector(state => state.session.user)
     const reviewsObj = useSelector(state => state.reviews.spot)
     const reviewsArr = Object.values(reviewsObj)
     // console.log('reviews', reviews)
-    let reviewfound; 
-    if (sessionUser) reviewfound = reviewsArr?.find(review => sessionUser.id === review.userId)
-    reviewfound ? reviewfound = true : reviewfound = false
-    console.log('reviewfound', reviewfound)
+    // reviewfound ? reviewfound = true : reviewfound = false
+    // console.log('reviewfound', reviewfound)
+    
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
-        if (reviewsArr.length){
+        
         dispatch(getReviews(spotId))
-        }
+        
     },[dispatch, spotId])
+    
+    useEffect(() => {
+        let reviewfound; 
+        if (sessionUser) reviewfound = reviewsArr?.find(review => sessionUser.id === review.userId)
+        if (reviewfound) setReviewBoo(true)
+    },[reviewsArr])
     // useEffect(() => {
     //     dispatch(getSingleSpot(spotId))
     //     return(() => {
@@ -40,7 +47,7 @@ if (!spot) return null;
         <div className="single-spot-container">
              <div className="singleSpot-card-details">
                     <div className='singleSpot-name'>{spot?.name}</div><p></p>
-                    <div className='single-spot-stars'>★ {parseFloat(spot.avgStarRating).toFixed(2)}  ·   {spot?.city}, {spot?.state} · {reviewsArr.length ? reviewsArr.length : 'No'} reviews</div>
+                    <div className='single-spot-stars'>★ {spot.avgStarRating ? parseFloat(spot.avgStarRating).toFixed(2) : 'none'}  ·   {spot?.city}, {spot?.state} · {reviewsArr.length ? reviewsArr.length : 'No'} reviews</div>
                     {/* <div>{spot?.city}, {spot?.state}</div> */}<p></p>
                     {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
                     <div className='hosted-by-content'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>
@@ -56,7 +63,7 @@ if (!spot) return null;
             )}
 
             {sessionUser && 
-            reviewfound === false && 
+            reviewBoo === false && 
             spot.ownerId !== sessionUser.id && (
         
             <CreateReviewModal />

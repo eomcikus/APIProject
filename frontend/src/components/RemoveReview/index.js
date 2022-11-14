@@ -23,7 +23,7 @@ const RemoveReview = () => {
     const deleteIt = (e) => {
         e.preventDefault()
         dispatch(removeReview(myReview.id))
-        history.push(`/spots`)
+        history.push(`/`)
     }
     return (
         <div>            

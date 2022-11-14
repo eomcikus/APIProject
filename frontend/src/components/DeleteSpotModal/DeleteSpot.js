@@ -17,7 +17,7 @@ console.log(sessionUser)
 const removeIt = (e) => {
     e.preventDefault()
     dispatch(removeSpot(spotId))
-    history.push(`/spots`)
+    history.push(`/`)
 }
 return (
     <div className='delete-modal'>

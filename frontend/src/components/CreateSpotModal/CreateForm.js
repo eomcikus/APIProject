@@ -76,7 +76,7 @@ const CreateSpotForm = ({ }) => {
         } else {
             // <Redirect to='spots' />
             dispatch(getSpots())
-             history.push(`/spots`);
+             history.push(`/`);
              return
         }
     }

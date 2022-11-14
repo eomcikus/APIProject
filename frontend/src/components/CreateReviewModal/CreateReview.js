@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams, useHistory } from "react-router-dom"
 import * as reviewActions from "../../store/reviews"
 import './CreateReview.css';
@@ -10,7 +10,7 @@ const CreateReviewForm = () => {
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
     const { spotId } = useParams()
-    
+    // const sessionUser = useSelector(state => state.session.user.firstName)
 
     const resetClick = (e) => {
         e.preventDefault()
@@ -21,6 +21,7 @@ const CreateReviewForm = () => {
         e.preventDefault()
 
         const payload = {
+   
             review,
             stars
         }

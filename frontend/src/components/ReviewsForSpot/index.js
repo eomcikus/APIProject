@@ -9,7 +9,8 @@ import ReviewCard from "../ReviewCard";
 const ReviewsForSpot = () => {
     const { spotId } = useParams()
     let reviews = useSelector(state => Object.values(state.reviews.spot))
-    // console.log('reviews', reviews)
+    console.log('reviews', reviews)
+    
     // let reviewArr = Object.values(reviews)
     // console.log('reviewArr', reviewArr)
     let finalArr = reviews.filter(review => +review.spotId === +spotId)
@@ -24,11 +25,11 @@ const ReviewsForSpot = () => {
     useEffect(() => {
         dispatch(ReviewsActions.getReviews(spotId))
     }, [dispatch])
-    if (!finalArr) return null
-    
+    if (reviews.length === 0) return null
+    // if (!finalArr) return null
     return (
         <div className='true-review-container'>
-            <div className='spot-avg-reviews'>★{parseFloat(spot.avgStarRating).toFixed(2)} · {reviewArr.length ? reviewArr.length : 'No'} reviews <p></p>
+            <div className='spot-avg-reviews'>★ {spot.avgStarRating ? parseFloat(spot.avgStarRating).toFixed(2) : 'None'} · {reviewArr.length ? reviewArr.length : 'No'} reviews <p></p>
            <div className='reviews-contained'>{finalArr.map(review => (<div className='review-card'>
                 <ReviewCard key={review.id} review={review} /></div>))}
                 </div> 

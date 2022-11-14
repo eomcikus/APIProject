@@ -28,7 +28,7 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
-    return history.push('/spots')
+    return history.push('/')
     // return <Redirect to="/spots" />
   };
 
