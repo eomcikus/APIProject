@@ -16,7 +16,7 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
       <CreateSpotModal className='become-host-button' />
-      <ProfileButton className='profile-button' user={sessionUser} />
+      <ProfileButton  user={sessionUser} />
       </>
     );
   } else {
