@@ -74,9 +74,10 @@ const CreateSpotForm = ({ }) => {
         if (validationErrors.length) {
             window.alert('Cannot submit form')
         } else {
+            // <Redirect to='spots' />
             dispatch(getSpots())
-            // return history.push(`/spots`);
-            return <Redirect to="/spots" />
+             history.push(`/spots`);
+             return
         }
     }
     return (
@@ -164,6 +165,7 @@ const CreateSpotForm = ({ }) => {
                     onChange={e => setPhoto(e.target.value)}
                 />
                 <button type="submit"
+                onSubmit={handleSubmit}
                 // disabled={validationErrors.length ? true : false}
                 >Create new Spot</button>
                 <button type="button"

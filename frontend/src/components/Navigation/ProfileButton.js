@@ -33,9 +33,9 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button button onClick={openMenu} className='profile-button'>
-      {/* <link rel="icon" type="image/png" href="screenshot.png" /> */}
-      {/* <img src="screenshot.png" /> */}
+      < button onClick={openMenu} className='profile-button'>
+      {/* <link rel="icon" type="image/png" href="../../../favicon.png" /> */}
+        <img src="favicon.png" />
       </button>
       {showMenu && (
         <div className="profile-dropdown">

@@ -70,7 +70,7 @@ export const createReview = (review, spotId) => async dispatch => {
 }
 
 export const removeReview = (reviewId) => async dispatch => {
-    console.log('were in the thunk at least')
+    console.log('were in the thunk at least', reviewId)
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     })
