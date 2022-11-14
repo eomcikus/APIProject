@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { createSpot, createSpotImage, getSpots } from '../../store/spots'
 import './CreateSpot.css'
 const CreateSpotForm = ({ }) => {
@@ -75,7 +75,8 @@ const CreateSpotForm = ({ }) => {
             window.alert('Cannot submit form')
         } else {
             dispatch(getSpots())
-            history.push(`/spots`);
+            // return history.push(`/spots`);
+            return <Redirect to="/spots" />
         }
     }
     return (
