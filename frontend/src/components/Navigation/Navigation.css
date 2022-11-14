@@ -24,7 +24,7 @@
     position: relative;
     /* top: 150px;
     left: 1050px; */
-    float: left;
+    /* float: inline-start; */
     z-index: 10;
     overflow: hidden;
     margin-right: 100px;
