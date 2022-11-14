@@ -10,9 +10,6 @@ const ReviewsForSpot = () => {
     const { spotId } = useParams()
     let reviews = useSelector(state => Object.values(state.reviews.spot))
     console.log('reviews', reviews)
-    
-    // let reviewArr = Object.values(reviews)
-    // console.log('reviewArr', reviewArr)
     let finalArr = reviews.filter(review => +review.spotId === +spotId)
     // console.log('filteredArr', finalArr)
     const sessionUser = useSelector(state => state.session.user)
@@ -21,12 +18,11 @@ const ReviewsForSpot = () => {
     const reviewArr = Object.values(reviewObj)
     const spot = useSelector(state => state.spots.singleSpot)
     // console.log(userReview)
-    
     useEffect(() => {
         dispatch(ReviewsActions.getReviews(spotId))
     }, [dispatch])
     if (reviews.length === 0) return null
-    // if (!finalArr) return null
+    if (finalArr.length === 0) return null
     return (
         <div className='true-review-container'>
             <div className='spot-avg-reviews'>★ {spot.avgStarRating ? parseFloat(spot.avgStarRating).toFixed(2) : 'None'} · {reviewArr.length ? reviewArr.length : 'No'} reviews <p></p>

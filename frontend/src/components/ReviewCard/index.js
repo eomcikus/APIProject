@@ -11,7 +11,7 @@ const ReviewCard = ({ review }) => {
     console.log('newReview', newReview)
     console.log('sessionUser', sessionUser)
     // const review = useSelector(state => state.review.)
-    if (!review) return null;
+    if (!newReview) return null;
      return (
 
         <div className='review-container'>
@@ -22,8 +22,6 @@ const ReviewCard = ({ review }) => {
                         {review.review}
                         {sessionUser && sessionUser.id === review.userId && (
                             <RemoveReview />)}
-
-
                     </div>
                 </div>
             </div>

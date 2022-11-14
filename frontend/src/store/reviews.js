@@ -37,7 +37,7 @@ export const getReviews = (spotId) => async dispatch => {
         // console.log('...after dispatch', reviews)
         // return reviews;
     }    else {
-        console.log('debugging')
+        return null;
     }
     
 }

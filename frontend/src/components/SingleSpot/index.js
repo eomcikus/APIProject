@@ -69,8 +69,9 @@ if (!spot) return null;
             <CreateReviewModal />
 
             )}
+            {reviewsArr.length > 0 && (
             <ReviewsForSpot />
-
+            )}
 
         </div>
     )
