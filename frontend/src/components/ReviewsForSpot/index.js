@@ -16,19 +16,16 @@ const ReviewsForSpot = () => {
     // console.log('filteredArr', finalArr)
     const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch()
-    const reviewArr = useSelector(state => Object.values(state.reviews.spot))
+    const reviewObj = useSelector(state => state.reviews.spot)
+    const reviewArr = Object.values(reviewObj)
     const spot = useSelector(state => state.spots.singleSpot)
     // console.log(userReview)
     
     useEffect(() => {
-        
         dispatch(ReviewsActions.getReviews(spotId))
-        
     }, [dispatch])
     if (!finalArr) return null
     
-    // console.log('spotId', spotId)
-//if current user matches review.userid, then display deletereview button
     return (
         <div className='true-review-container'>
             <div className='spot-avg-reviews'>★{spot.avgStarRating} · {reviewArr.length ? reviewArr.length : 'No'} reviews <p></p>
