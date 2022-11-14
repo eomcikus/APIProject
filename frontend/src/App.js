@@ -27,7 +27,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <AllSpots />
             {/* <CreateSpotForm /> */}
           </Route>

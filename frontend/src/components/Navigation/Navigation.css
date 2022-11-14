@@ -36,7 +36,7 @@
     /* margin-right: -500px;  */
     margin: 0px;
     margin-left: -20px;
-    margin-top: 12px;
+    margin-top: 70px;
     /* padding-left: 100px; */
     /* position: fixed; */
     background-color: white;
@@ -45,9 +45,10 @@
     text-align: center;
     border: none;
     padding: 0px;
+    align-items: center;
 }
 .profile-button>img {
-    width: 75px;
+    width: 100px;
 }
 .become-host-button {
     background-color: white;
