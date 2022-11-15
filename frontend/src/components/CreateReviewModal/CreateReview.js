@@ -10,7 +10,7 @@ const CreateReviewForm = ({setShowModal}) => {
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
     const { spotId } = useParams()
-    // const sessionUser = useSelector(state => state.session.user.firstName)
+    const sessionUser = useSelector(state => state.session.user)
 
     const resetClick = (e) => {
         e.preventDefault()
@@ -25,7 +25,7 @@ const CreateReviewForm = ({setShowModal}) => {
             review,
             stars
         }
-        let createdReview = await dispatch(reviewActions.createReview(payload, spotId))
+        let createdReview = await dispatch(reviewActions.createReview(payload, spotId, sessionUser))
         if (createdReview){
             console.log('createdReview', createdReview)
             dispatch(reviewActions.getReviews(spotId))

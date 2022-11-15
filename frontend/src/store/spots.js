@@ -130,7 +130,7 @@ const spotReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD: {
-            newState = { ...state };
+            newState = {allSpots: {}, singleSpot: {} };
             newState.allSpots = {}
             action.spots.Spots.forEach(spot => {
                 newState.allSpots[spot.id] = spot
@@ -138,18 +138,19 @@ const spotReducer = (state = initialState, action) => {
             return newState;
         }
         case VIEWONE: {
-            newState = { ...state }
+            newState = { allSpots: {}, singleSpot: {}  }
             newState.singleSpot = action.spot;
             return newState
         }
         case CREATE: {
 
-            newState = { ...state }
+            newState = { ...state, singleSpot: {}, allSpots: {...state.allSpots} }
            newState.allSpots[action.spot.id] = action.spot
             if (newState.allSpots[action.spot.id].SpotImages){
                 newState.allSpots[action.spot.id].previewImage = newState.allSpots[action.spot.id].SpotImages[0].url
             } 
-            return newState;
+            newState.singleSpot = action.spot
+             return newState;
         }
         case UPDATE: {
             newState = { ...state }

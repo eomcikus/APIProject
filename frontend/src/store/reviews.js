@@ -52,7 +52,7 @@ export const getUserReviews = () => async dispatch => {
     }
 }
 
-export const createReview = (review, spotId) => async dispatch => {
+export const createReview = (review, spotId, user) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         body: JSON.stringify(review),
@@ -62,7 +62,8 @@ export const createReview = (review, spotId) => async dispatch => {
     })
     if (response.ok) {
         const review = await response.json()
-        console.log('in response')
+        review.User = user
+        // console.log('in response', review)
         dispatch(create(review))
         console.log('---review after dispatch', review)
         return review;
@@ -93,7 +94,7 @@ const reviewReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD: {
-            newState = { ...state, spot: {...state.spot}, user: {...state.user} }
+            newState = { spot: {}, user: {} }
             action.reviews.forEach(review => {
                 newState.spot[review.id] = review
             })
@@ -105,7 +106,7 @@ const reviewReducer = (state = initialState, action) => {
             }
         }
         case USER: {
-            newState = { ...state, user: {...state.user} }
+            newState = {  user: {} }
             console.log('action.reviews', action)
             action.userId.forEach(review => {
                 newState.user[review.id] = review

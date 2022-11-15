@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Redirect } from 'react-router-dom';
 import { createSpot, createSpotImage, getSpots } from '../../store/spots'
+import { getReviews } from '../../store/reviews';
 import './CreateSpot.css'
 const CreateSpotForm = ({ setShowModal }) => {
     const dispatch = useDispatch();
@@ -11,8 +12,8 @@ const CreateSpotForm = ({ setShowModal }) => {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [country, setCountry] = useState('');
-    const [lat, setLat] = useState('');
-    const [lng, setLng] = useState('');
+    // const [lat, setLat] = useState('');
+    // const [lng, setLng] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -32,12 +33,12 @@ const CreateSpotForm = ({ setShowModal }) => {
         if (!price) errors.push("Spot must have a price ")
         if (price < 0) errors.push("Price must be greater than 0")
         if (description.length > 5000) errors.push("Spot description must be less than 5000 characters")
-        if (lat < -90 || lat > 90) errors.push("Latitude must be between -90 and 90")
-        if (lng < -180 || lng > 180) errors.push("Longitude must be between -180 and 180")
+        // if (lat < -90 || lat > 90) errors.push("Latitude must be between -90 and 90")
+        // if (lng < -180 || lng > 180) errors.push("Longitude must be between -180 and 180")
         if (!photo.includes('.png') && !photo.includes('.jpg') && !photo.includes('.jpeg')) errors.push('Photo must be in .png, .jpeg, or .jpg format')
         if (photo.length === 0) errors.push('must include an image URL')
         setValidationErrors(errors)
-    }, [name, price, lat, lng, description, address, city, state, country, photo])
+    }, [name, price, description, address, city, state, country, photo])
 
     const resetClick = (e) => {
         e.preventDefault()
@@ -45,8 +46,8 @@ const CreateSpotForm = ({ setShowModal }) => {
         setCity('')
         setState('')
         setCountry('')
-        setLat('')
-        setLng('')
+        // setLat('')
+        // setLng('')
         setName('')
         setDescription('')
         setPrice('')
@@ -60,8 +61,8 @@ const CreateSpotForm = ({ setShowModal }) => {
             city,
             state,
             country,
-            lat,
-            lng,
+            lat: 1,
+            lng: 1,
             name,
             description,
             price,
@@ -73,11 +74,10 @@ const CreateSpotForm = ({ setShowModal }) => {
         // console.log('createdSpot', createdSpot)
         if (validationErrors.length) {
             window.alert('Cannot submit form')
-        } else {
-            await dispatch(getSpots()).then(
-                setShowModal(false)
-            )
         }
+        await dispatch(getReviews(createdSpot.id))
+        
+        setShowModal(false)
     }
     return (
         <section>
@@ -119,7 +119,7 @@ const CreateSpotForm = ({ setShowModal }) => {
                     value={country}
                     onChange={e => setCountry(e.target.value)} />
 
-                <input
+                {/* <input
                     type='text'
                     placeholder='Latitude'
                     required
@@ -131,7 +131,7 @@ const CreateSpotForm = ({ setShowModal }) => {
                     placeholder='Longitude'
                     required
                     value={lng}
-                    onChange={e => setLng(e.target.value)} />
+                    onChange={e => setLng(e.target.value)} /> */}
                 Give your spot a name.
                 <input
                     type='text'

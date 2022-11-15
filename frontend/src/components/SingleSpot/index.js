@@ -13,7 +13,7 @@ import './SingleSpot.css'
 const SingleSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
-    const [reviewBoo, setReviewBoo] = useState(false)
+    // const [reviewBoo, setReviewBoo] = useState(false)
     
     const spot = useSelector(state => state.spots.singleSpot)
     const sessionUser = useSelector(state => state.session.user)
@@ -21,6 +21,8 @@ const SingleSpot = () => {
 
     const reviewsArr = Object.values(reviewsObj)
     const reviewLength = reviewsArr.length
+    const reviewBoo = reviewsArr.find(review => sessionUser.id === review.userId)
+
     console.log(reviewLength)
     // console.log('reviews', reviews)
     // reviewfound ? reviewfound = true : reviewfound = false
@@ -32,11 +34,11 @@ const SingleSpot = () => {
         
     },[dispatch, spotId])
     
-    useEffect(() => {
-        let reviewfound; 
-        if (sessionUser) reviewfound = reviewsArr?.find(review => sessionUser.id === review.userId)
-        if (reviewfound) setReviewBoo(true)
-    },[reviewsArr])
+    // useEffect(() => {
+    //     let reviewfound; 
+    //     if (sessionUser) reviewfound = reviewsArr?.find(review => sessionUser.id === review.userId)
+    //     if (reviewfound) setReviewBoo(true)
+    // },[reviewsArr])
     // useEffect(() => {
     //     dispatch(getSingleSpot(spotId))
     //     return(() => {
