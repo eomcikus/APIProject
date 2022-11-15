@@ -21,8 +21,10 @@ const SingleSpot = () => {
     const newestRating = avgStarRating
     const reviewsArr = Object.values(reviewsObj)
     const reviewLength = reviewsArr.length
-    const reviewBoo = reviewsArr.find(review => sessionUser.id === review.userId)
-    
+    let reviewBoo;
+    if (sessionUser){
+     reviewBoo = reviewsArr.find(review => sessionUser.id === review.userId)
+    }
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
         dispatch(getReviews(spotId))
@@ -70,7 +72,8 @@ if (!spot) return null;
                 </>
             )}
 
-            {sessionUser && 
+            {!sessionUser ||
+            sessionUser && 
             !reviewBoo && 
             spot.ownerId !== sessionUser.id && (
         

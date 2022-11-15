@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -15,6 +15,7 @@ function LoginForm() {
     <Redirect to="/" />
   );
 
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
@@ -22,6 +23,7 @@ function LoginForm() {
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
+
       });
   }
 
