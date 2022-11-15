@@ -442,6 +442,8 @@ router.post('/', requireAuth, handleValidationErrors, async (req, res, next) => 
     if (req.user) {
         let newSpot = await Spot.create(req.body)
         newSpot.ownerId = req.user.id
+        // newSpot.lat = 90
+        // newSpot.lng = 180
         await newSpot.save()
 
         res.status(201)
