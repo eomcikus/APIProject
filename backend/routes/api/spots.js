@@ -414,7 +414,7 @@ router.get('/', async (req, res) => {
 //Delete a spot by spotid
 router.delete('/:spotId', requireAuth, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId)
-    // console.log('IN THE DELETE ROUTE!', spot)
+    console.log('IN THE DELETE ROUTE!', spot)
     // console.log('******************', req)
     if (!spot) {
         res.status(404)
