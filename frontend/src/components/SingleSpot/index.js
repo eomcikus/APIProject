@@ -13,27 +13,31 @@ import './SingleSpot.css'
 const SingleSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
-    // const [reviewBoo, setReviewBoo] = useState(false)
     
     const spot = useSelector(state => state.spots.singleSpot)
     const sessionUser = useSelector(state => state.session.user)
     const reviewsObj = useSelector(state => state.reviews.spot)
-
+    const avgStarRating = useSelector(state =>  state.spots.singleSpot.avgStarRating)
+    const newestRating = avgStarRating
     const reviewsArr = Object.values(reviewsObj)
     const reviewLength = reviewsArr.length
     const reviewBoo = reviewsArr.find(review => sessionUser.id === review.userId)
-
-    console.log(reviewLength)
-    // console.log('reviews', reviews)
-    // reviewfound ? reviewfound = true : reviewfound = false
-    // console.log('reviewfound', reviewfound)
     
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
         dispatch(getReviews(spotId))
         
-    },[dispatch, spotId])
-    
+    },[dispatch, spotId, avgStarRating])
+    // useEffect(() => {
+    //     dispatch(getReviews(spotId))
+    // }, [reviewLength])
+
+    // useEffect(() => {
+        
+    // }, [reviewLength])
+    // useEffect(() => {
+    //     reviewLength = reviewsArr.length
+    // }, [reviewsArr])
     // useEffect(() => {
     //     let reviewfound; 
     //     if (sessionUser) reviewfound = reviewsArr?.find(review => sessionUser.id === review.userId)
@@ -51,7 +55,7 @@ if (!spot) return null;
         <div className="single-spot-container">
              <div className="singleSpot-card-details">
                     <div className='singleSpot-name'>{spot?.name}</div><p></p>
-                    <div className='single-spot-stars'>★ {spot.avgStarRating ? parseFloat(spot.avgStarRating).toFixed(2) : 'none'}  ·   {spot?.city}, {spot?.state} · {reviewsArr ? reviewLength : 'No'} reviews</div>
+                    <div className='single-spot-stars'>★ {spot.avgStarRating ? parseFloat(newestRating).toFixed(2) : 'none'}  ·   {spot?.city}, {spot?.state} · {reviewsArr ? reviewLength : 'No'} reviews</div>
                     {/* <div>{spot?.city}, {spot?.state}</div> */}<p></p>
                     {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
                     <div className='hosted-by-content'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>

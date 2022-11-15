@@ -1,4 +1,4 @@
-import { removeSpot } from "../../store/spots";
+import { removeSpot, getSpots } from "../../store/spots";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -12,11 +12,13 @@ const sessionUser = useSelector(state => state.session.user);
 const spot = useSelector(state => state.spots.singleSpot.id)
 console.log('this is spot in delete spot', spot)
 console.log(sessionUser)
+console.log('spot id in deletespot comp', spotId)
 //if session user id === spot.ownerid then display delete button 
 
-const removeIt = (e) => {
+const removeIt = async (e) => {
     e.preventDefault()
-    dispatch(removeSpot(spotId))
+    await dispatch(removeSpot(spotId))
+    // dispatch(getSpots())
     history.push(`/`)
 }
 return (

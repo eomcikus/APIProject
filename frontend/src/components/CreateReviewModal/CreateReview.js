@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useHistory } from "react-router-dom"
 import * as reviewActions from "../../store/reviews"
+import { getSingleSpot } from "../../store/spots";
 import './CreateReview.css';
 
 const CreateReviewForm = ({setShowModal}) => {
@@ -29,6 +30,7 @@ const CreateReviewForm = ({setShowModal}) => {
         if (createdReview){
             console.log('createdReview', createdReview)
             dispatch(reviewActions.getReviews(spotId))
+            dispatch(getSingleSpot(spotId))
             setShowModal(false)
             history.push(`/spots/${spotId}`)
         } else {
