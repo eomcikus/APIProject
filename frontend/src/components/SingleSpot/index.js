@@ -28,7 +28,6 @@ const SingleSpot = () => {
     
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
-        
         dispatch(getReviews(spotId))
         
     },[dispatch, spotId])
@@ -66,7 +65,7 @@ if (!spot) return null;
             )}
 
             {sessionUser && 
-            // !reviewBoo && 
+            !reviewBoo && 
             spot.ownerId !== sessionUser.id && (
         
             <CreateReviewModal />

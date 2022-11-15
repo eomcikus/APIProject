@@ -18,7 +18,7 @@
 .review-card-layout {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding-left: 20px;
     padding-right: 20px;
     height: 100px;

@@ -30,12 +30,12 @@ const SpotCard = ({ spot }) => {
             <div className="spot-card-detail-container">
                 <div className='spot-card-details'>
                     <p><b>{spot.name}</b></p>
-                    <p div className='spot-card-location'>{spot.city}, {spot.state}</p>
+                    <div className='spot-card-location'>{spot.city}, {spot.state}</div>
                     <p><b>${spot.price}</b> night</p>
 
                 </div>
                 <div className='avg-rating'>
-                    <p>★ {spot.avgRating ? parseFloat(spot.avgRating).toFixed(2) : 'none'}</p>
+                    {/* <p>★ {spot.avgRating ? parseFloat(spot.avgRating).toFixed(2) : 'none'}</p> */}
                 </div>
             </div>
 

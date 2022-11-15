@@ -9,7 +9,7 @@ import ReviewCard from "../ReviewCard";
 const ReviewsForSpot = () => {
     const { spotId } = useParams()
     let reviews = useSelector(state => Object.values(state.reviews.spot))
-    console.log('reviews', reviews)
+    // console.log('reviews', reviews)
     let finalArr = reviews.filter(review => +review.spotId === +spotId)
     // console.log('filteredArr', finalArr)
     const sessionUser = useSelector(state => state.session.user)
@@ -30,7 +30,7 @@ const ReviewsForSpot = () => {
                 <ReviewCard key={review.id} review={review} /></div>))}
                 </div> 
                 </div>
-                // </div>
+                </div>
     )
 }
 

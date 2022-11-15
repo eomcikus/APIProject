@@ -27,13 +27,14 @@ const CreateReviewForm = ({setShowModal}) => {
         }
         let createdReview = await dispatch(reviewActions.createReview(payload, spotId))
         if (createdReview){
+            console.log('createdReview', createdReview)
             dispatch(reviewActions.getReviews(spotId))
             setShowModal(false)
             history.push(`/spots/${spotId}`)
         } else {
             window.alert('Cannot submit review')
         }
-        // console.log(createdReview)
+        console.log(createdReview)
     }
     return (
         <section>
