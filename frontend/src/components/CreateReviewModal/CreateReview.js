@@ -4,7 +4,7 @@ import { useParams, useHistory } from "react-router-dom"
 import * as reviewActions from "../../store/reviews"
 import './CreateReview.css';
 
-const CreateReviewForm = () => {
+const CreateReviewForm = ({setShowModal}) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [review, setReview] = useState('')
@@ -28,9 +28,12 @@ const CreateReviewForm = () => {
         let createdReview = await dispatch(reviewActions.createReview(payload, spotId))
         if (createdReview){
             dispatch(reviewActions.getReviews(spotId))
+            setShowModal(false)
+            history.push(`/spots/${spotId}`)
+        } else {
+            window.alert('Cannot submit review')
         }
         // console.log(createdReview)
-        history.push(`/spots/${spotId}`)
     }
     return (
         <section>

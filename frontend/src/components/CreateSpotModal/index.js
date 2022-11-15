@@ -11,7 +11,7 @@ export const CreateSpotModal = () => {
         <button className='become-host-button' onClick={() => setShowModal(true)}>Become a Host</button>
         {showModal && (
             <Modal onClose={() => setShowModal(false)}>
-                <CreateSpotForm />
+                <CreateSpotForm setShowModal={setShowModal}/>
             </Modal>
         )}
         </>
