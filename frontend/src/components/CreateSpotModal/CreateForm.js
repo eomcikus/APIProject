@@ -76,8 +76,8 @@ const CreateSpotForm = ({ setShowModal }) => {
             window.alert('Cannot submit form')
         }
         await dispatch(getReviews(createdSpot.id))
-        
         setShowModal(false)
+        history.push('/')
     }
     return (
         <section>
