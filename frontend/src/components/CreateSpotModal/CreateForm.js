@@ -25,18 +25,24 @@ const CreateSpotForm = ({ setShowModal }) => {
     useEffect(() => {
         let errors = []
         if (!address) errors.push("Spot must have an address")
+        if (address.length < 10) errors.push("Spot must have a complete address")
         if (!city) errors.push("Spot must have a city")
+        if (city.length < 4) errors.push("Spot must have a city longer than 4 characters")
         if (!state) errors.push("Spot must have a state")
+        if (state.length < 2) errors.push("Spot must have a state code or state name longer than 1 character")
         if (!country) errors.push("Spot must have a country")
+        if (country.length < 3) errors.push("Spot must have country code or country name longer than 3 characters")
         if (!name) errors.push("spot must have a name")
+        if (name.length < 10 ) errors.push("Less than 10 characters is not enough for a spot name. Please be descriptive and use 10 or more characters.")
         if (!description) errors.push("Spot must have a description")
+        if (description.length < 20) errors.push("The description should be longer than 20 characters so your future visitors know a lot about their spot.")
         if (!price) errors.push("Spot must have a price ")
         if (price < 0) errors.push("Price must be greater than 0")
         if (description.length > 5000) errors.push("Spot description must be less than 5000 characters")
         // if (lat < -90 || lat > 90) errors.push("Latitude must be between -90 and 90")
         // if (lng < -180 || lng > 180) errors.push("Longitude must be between -180 and 180")
         if (!photo.includes('.png') && !photo.includes('.jpg') && !photo.includes('.jpeg')) errors.push('Photo must be in .png, .jpeg, or .jpg format')
-        if (photo.length === 0) errors.push('must include an image URL')
+        if (photo.length === 0) errors.push('Must include an image URL so your future visitors know what the spot looks like.')
         setValidationErrors(errors)
     }, [name, price, description, address, city, state, country, photo])
 
@@ -69,12 +75,12 @@ const CreateSpotForm = ({ setShowModal }) => {
             previewImage: photo
         }
         setSubmit(true)
-        createdSpot = await dispatch(createSpot(payload))
-        let createdSpotImage = await dispatch(createSpotImage(photo, createdSpot.id))
         // console.log('createdSpot', createdSpot)
         if (validationErrors.length) {
-            window.alert('Cannot submit form')
+            console.log('cannot submit form, please see feedback')
         }
+        createdSpot = await dispatch(createSpot(payload))
+        let createdSpotImage = await dispatch(createSpotImage(photo, createdSpot.id))
         await dispatch(getReviews(createdSpot.id))
         setShowModal(false)
         history.push('/')

@@ -73,16 +73,20 @@ const EditSpot = ({setShowModal}) => {
     useEffect(() => {
         let errors = []
         if (!address) errors.push("Spot must have an address")
+        if (address.length < 10) errors.push("Spot must have a complete address")
         if (!city) errors.push("Spot must have a city")
+        if (city.length < 4) errors.push("Spot must have a city longer than 4 characters")
         if (!state) errors.push("Spot must have a state")
+        if (state.length < 2) errors.push("Spot must have a state code or state name longer than 1 character")
         if (!country) errors.push("Spot must have a country")
+        if (country.length < 3) errors.push("Spot must have country code or country name longer than 3 characters")
         if (!name) errors.push("spot must have a name")
+        if (name.length < 10 ) errors.push("Less than 10 characters is not enough for a spot name. Please be descriptive and use 10 or more characters.")
         if (!description) errors.push("Spot must have a description")
+        if (description.length < 20) errors.push("The description should be longer than 20 characters so your future visitors know a lot about their spot.")
         if (!price) errors.push("Spot must have a price ")
         if (price < 0) errors.push("Price must be greater than 0")
         if (description.length > 5000) errors.push("Spot description must be less than 5000 characters")
-        if (lat < -90 || lat > 90) errors.push("Latitude must be between -90 and 90")
-        if (lng < -180 || lng > 180) errors.push("Longitude must be between -180 and 180")
         setValidationErrors(errors)
     }, [name, price, lat, lng, description, address, city, state, country])
     const handleSubmit = async (e) => {
