@@ -12,7 +12,7 @@ export const EditSpotModal = () => {
         <button onClick={() => setShowModal(true)}>Edit Spot</button>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
-            <EditSpot />
+            <EditSpot setShowModal={setShowModal} />
           </Modal>
         )}
       </>

@@ -3,15 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import RemoveReview from '../RemoveReview';
 
 const ReviewCard = ({ review }) => {
-    console.log('reviews in reviewcard', review)
+    // console.log('reviews in reviewcard', review)
     const spot = useSelector(state => state.spots.singleSpot)
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
     const newReview = useSelector(state => state.reviews.User)
-    console.log('newReview', newReview)
-    console.log('sessionUser', sessionUser)
+    // console.log('newReview', newReview)
+    // console.log('sessionUser', sessionUser)
     // const review = useSelector(state => state.review.)
-    if (!newReview) return null;
+    // if (!newReview) return null;
      return (
 
         <div className='review-container'>

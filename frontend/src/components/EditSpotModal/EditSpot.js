@@ -5,13 +5,15 @@ import { getSingleSpot, updateSpot } from '../../store/spots'
 import { clear } from '../../store/spots'
 import './EditSpot.css'
 
-const EditSpot = () => {
+const EditSpot = ({setShowModal}) => {
     const dispatch = useDispatch()
     const { spotId } = useParams()
+    // console.log('spotId', spotId)
     const history = useHistory()
     // console.log(spotId)
     const currentSpot = useSelector(state => state.spots.singleSpot);
     // console.log('current spot in edit', currentSpot)
+
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
         // return(() => {
@@ -42,7 +44,7 @@ const EditSpot = () => {
     const [price, setPrice] = useState(currentSpot?.price);
 
     const [validationErrors, setValidationErrors] = useState([])
-    
+
     const updateAddress = (e) => setAddress(e.target.value)
     const updateCity = (e) => setCity(e.target.value)
     const updateState = (e) => setState(e.target.value)
@@ -82,7 +84,7 @@ const EditSpot = () => {
         if (lat < -90 || lat > 90) errors.push("Latitude must be between -90 and 90")
         if (lng < -180 || lng > 180) errors.push("Longitude must be between -180 and 180")
         setValidationErrors(errors)
-    },[name, price, lat, lng, description, address, city, state, country])
+    }, [name, price, lat, lng, description, address, city, state, country])
     const handleSubmit = async (e) => {
         e.preventDefault()
         let updatedSpot;
@@ -100,8 +102,10 @@ const EditSpot = () => {
         updatedSpot = await dispatch(updateSpot(payload, spotId))
         console.log('made it to if statement with history.push')
         if (updatedSpot) {
-            dispatch(getSingleSpot(spotId))
-            history.push(`/spots/${spotId}`)
+            await dispatch(getSingleSpot(spotId)).then(
+                setShowModal(false))
+        } else if (validationErrors.length){
+            window.alert('Cannot submit form')
         }
     }
     return (
@@ -111,75 +115,75 @@ const EditSpot = () => {
                     {validationErrors.map((error) => (
                         <li key={error}>{error}</li>
                     ))}</ul>
-                    Address:
-                    <input
-                        type="text"
-                        placeholder='Address'
-                        required
-                        value={address}
-                        onChange={updateAddress} />
-                    City:
-                    <input
-                        type="text"
-                        placeholder='City'
-                        required
-                        value={city}
-                        onChange={updateCity} />
-                    State:
-                    <input
-                        type='text'
-                        placeholder='state'
-                        required
-                        value={state}
-                        onChange={updateState} />
-                    Country:
-                    <input
-                        type='text'
-                        placeholder='Country'
-                        required
-                        value={country}
-                        onChange={updateCountry} />
-                    Latitude:
-                    <input
-                        type='text'
-                        placeholder='Latitude'
-                        required
-                        value={lat}
-                        onChange={updateLat} />
-                    Longitute:
-                    <input
-                        type='text'
-                        placeholder='Longitude'
-                        required
-                        value={lng}
-                        onChange={updateLng} />
-                    Name:
-                    <input
-                        type='text'
-                        placeholder='Spot name'
-                        required
-                        value={name}
-                        onChange={updateName} />
-                    Description:
-                    <input
-                        type='text'
-                        placeholder='description'
-                        required
-                        value={description}
-                        onChange={updateDescription}
-                    />
-                    Price:
-                    <input
-                        type='text'
-                        placeholder='$'
-                        required
-                        value={price}
-                        onChange={updatePrice}
-                    />
-                    <button type="submit"
-                    >Update Spot</button>
-                    <button type="button"
-                        onClick={resetClick}>Cancel</button>
+                Address:
+                <input
+                    type="text"
+                    placeholder='Address'
+                    required
+                    value={address}
+                    onChange={updateAddress} />
+                City:
+                <input
+                    type="text"
+                    placeholder='City'
+                    required
+                    value={city}
+                    onChange={updateCity} />
+                State:
+                <input
+                    type='text'
+                    placeholder='state'
+                    required
+                    value={state}
+                    onChange={updateState} />
+                Country:
+                <input
+                    type='text'
+                    placeholder='Country'
+                    required
+                    value={country}
+                    onChange={updateCountry} />
+                Latitude:
+                <input
+                    type='text'
+                    placeholder='Latitude'
+                    required
+                    value={lat}
+                    onChange={updateLat} />
+                Longitute:
+                <input
+                    type='text'
+                    placeholder='Longitude'
+                    required
+                    value={lng}
+                    onChange={updateLng} />
+                Name:
+                <input
+                    type='text'
+                    placeholder='Spot name'
+                    required
+                    value={name}
+                    onChange={updateName} />
+                Description:
+                <input
+                    type='text'
+                    placeholder='description'
+                    required
+                    value={description}
+                    onChange={updateDescription}
+                />
+                Price:
+                <input
+                    type='text'
+                    placeholder='$'
+                    required
+                    value={price}
+                    onChange={updatePrice}
+                />
+                <button type="submit"
+                >Update Spot</button>
+                <button type="button"
+                    onClick={resetClick}>Cancel</button>
             </form>
         </section>
     )

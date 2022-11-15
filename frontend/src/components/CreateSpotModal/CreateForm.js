@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Redirect } from 'react-router-dom';
 import { createSpot, createSpotImage, getSpots } from '../../store/spots'
 import './CreateSpot.css'
-const CreateSpotForm = ({ }) => {
+const CreateSpotForm = ({ setShowModal }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
@@ -74,10 +74,9 @@ const CreateSpotForm = ({ }) => {
         if (validationErrors.length) {
             window.alert('Cannot submit form')
         } else {
-            // <Redirect to='spots' />
-            dispatch(getSpots())
-             history.push(`/`);
-             return
+            await dispatch(getSpots()).then(
+                setShowModal(false)
+            )
         }
     }
     return (
