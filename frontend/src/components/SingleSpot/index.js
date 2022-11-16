@@ -74,7 +74,7 @@ if (!spot) return null;
                 </>
             )}
 
-            {!sessionUser ||
+            {(!sessionUser) ||
             sessionUser && 
             !reviewBoo && 
             spot.ownerId !== sessionUser.id && (
