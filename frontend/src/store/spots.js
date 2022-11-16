@@ -67,9 +67,9 @@ export const updateSpot = (spot, spotId) => async dispatch => {
         }
     })
     if (response.ok) {
-        console.log('res', response)
+        // console.log('res', response)
         const oneSpot = await response.json()
-        console.log('---', oneSpot)
+        // console.log('---', oneSpot)
         dispatch(update(oneSpot))
         return oneSpot
     }
@@ -109,13 +109,13 @@ export const createSpotImage = (url, spotId) => async dispatch => {
 }
 
 export const removeSpot = (spotId) => async dispatch => {
-    console.log('---spotId in delete', spotId)
+    // console.log('---spotId in delete', spotId)
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     })
-    console.log('response after fetch', response)
+    // console.log('response after fetch', response)
     if (response.ok) {
-        console.log('response', response)
+        // console.log('response', response)
         dispatch(remove(spotId))
     }
 }

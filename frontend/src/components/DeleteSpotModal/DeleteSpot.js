@@ -10,9 +10,9 @@ const dispatch = useDispatch();
 const history = useHistory()
 const sessionUser = useSelector(state => state.session.user);
 const spot = useSelector(state => state.spots.singleSpot.id)
-console.log('this is spot in delete spot', spot)
+// console.log('this is spot in delete spot', spot)
 console.log(sessionUser)
-console.log('spot id in deletespot comp', spotId)
+// console.log('spot id in deletespot comp', spotId)
 //if session user id === spot.ownerid then display delete button 
 
 const removeIt = async (e) => {

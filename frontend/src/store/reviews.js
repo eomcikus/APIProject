@@ -32,7 +32,7 @@ export const getReviews = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
     if (response.ok) {
         const data = await response.json()
-        console.log('--reviews in thunk', data)
+        // console.log('--reviews in thunk', data)
         dispatch(load(data.Reviews))
         // console.log('...after dispatch', reviews)
         // return reviews;
@@ -44,10 +44,10 @@ export const getReviews = (spotId) => async dispatch => {
 
 export const getUserReviews = () => async dispatch => {
     const response = await csrfFetch(`/api/reviews/current`)
-    console.log('getUserRes', response)
+    // console.log('getUserRes', response)
     if (response.ok) {
         const data = await response.json()
-        console.log('---data after .json', data)
+        // console.log('---data after .json', data)
         dispatch(viewUserRevs(data.Reviews))
     }
 }
@@ -65,17 +65,17 @@ export const createReview = (review, spotId, user) => async dispatch => {
         review.User = user
         // console.log('in response', review)
         dispatch(create(review))
-        console.log('---review after dispatch', review)
+        // console.log('---review after dispatch', review)
         return review;
     }
 }
 
 export const removeReview = (reviewId) => async dispatch => {
-    console.log('were in the thunk at least', reviewId)
+    // console.log('were in the thunk at least', reviewId)
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     })
-    console.log('---response in removereview', response)
+    // console.log('---response in removereview', response)
     if (response.ok) {
         // const review = await response.json()
         // console.log('response', response)
@@ -98,7 +98,7 @@ const reviewReducer = (state = initialState, action) => {
             action.reviews.forEach(review => {
                 newState.spot[review.id] = review
             })
-            console.log(action.reviews)
+            // console.log(action.reviews)
             if (!action.reviews) {
                 return state.reviews;
             } else {
@@ -107,7 +107,7 @@ const reviewReducer = (state = initialState, action) => {
         }
         case USER: {
             newState = {  user: {} }
-            console.log('action.reviews', action)
+            // console.log('action.reviews', action)
             action.userId.forEach(review => {
                 newState.user[review.id] = review
             })
@@ -115,7 +115,7 @@ const reviewReducer = (state = initialState, action) => {
         }
         case CREATE: {
             newState = { ...state, Spot: { ...state.spot }, User: { ...state.user } }
-            console.log('action.review', action.review)
+            // console.log('action.review', action.review)
 
             newState.Spot[action.review.id] = action.review
             newState.User[action.review.id] = action.review

@@ -13,7 +13,7 @@ const RemoveReview = () => {
     // console.log('sessionuser', sessionUser)
     const reviewArr = Object.values(review)
     const myReview = reviewArr.find(review => review.User.id === sessionUser.id)
-    console.log('my review', myReview)
+    // console.log('my review', myReview)
     // let userReview = reviewArr.filter(review => {
     //    return review.User.id === sessionUser.id && review.spotId === spotId
     // })
