@@ -35,10 +35,11 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu} className='profile-button'>
-     <i className="fa-solid fa-user"></i>
+      <i className="fa-solid fa-bars"></i>
+      <i className="fa-solid fa-user"></i>
       </button>
       {showMenu && (
-        <div className="profile-dropdown">
+      <div className="profile-dropdown">
           <h3>Hello, {user.firstName}</h3>
           <div>{user.username}</div>
           <div>{user.email}</div>

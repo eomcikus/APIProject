@@ -62,7 +62,7 @@ if (!spot) return null;
                     {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
                     <div className='hosted-by-content'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>
                     <div className='singleSpot-description'>{spot?.description}</div> 
-                    <div>${spot?.price} per night</div>
+                    <div><b>${spot?.price}</b> per night</div>
                 </div>
        
             {sessionUser && spot.ownerId === sessionUser.id && (

@@ -29,6 +29,7 @@
     /* margin-right: 100px; */
     background-color: white;
     width: 150px;
+    top: 105px;
     right: 0px;
     padding: 1%;
 }
@@ -42,19 +43,26 @@
     margin-top: 70px; */
     /* padding-left: 100px; */
     /* position: fixed; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     background-color: white;
     color: gray;
-    /* border: black solid 1px; */
-    border-radius: 15px;
+    border: gray solid 0.5px;
+    /* box-shadow: 0 4px 8px 0 rgba(0,0,0, 0.2); */
+    border-radius: 25px;
     /* text-align: center;
     border: none; */
     /* padding: 0px; */
     /* align-items: center; */
-    width: 40px;
-    height: 40px;
+    width: 70px;
+    height: 35px;
+    
 }
 .profile-button:hover {
     color: #E5E5E5;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0, 0.2);
 }
 .become-host-button {
     /* background-color: yellow; */
@@ -75,4 +83,9 @@
 }
 .logout-button:hover {
     background-color: #EFF5F7;
+}
+.profile-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
