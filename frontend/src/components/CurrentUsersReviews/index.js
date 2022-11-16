@@ -9,9 +9,9 @@ import RemoveReview from '../RemoveReview';
 const CurrentUsersReviews = () => {
     const dispatch = useDispatch()
     const reviews = useSelector(state => Object.values(state.reviews.user))
-    console.log('get the reviews', reviews)
+    // console.log('get the reviews', reviews)
     const sessionUser = useSelector(state => state.session.user)
-    console.log('current user', sessionUser)
+    // console.log('current user', sessionUser)
     const finalArr = reviews.filter(review => +review.userId === +sessionUser.id)
     useEffect(() => {
         dispatch(reviewActions.getUserReviews(sessionUser.id))

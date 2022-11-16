@@ -28,7 +28,7 @@ const CreateReviewForm = ({setShowModal}) => {
         }
         let createdReview = await dispatch(reviewActions.createReview(payload, spotId, sessionUser))
         if (createdReview){
-            console.log('createdReview', createdReview)
+            // console.log('createdReview', createdReview)
             dispatch(reviewActions.getReviews(spotId))
             dispatch(getSingleSpot(spotId))
             setShowModal(false)
