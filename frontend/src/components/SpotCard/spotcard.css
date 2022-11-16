@@ -7,3 +7,21 @@
     color: black;
     text-decoration: none;
 }
+
+.name-and-stars-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 300px;
+
+    font-weight: 600;
+    padding-bottom: 8px;
+}
+.spt-avgrtg {
+    width: 60px;
+}
+
+.spot-price {
+    padding-top: 8px;
+    padding-bottom: 10px;
+}

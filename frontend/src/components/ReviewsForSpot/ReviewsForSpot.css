@@ -10,6 +10,7 @@
 .true-review-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     /* border: 1px solid yellow; */
 }
 .review-card {

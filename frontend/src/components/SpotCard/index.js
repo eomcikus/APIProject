@@ -29,9 +29,10 @@ const SpotCard = ({ spot }) => {
             </div>
             <div className="spot-card-detail-container">
                 <div className='spot-card-details'>
-                    <p><b>{spot.name}</b></p>
+                    <div className='name-and-stars-container'>
+                        <div className='name'>{spot.name}</div> <div className='spt-avgrtg'>★ {spot.avgRating ? parseFloat(spot.avgRating).toFixed(2) : 'none'}</div></div>
                     <div className='spot-card-location'>{spot.city}, {spot.state}</div>
-                    <p><b>${spot.price}</b> night</p>
+                    <div className='spot-price'><b>${spot.price}</b> night</div>
 
                 </div>
                 <div className='avg-rating'>

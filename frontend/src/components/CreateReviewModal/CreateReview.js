@@ -36,7 +36,7 @@ const CreateReviewForm = ({setShowModal}) => {
         } else {
             window.alert('Cannot submit review')
         }
-        console.log(createdReview)
+        // console.log(createdReview)
     }
     return (
         <section>
