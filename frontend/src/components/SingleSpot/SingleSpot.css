@@ -13,19 +13,32 @@
     width: 600px;
     height: 600px;
     border-radius: 15px;
+    /* padding-bottom: 15px; */
+
 }
 
 .singleSpot-name {
     color: black;
     font-size: 32px;
+    /* border: 1px yellow solid; */
 }
 
 .single-spot-stars{ 
     font-size: 14px;
+    /* border: 1px red solid; */
+    /* padding-bottom: 10px; */
 }
 
 .hosted-by-content {
     justify-content: space-around;
     font-size: 24px;
+    padding-top: 10px;
     /* border: 2px solid black; */
+}
+
+.singleSpot-description {
+    color: gray;
+    width: 750px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

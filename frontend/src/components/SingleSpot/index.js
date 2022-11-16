@@ -57,11 +57,11 @@ if (!spot) return null;
         <div className="single-spot-container">
              <div className="singleSpot-card-details">
                     <div className='singleSpot-name'>{spot?.name}</div><p></p>
-                    <div className='single-spot-stars'>★ {spot.avgStarRating ? parseFloat(newestRating).toFixed(2) : 'none'}  ·   {spot?.city}, {spot?.state} · {reviewsArr ? reviewLength : 'No'} reviews</div>
+                    <div className='single-spot-stars'>★ {spot.avgStarRating ? parseFloat(newestRating).toFixed(2) : 'none'}  ·   {spot?.city}, {spot?.state}, {spot.country} · {reviewsArr ? reviewLength : 'No'} reviews</div>
                     {/* <div>{spot?.city}, {spot?.state}</div> */}<p></p>
                     {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
                     <div className='hosted-by-content'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>
-                    <div>{spot?.description}</div> 
+                    <div className='singleSpot-description'>{spot?.description}</div> 
                     <div>${spot?.price} per night</div>
                 </div>
        
