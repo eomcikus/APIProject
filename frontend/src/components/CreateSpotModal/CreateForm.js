@@ -42,7 +42,7 @@ const CreateSpotForm = ({ setShowModal }) => {
         // if (lat < -90 || lat > 90) errors.push("Latitude must be between -90 and 90")
         // if (lng < -180 || lng > 180) errors.push("Longitude must be between -180 and 180")
         if (!photo.includes('.png') && !photo.includes('.jpg') && !photo.includes('.jpeg')) errors.push('Photo must be in .png, .jpeg, or .jpg format')
-        if (photo.length === 0) errors.push('Must include an image URL so your future visitors know what the spot looks like.')
+        if (photo.length === 0) errors.push('Must include an image URL so your future visitors know what your house looks like')
         setValidationErrors(errors)
     }, [name, price, description, address, city, state, country, photo])
 
@@ -77,13 +77,14 @@ const CreateSpotForm = ({ setShowModal }) => {
         setSubmit(true)
         // console.log('createdSpot', createdSpot)
         if (validationErrors.length) {
-            console.log('cannot submit form, please see feedback')
-        }
+            setShowModal(true)
+        } else {
         createdSpot = await dispatch(createSpot(payload))
         let createdSpotImage = await dispatch(createSpotImage(photo, createdSpot.id))
         await dispatch(getReviews(createdSpot.id))
         setShowModal(false)
         history.push('/')
+        }
     }
     return (
         <section>
