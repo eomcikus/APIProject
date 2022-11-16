@@ -27,7 +27,7 @@ const RemoveReview = () => {
     }
     return (
         <div>            
-            <button type="button" onClick={deleteIt}>Delete Review</button>
+            <button type="button" onClick={deleteIt}>Delete</button>
         </div>
     )
 }

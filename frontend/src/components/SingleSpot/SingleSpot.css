@@ -42,3 +42,17 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.edit-delete-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.delete-modal {
+    display: flex;
+    flex-direction: row;
+}
+
+/* .spot-avg-reviews {
+    /* font-weight: 00; 
+} */

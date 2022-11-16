@@ -8,7 +8,7 @@ function DeleteSpotModal() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Delete</button>
+      <button onClick={() => setShowModal(true)}>Delete Spot</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <DeleteSpot />

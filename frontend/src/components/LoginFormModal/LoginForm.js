@@ -24,7 +24,11 @@ function LoginForm() {
         if (data && data.errors) setErrors(data.errors);
       });
   }
-
+  const handleDemo = async (e) => {
+    e.preventDefault();
+    await dispatch(sessionActions.login({ credential: 'FakeUser4' , password: 'password5' }))
+    return 
+  }
   return (
     <form onSubmit={handleSubmit}>
       <ul>
@@ -49,6 +53,7 @@ function LoginForm() {
         />
       </label>
       <button type="submit">Log In</button>
+      <button type="submit" onClick={handleDemo}>Demo User</button>
     </form>
   );
 }

@@ -54,7 +54,7 @@ const SingleSpot = () => {
 //   console.log('spot', spot)
 if (!spot) return null;
      return (
-        <div className="single-spot-container">
+        <div className ="single-spot-container" key={spot.id}>
              <div className="singleSpot-card-details">
                     <div className='singleSpot-name'>{spot?.name}</div><p></p>
                     <div className='single-spot-stars'>★ {spot.avgStarRating ? parseFloat(newestRating).toFixed(2) : 'none'}  ·   {spot?.city}, {spot?.state}, {spot.country} · {reviewsArr ? reviewLength : 'No'} reviews</div>
@@ -67,8 +67,10 @@ if (!spot) return null;
        
             {sessionUser && spot.ownerId === sessionUser.id && (
                 <>
+                <div className='edit-delete-buttons'>
                 <DeleteSpot />
                 <EditSpot />
+                </div>
                 </>
             )}
 
