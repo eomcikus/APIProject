@@ -125,7 +125,7 @@ const CreateSpotForm = ({ setShowModal }) => {
                     required
                     value={country}
                     onChange={e => setCountry(e.target.value)} />
-
+              
                 {/* <input
                     type='text'
                     placeholder='Latitude'
