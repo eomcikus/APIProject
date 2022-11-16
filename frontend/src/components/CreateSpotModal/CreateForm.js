@@ -90,7 +90,7 @@ const CreateSpotForm = ({ setShowModal }) => {
         <section>
             <form onSubmit={handleSubmit} className='create-form-modal'>
                 <h1> Create a Spot</h1>
-                {submit && validationErrors.length && (
+                {submit && !!validationErrors.length && (
                     <ul className="errors">
                         {validationErrors.map((error) => (
                             <li key={error}>{error}</li>))}
