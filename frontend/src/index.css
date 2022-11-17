@@ -12,6 +12,7 @@ button {
     margin: 10px;
     border: none;
     padding: 10px 20px;
+    cursor: pointer;
 }
 
  html, body, input, textarea {

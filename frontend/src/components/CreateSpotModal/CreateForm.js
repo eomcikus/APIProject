@@ -99,8 +99,8 @@ const CreateSpotForm = ({ setShowModal }) => {
                             <li key={error}>{error}</li>))}
                     </ul>
                 )}
-                <h2>Tell us about your spot.</h2>
-                Where is your spot?
+                {/* <h2>Tell us about your spot.</h2>
+                Where is your spot? */}
                 <input
                     type="text"
                     placeholder='Address'
@@ -142,33 +142,33 @@ const CreateSpotForm = ({ setShowModal }) => {
                     required
                     value={lng}
                     onChange={e => setLng(e.target.value)} /> */}
-                Give your spot a name.
+                {/* Give your spot a name. */}
                 <input
                     type='text'
                     placeholder='Spot name'
                     required
                     value={name}
                     onChange={e => setName(e.target.value)} />
-                What makes your spot special? Write a description.
+                {/* What makes your spot special? Write a description. */}
                 <input
                     type='text'
-                    placeholder='description'
+                    placeholder='Description'
                     required
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                 />
-                Cost per night:
+                {/* Cost per night: */}
                 <input
                     type='number'
-                    placeholder='$'
+                    placeholder='$ Cost per night'
                     required
                     value={price}
                     onChange={e => setPrice(e.target.value)}
                 />
-                Upload a photo:
+              
                 <input
                     type='text'
-                    placeholder='link to photo'
+                    placeholder='Add a link to photo of spot'
                     required
                     value={photo}
                     onChange={e => setPhoto(e.target.value)}
