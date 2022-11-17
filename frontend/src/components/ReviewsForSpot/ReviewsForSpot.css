@@ -1,27 +1,37 @@
 .spot-avg-reviews {
     padding-top: 20px;
     font-size: 24px;
-    display: flex;
-    flex-direction: column;
-    width: auto;
+    /* display: flex;
+    flex-direction: row; */
+    /* align-items: flex-start; */
+    /* width: 90%;
+    flex-wrap: wrap; */
     /* border: 1px solid red */
 }
 
-.true-review-container {
+/* .true-review-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     /* border: 1px solid yellow; */
-}
-.review-card {
+
+/* .review-card {
     display: flex;
     flex-direction: row;
-    width: 400px;
+    width: 200px;
     /* border: 5px solid blue */
-}
+
 
 
 .reviews-contained {
     display: flex;
     flex-direction: row;
+    /* flex-wrap: wrap;
+    align-items: flex-start; */
+}
+
+.reviews-layout-contain {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }

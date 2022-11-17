@@ -65,7 +65,7 @@ form text {
 }
 
 li {
- order: 5;
- align-self: center;
- 
-}
+    order: 3;
+    align-self: center;
+    
+   }

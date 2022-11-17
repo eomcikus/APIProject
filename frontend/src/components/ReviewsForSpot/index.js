@@ -24,13 +24,15 @@ const ReviewsForSpot = () => {
     if (reviews.length === 0) return null;
     if (finalArr.length === 0) return null;
     return (
-        <div className='true-review-container' >
-            <div className='spot-avg-reviews' id='bold-letters'><b>★ {spot.avgStarRating ? parseFloat(spot.avgStarRating).toFixed(2) : 'None'} · {reviewArr ? reviewArr.length : 'No'} reviews </b><p></p>
+        <>
+            <div className='spot-avg-reviews'><b>★ {spot.avgStarRating ? parseFloat(spot.avgStarRating).toFixed(2) : 'None'} · {reviewArr ? reviewArr.length : 'No'} reviews </b></div><p></p>
+            <div className='reviews-layout-contain'>
                 <div className='reviews-contained'>{finalArr.map(review => (<div className='review-card'>
                     <ReviewCard key={review.id} review={review} /></div>))}
                 </div>
             </div>
-        </div>
+        </>
+
     )
 }
 
