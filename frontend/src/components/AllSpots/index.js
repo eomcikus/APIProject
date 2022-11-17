@@ -12,7 +12,7 @@ const AllSpots = () => {
     let spots = useSelector(state => state.spots.allSpots)
     let reviews = useSelector(state => state.reviews.spot)
     let spotArray = Object.values(spots)
-    // console.log(spotArray)
+
     useEffect(() => {
         dispatch(getSpots())
     }, [dispatch])

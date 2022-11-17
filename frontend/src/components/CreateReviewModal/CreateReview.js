@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useHistory } from "react-router-dom"
 import * as reviewActions from "../../store/reviews"
@@ -10,6 +10,8 @@ const CreateReviewForm = ({setShowModal}) => {
     const history = useHistory()
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
+    const [validationErrors, setValidationErrors] = useState([])
+    const [submit, setSubmit] = useState(false)
     const { spotId } = useParams()
     const sessionUser = useSelector(state => state.session.user)
 
@@ -18,14 +20,24 @@ const CreateReviewForm = ({setShowModal}) => {
         setReview('')
         setStars('')
     }
+
+useEffect(() =>{
+let errors = []
+if (review.length < 20) errors.push('Review must be longer than 20 characters')
+setValidationErrors(errors)
+}, [review])
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const payload = {
-   
             review,
             stars
         }
+        setSubmit(true)
+        if (validationErrors.length){
+            setShowModal(true)
+        } else {
         let createdReview = await dispatch(reviewActions.createReview(payload, spotId, sessionUser))
         if (createdReview){
             // console.log('createdReview', createdReview)
@@ -33,8 +45,7 @@ const CreateReviewForm = ({setShowModal}) => {
             dispatch(getSingleSpot(spotId))
             setShowModal(false)
             history.push(`/spots/${spotId}`)
-        } else {
-            window.alert('Cannot submit review')
+        } 
         }
         // console.log(createdReview)
     }
@@ -42,6 +53,12 @@ const CreateReviewForm = ({setShowModal}) => {
         <section>
             <form onSubmit={handleSubmit}>
                 Stars:
+                {submit && !!validationErrors.length && (
+                    <ul className="errors">
+                        {validationErrors.map((error) => (
+                            <li key={error}>{error}</li>))}
+                    </ul>
+                )}
                 <input
                     type="number"
                     placeholder="Rate your stay"
