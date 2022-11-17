@@ -72,7 +72,7 @@ module.exports = {
         lat: 110.2,
         lng: 100.2,
         name: 'Sideways Getaway',
-        description: 'Wow! This home is an optical illusion but is filled with amazing views of the landscape and natural light. House is perfect for remote work, outfitted with fiber but away from distractions. Enjoy hikes on your off-time .',
+        description: 'Wow! This home is an optical illusion but is filled with amazing views of the landscape and natural light. House is perfect for remote work, outfitted with fiber.',
         price: 1500.0,
       },
       {
@@ -84,7 +84,7 @@ module.exports = {
         lat: 110.2,
         lng: 100.2,
         name: 'Tiny Forest Getaway',
-        description: 'Another tiny home that will take your breath away! Stunning Scandinavian design lends itself to a minimalist\'s vacation dream! Enjoy the wood stove ambiance and take in stunning views, especially in the fall season. ',
+        description: 'Another tiny home that will take your breath away! Stunning Scandinavian design lends itself to a minimalist\'s vacation dream!',
         price: 900.0,
       },
       {
@@ -96,7 +96,7 @@ module.exports = {
         lat: 110.2,
         lng: 100.2,
         name: 'Warm Cozy Dome',
-        description: 'Enjoy this tiny dome right outside of Seattle! With stunning views and floor to ceiling windows, you are sure to enjoy your stay. Rest and recharge in the dome, or go hike and enjoy the great outdoors for some views.',
+        description: 'Enjoy this tiny dome right outside of Seattle! With stunning views and floor to ceiling windows, you are sure to enjoy your stay. ',
         price: 900.0,
       },
       {
@@ -108,7 +108,7 @@ module.exports = {
         lat: 110.2,
         lng: 100.2,
         name: 'Old Fire Lookout',
-        description: 'Enjoy the stunning views from this converted fire lookout. Please note that this house has multiple flights of stairs to ascend to enter the house. There are many great hikes close by and local breweries.',
+        description: 'Enjoy the stunning views from this converted fire lookout. Please note that this house has multiple flights of stairs to ascend to enter the house. ',
         price: 700.0,
       },
       {
@@ -120,7 +120,7 @@ module.exports = {
         lat: 110.2,
         lng: 100.2,
         name: 'The Egg',
-        description: 'Do you want to take a vow of silence? Book this whimsical egg with window cutouts to enjoy the lovely farmland that surrounds it. Located on a winery, you can enjoy some beverages and excellent food and be close by to your stay. ',
+        description: 'Do you want to take a vow of silence? Book this whimsical egg with window cutouts to enjoy the lovely farmland that surrounds it. Located on a winery. ',
         price: 700.0,
       },
     ])

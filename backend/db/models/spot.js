@@ -90,7 +90,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     description: {
-      type: DataTypes.STRING(500),
+      type: DataTypes.TEXT,
       unique: true,
       allowNull: false,
       validate: {
