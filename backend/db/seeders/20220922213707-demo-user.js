@@ -38,6 +38,20 @@ module.exports = {
         email: 'cheesepizza@lamp.com',
         username: 'FakeUser4',
         hashedPassword: bcrypt.hashSync('password5')
+      },
+      {
+        firstName: 'Doug',
+        lastName: 'Demodome',
+        email: 'doug@demodome.com',
+        username: 'DougDemodome',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        firstName: 'Leslie',
+        lastName: 'Knope',
+        email: 'leslie@pawnee.com',
+        username: 'Leslie',
+        hashedPassword: bcrypt.hashSync('password')
       }
     ], {});
   },
@@ -45,7 +59,7 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('Users', {
-      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2', 'FakeUser3', 'FakeUser4'] }
+      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2', 'FakeUser3', 'FakeUser4', 'DougDemodome'] }
     }, {});
   }
 };

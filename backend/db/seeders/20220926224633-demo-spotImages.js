@@ -27,6 +27,31 @@ module.exports = {
         spotId: 5,
         url: 'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2020_33/1599433/pie-house-mc-main1-2008118.jpg',
         preview: true
+      },
+      {
+        spotId: 6,
+        url: 'https://livinginatiny.com/wp-content/uploads/2021/02/Gorgeous-and-Uniquely-Designed-Tiny-House-Model_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 7,
+        url: 'https://i.pinimg.com/originals/9e/fc/23/9efc23774cfb68e26db03fd40e9eed43.jpg',
+        preview: true
+      },
+      {
+        spotId: 8,
+        url: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/d369d12f-21cd-459b-ae90-de8408dc3b08-4.%20secluded-airship-scotland-exterior.jpg',
+        preview: true
+      },
+      {
+        spotId: 9,
+        url: 'https://img.buzzfeed.com/buzzfeed-static/static/2021-08/24/18/asset/636d0eb22988/sub-buzz-1152-1629830394-12.png',
+        preview: true
+      },
+      {
+        spotId: 10,
+        url: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/d1a88bb5-82c3-41a9-80c1-3b7f95859ca8-1.%20escape-pod-uk-exterior.jpg',
+        preview: true
       }
     ])
   },

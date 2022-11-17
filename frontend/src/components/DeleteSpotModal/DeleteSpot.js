@@ -24,8 +24,8 @@ const removeIt = async (e) => {
 return (
     <div className='delete-modal'>
         <h2>Are you sure? </h2>
-        Pressing this button will delete your Spot and all information connected to it. 
-        This cannot be undone.
+        <div>Pressing this button will delete your Spot and all information connected to it. </div>
+        <div>This cannot be undone.</div>
         <button type='button' onClick={removeIt}>I am sure, Delete</button>
     </div>
 )
