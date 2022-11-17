@@ -12,7 +12,7 @@ module.exports = {
         lat: 123.4,
         lng: 123.4,
         name: 'Forest Chill',
-        description: 'A lovely home in the forest. Enjoy quiet time away from the hustle and bustle of city life with plenty of natural light. House is equipped with fiber internet so remote work is possible. Hikes are close by, as is a small village with local artisans and restaurants.',
+        description: 'A lovely home in the forest. Enjoy quiet time away from the hustle and bustle of city life with plenty of natural light. House is equipped with fiber internet so remote work is possible.',
         price: 400.0,
       },
       {
@@ -24,7 +24,7 @@ module.exports = {
         lat: 56.5,
         lng: 54.5,
         name: 'Corner Bay Lot Home!',
-        description: 'A home nestled on the shore of the bay, within walking distance of the beach. Enjoy the luxury of spending time on the dock on days when the beach is buggy, and take a dip in the bay to cool off. The house has plenty of floats to relax and laze the day away in the water. Also house is equipped with speedboat.',
+        description: 'A home nestled on the shore of the bay, within walking distance of the beach. Enjoy the luxury of spending time on the dock on days when the beach is buggy, and take a dip in the bay to cool off.',
         price: 2500.0,
       },
       {
@@ -36,7 +36,7 @@ module.exports = {
         lat: 60.4,
         lng: 65.4,
         name: 'Walkable Philly apartment',
-        description: 'Beautiful property with Old City charm. This house is historic because when the Eagles won the Superbowl, a group of fans successfully turned it over. Enjoy a piece of modern history in a central location near all of the excellent restaurants and attractiions Philly has to offer.',
+        description: 'Beautiful property with Old City charm. This house is historic because when the Eagles won the Superbowl, a group of fans successfully turned it over. Enjoy a piece of modern history in a central location.',
         price: 1300.0,
       },
       {
@@ -60,7 +60,7 @@ module.exports = {
         lat: 110.2,
         lng: 100.2,
         name: 'West Chester rowhome',
-        description: 'The West Chester restaurant scene is a walk away from this adorable row home! A great option if you need small accommodations while visiting your student at WCU! Take a day trip to Longwood Gardens or to King of Prussia to go shopping in one of the best malls in America.',
+        description: 'The West Chester restaurant scene is a walk away from this adorable row home! A great option if you need small accommodations while visiting your student at WCU! Take a day trip to Longwood Gardens.',
         price: 1200.0,
       },
       {
@@ -72,7 +72,7 @@ module.exports = {
         lat: 110.2,
         lng: 100.2,
         name: 'Sideways Getaway',
-        description: 'Wow! This home is an optical illusion but is filled with amazing views of the landscape and natural light. House is perfect for remote work, outfitted with fiber but away from distractions. Enjoy hikes on your off-time and reconnect with nature.',
+        description: 'Wow! This home is an optical illusion but is filled with amazing views of the landscape and natural light. House is perfect for remote work, outfitted with fiber but away from distractions. Enjoy hikes on your off-time .',
         price: 1500.0,
       },
       {
@@ -84,7 +84,7 @@ module.exports = {
         lat: 110.2,
         lng: 100.2,
         name: 'Tiny Forest Getaway',
-        description: 'Another tiny home that will take your breath away! Stunning Scandinavian design lends itself to a minimalist\'s vacation dream! Enjoy the wood stove ambiance and take in stunning views, especially in the fall season. It comes equipped with a firepit out back to enjoy the outdoors.',
+        description: 'Another tiny home that will take your breath away! Stunning Scandinavian design lends itself to a minimalist\'s vacation dream! Enjoy the wood stove ambiance and take in stunning views, especially in the fall season. ',
         price: 900.0,
       },
       {
@@ -96,7 +96,7 @@ module.exports = {
         lat: 110.2,
         lng: 100.2,
         name: 'Warm Cozy Dome',
-        description: 'Enjoy this tiny dome right outside of Seattle! With stunning views and floor to ceiling windows, you are sure to enjoy your stay. Rest and recharge in the dome, or go hike and enjoy the great outdoors for some different views. There\'s also a lovely porch to dine al fresco.',
+        description: 'Enjoy this tiny dome right outside of Seattle! With stunning views and floor to ceiling windows, you are sure to enjoy your stay. Rest and recharge in the dome, or go hike and enjoy the great outdoors for some views.',
         price: 900.0,
       },
       {
@@ -108,7 +108,7 @@ module.exports = {
         lat: 110.2,
         lng: 100.2,
         name: 'Old Fire Lookout',
-        description: 'Enjoy the stunning views from this converted fire lookout. Please note that this house has multiple flights of stairs to ascend to enter the house. There are many great hikes close by and local breweries and restaurants in the nearby village.',
+        description: 'Enjoy the stunning views from this converted fire lookout. Please note that this house has multiple flights of stairs to ascend to enter the house. There are many great hikes close by and local breweries.',
         price: 700.0,
       },
       {
@@ -120,7 +120,7 @@ module.exports = {
         lat: 110.2,
         lng: 100.2,
         name: 'The Egg',
-        description: 'Do you want to take a vow of silence? Book this whimsical egg with window cutouts to enjoy the lovely farmland that surrounds it. Located on a winery, you can enjoy some beverages and excellent food and be close by to your stay. Stop by the spa on the property for even more relaxtion. This is a good egg.',
+        description: 'Do you want to take a vow of silence? Book this whimsical egg with window cutouts to enjoy the lovely farmland that surrounds it. Located on a winery, you can enjoy some beverages and excellent food and be close by to your stay. ',
         price: 700.0,
       },
     ])
