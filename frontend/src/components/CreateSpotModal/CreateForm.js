@@ -59,6 +59,9 @@ const CreateSpotForm = ({ setShowModal }) => {
         setPrice('')
 
     }
+    const cancel =  async (e) => {
+        setShowModal(false)
+    }
     const handleSubmit = async (e) => {
         e.preventDefault()
         let createdSpot;
@@ -175,7 +178,7 @@ const CreateSpotForm = ({ setShowModal }) => {
                 // disabled={validationErrors.length ? true : false}
                 >Create new Spot</button>
                 <button type="button"
-                    onClick={resetClick}
+                    onClick={cancel}
                 >Cancel</button>
             </form>
         </section>

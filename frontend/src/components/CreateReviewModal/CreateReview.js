@@ -20,7 +20,9 @@ const CreateReviewForm = ({setShowModal}) => {
         setReview('')
         setStars('')
     }
-
+    const cancel =  async (e) => {
+        setShowModal(false)
+    }
 useEffect(() =>{
 let errors = []
 if (review.length < 20) errors.push('Review must be longer than 20 characters')
@@ -79,7 +81,7 @@ setValidationErrors(errors)
                     value={review}
                     onChange={e => setReview(e.target.value)} />
                 <button type="submit">Create new Review</button>
-                <button type="button" onClick={resetClick}>Cancel</button>
+                <button type="button" onClick={cancel}>Cancel</button>
             </form>
         </section>
     )
