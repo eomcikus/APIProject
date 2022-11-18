@@ -7,11 +7,11 @@
 button {
     background-color: white;
     color: grey;
-    border: 1px grey solid;
+    border: 0.5px grey solid;
     border-radius: 15px;
     text-align: center;
     margin: 10px;
-    border: none;
+    /* border: none; */
     padding: 10px 20px;
     cursor: pointer;
 }

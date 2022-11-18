@@ -69,11 +69,11 @@
     /* padding: 0px; */
     /* align-items: center; */
     width: 70px;
-    height: 35px;
+    height: 40px;
     
 }
 .profile-button:hover {
-    color: #E5E5E5;
+    /* color: #E5E5E5; */
     box-shadow: 0 4px 8px 0 rgba(0,0,0, 0.2);
 }
 .become-host-button {
@@ -81,7 +81,7 @@
     color: gray;
     /* margin-left: -220px; */
     position: relative;
-
+    border: none;
 }
 .become-host-button:hover {
     background-color: #E5E5E5
