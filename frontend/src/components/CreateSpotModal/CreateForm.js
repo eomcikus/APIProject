@@ -167,7 +167,7 @@ const CreateSpotForm = ({ setShowModal }) => {
                 />
               
                 <input
-                    type='text'
+                    type='url'
                     placeholder='Add a link to photo of spot'
                     required
                     value={photo}
