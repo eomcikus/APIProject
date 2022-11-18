@@ -1,3 +1,8 @@
+.write-review-div {
+    width: 100%;
+}
+
 .write-review-button {
     border: 1px solid gray;
+    align-items: flex-start;
 }

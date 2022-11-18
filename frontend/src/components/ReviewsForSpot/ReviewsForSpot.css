@@ -5,7 +5,7 @@
     flex-direction: row;
     justify-content: flex-start; */
     width: 100%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin: 0
     /* border: 1px solid red */
 }
@@ -15,7 +15,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-   border: 1px solid yellow;
+   /* border: 1px solid yellow; */
 }
 /* .review-card {
     display: flex;
@@ -28,7 +28,7 @@
 .reviews-contained {
     display: flex;
     flex-direction: row;
-    border: 1px red solid;
+    /* border: 1px red solid; */
     /* flex-wrap: wrap;
     align-items: flex-start; */
 }

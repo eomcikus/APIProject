@@ -77,12 +77,12 @@ if (!spot) return null;
             {sessionUser && 
             !reviewBoo && 
             spot.ownerId !== sessionUser.id && (
-        
+            <div className='create-review-div'>
             <CreateReviewModal />
-
+                </div>
             )}
 
-            <ReviewsForSpot className='reviews-card'/>
+            <ReviewsForSpot />
 
 
         </div>
