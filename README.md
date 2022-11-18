@@ -6,10 +6,10 @@ Live site: [erBnB](https://erbnb.herokuapp.com/)
 
 ## Wiki Link
 
-Backend Routes <p>
-Database Schema <p>
-Feature List <p>
-Frontend Routes <p>
+[Backend Routes](https://github.com/eomcikus/erBnB/wiki/API-Routes) <p>
+[Database Schema](https://github.com/eomcikus/erBnB/wiki/Database-Schema) <p>
+[Feature List](https://github.com/eomcikus/erBnB/wiki/Feature-List) <p>
+[Frontend Routes](https://github.com/eomcikus/erBnB/wiki/Redux-Store-State) <p>
 
 ## Tech Stack<p>
 
