@@ -82,7 +82,7 @@ if (!spot) return null;
 
             )}
 
-            <ReviewsForSpot />
+            <ReviewsForSpot className='reviews-card'/>
 
 
         </div>

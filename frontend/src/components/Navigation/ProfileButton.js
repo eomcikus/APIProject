@@ -12,7 +12,7 @@ function ProfileButton({ user }) {
     if (showMenu) return;
     setShowMenu(true);
   };
-  
+
   useEffect(() => {
     if (!showMenu) return;
 
@@ -21,7 +21,7 @@ function ProfileButton({ user }) {
     };
 
     document.addEventListener('click', closeMenu);
-  
+
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
@@ -35,14 +35,14 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu} className='profile-button'>
-      <i className="fa-solid fa-bars"></i>
-      <i className="fa-solid fa-user"></i>
+        <i className="fa-solid fa-bars"></i>
+        <i className="fa-solid fa-user"></i>
       </button>
       {showMenu && (
-      <div className="profile-dropdown">
-          <h3>Hello, {user.firstName}</h3>
-          <div>{user.username}</div>
-          <div>{user.email}</div>
+        <div className="profile-dropdown">
+          <h3 className='prof-greeting'>   Hello, {user.firstName}</h3>
+          <div className='userName'>   {user.username}</div>
+          <div className='prof-email'>   {user.email}</div>
           <div>
             <button onClick={logout} className='logout-button'>Log Out</button>
           </div>

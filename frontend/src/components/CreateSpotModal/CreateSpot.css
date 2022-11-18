@@ -1,7 +1,7 @@
 .create-form-modal {
     height: 650px;
     width: auto;
-    overflow:scroll;
+    overflow:hidden;
 }
 
 .become-host-button {
