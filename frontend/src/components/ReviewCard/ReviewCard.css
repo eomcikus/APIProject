@@ -13,7 +13,7 @@
     /* margin-top: 20vh; */
 }
 .review-card {
-    width: 100%
+    width: 50%
 }
 .review-card-layout {
     display: flex;
@@ -21,8 +21,9 @@
     /* align-items: center; */
     padding-left: 20px;
     padding-right: 20px;
-    height: 200px;
-    width: 300px;
+    padding-bottom: 20px;
+    height: 50%;
+    width: 100%;
     flex-wrap: wrap;
     /* border: 1px solid green; */
     border-radius: 10%
