@@ -3,3 +3,7 @@
     width: auto;
     overflow:hidden;
 }
+
+.edit-submit {
+    border: 0.5px grey solid;
+}

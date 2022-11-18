@@ -189,6 +189,7 @@ const EditSpot = ({setShowModal}) => {
                     onChange={updatePrice}
                 />
                 <button type="submit"
+                className='edit-submit'
                 >Update Spot</button>
                 <button type="button"
                     onClick={cancel}>Cancel</button>

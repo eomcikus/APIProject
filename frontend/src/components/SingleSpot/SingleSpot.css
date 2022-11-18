@@ -51,6 +51,7 @@
 .edit-delete-buttons {
     display: flex;
     flex-direction: row;
+
 }
 
 .delete-modal {
@@ -62,5 +63,9 @@
     /* font-weight: 00; 
 } */
 .create-review-div {
+    width: 100%
+}
+
+.edit-delete-buttons {
     width: 100%
 }

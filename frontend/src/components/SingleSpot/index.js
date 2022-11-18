@@ -68,8 +68,8 @@ if (!spot) return null;
             {sessionUser && spot.ownerId === sessionUser.id && (
                 <>
                 <div className='edit-delete-buttons'>
-                <DeleteSpot />
                 <EditSpot />
+                <DeleteSpot />
                 </div>
                 </>
             )}
