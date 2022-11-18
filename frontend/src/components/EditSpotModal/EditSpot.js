@@ -25,8 +25,8 @@ const EditSpot = ({setShowModal}) => {
         setCity(currentSpot?.city)
         setState(currentSpot?.state)
         setCountry(currentSpot?.country)
-        setLat(currentSpot?.lat)
-        setLng(currentSpot?.lng)
+        // setLat(currentSpot?.lat)
+        // setLng(currentSpot?.lng)
         setName(currentSpot?.name)
         setDescription(currentSpot?.description)
         setPrice(currentSpot?.price)
@@ -37,8 +37,8 @@ const EditSpot = ({setShowModal}) => {
     const [city, setCity] = useState(currentSpot?.city)
     const [state, setState] = useState(currentSpot?.state)
     const [country, setCountry] = useState(currentSpot?.country);
-    const [lat, setLat] = useState(currentSpot?.lat);
-    const [lng, setLng] = useState(currentSpot?.lng);
+    // const [lat, setLat] = useState(currentSpot?.lat);
+    // const [lng, setLng] = useState(currentSpot?.lng);
     const [name, setName] = useState(currentSpot?.name);
     const [description, setDescription] = useState(currentSpot?.description);
     const [price, setPrice] = useState(currentSpot?.price);
@@ -49,8 +49,8 @@ const EditSpot = ({setShowModal}) => {
     const updateCity = (e) => setCity(e.target.value)
     const updateState = (e) => setState(e.target.value)
     const updateCountry = (e) => setCountry(e.target.value)
-    const updateLat = (e) => setLat(e.target.value)
-    const updateLng = (e) => setLng(e.target.value)
+    // const updateLat = (e) => setLat(e.target.value)
+    // const updateLng = (e) => setLng(e.target.value)
     const updateName = (e) => setName(e.target.value)
     const updateDescription = (e) => setDescription(e.target.value)
     const updatePrice = (e) => setPrice(e.target.value)
@@ -61,8 +61,8 @@ const EditSpot = ({setShowModal}) => {
         setCity('')
         setState('')
         setCountry('')
-        setLat('')
-        setLng('')
+        // setLat('')
+        // setLng('')
         setName('')
         setDescription('')
         setPrice('')
@@ -72,7 +72,7 @@ const EditSpot = ({setShowModal}) => {
 
     useEffect(() => {
         let errors = []
-        if (!address) errors.push("Spot must have an address")
+       if (!address) errors.push("Spot must have an address")
         if (address.length < 10) errors.push("Spot must have a complete address")
         if (!city) errors.push("Spot must have a city")
         if (city.length < 4) errors.push("Spot must have a city longer than 4 characters")
@@ -88,7 +88,7 @@ const EditSpot = ({setShowModal}) => {
         if (price < 0) errors.push("Price must be greater than 0")
         if (description.length > 5000) errors.push("Spot description must be less than 5000 characters")
         setValidationErrors(errors)
-    }, [name, price, lat, lng, description, address, city, state, country])
+    }, [name, price, description, address, city, state, country])
     const handleSubmit = async (e) => {
         e.preventDefault()
         let updatedSpot;
@@ -97,20 +97,24 @@ const EditSpot = ({setShowModal}) => {
             city,
             state,
             country,
-            lat,
-            lng,
+            lat: 1,
+            lng: 1,
             name,
             description,
             price
         }
         updatedSpot = await dispatch(updateSpot(payload, spotId))
-        // console.log('made it to if statement with history.push')
+        console.log('made it to if statement with history.push')
         if (updatedSpot) {
             await dispatch(getSingleSpot(spotId)).then(
                 setShowModal(false))
         } else if (validationErrors.length){
             window.alert('Cannot submit form')
         }
+    }
+
+    const cancel =  async (e) => {
+        setShowModal(false)
     }
     return (
         <section>
@@ -147,7 +151,7 @@ const EditSpot = ({setShowModal}) => {
                     required
                     value={country}
                     onChange={updateCountry} />
-                Latitude:
+                {/* Latitude:
                 <input
                     type='text'
                     placeholder='Latitude'
@@ -160,7 +164,7 @@ const EditSpot = ({setShowModal}) => {
                     placeholder='Longitude'
                     required
                     value={lng}
-                    onChange={updateLng} />
+                    onChange={updateLng} /> */}
                 Name:
                 <input
                     type='text'
@@ -187,7 +191,7 @@ const EditSpot = ({setShowModal}) => {
                 <button type="submit"
                 >Update Spot</button>
                 <button type="button"
-                    onClick={resetClick}>Cancel</button>
+                    onClick={cancel}>Cancel</button>
             </form>
         </section>
     )

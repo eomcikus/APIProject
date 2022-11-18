@@ -59,9 +59,6 @@ const CreateSpotForm = ({ setShowModal }) => {
         setPrice('')
 
     }
-    const cancel =  async (e) => {
-        setShowModal(false)
-    }
     const handleSubmit = async (e) => {
         e.preventDefault()
         let createdSpot;
@@ -80,14 +77,17 @@ const CreateSpotForm = ({ setShowModal }) => {
         setSubmit(true)
         // console.log('createdSpot', createdSpot)
         if (validationErrors.length) {
-            setShowModal(true)
+            return setShowModal(true)
         } else {
-        createdSpot = await dispatch(createSpot(payload))
-        let createdSpotImage = await dispatch(createSpotImage(photo, createdSpot.id))
-        await dispatch(getReviews(createdSpot.id))
-        setShowModal(false)
-        history.push('/')
+            createdSpot = await dispatch(createSpot(payload))
+            let createdSpotImage = await dispatch(createSpotImage(photo, createdSpot.id))
+            await dispatch(getReviews(createdSpot.id))
+            setShowModal(false)
+            history.push('/')
         }
+    }
+    const cancel =  async (e) => {
+        setShowModal(false)
     }
     return (
         <section>
