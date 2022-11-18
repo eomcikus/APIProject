@@ -1,16 +1,16 @@
 .delete-modal {
-    height: 200px;
-    width: 300px;
+    height: auto;
+    width: auto;
     /* overflow:scroll; */
-    /* margin: 10%; */
-    margin: 20px;
+    margin: 5%;
+    /* margin: 20px; */
     color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     /* margin: 0px; */
-
+    align-items: center;
     flex-wrap: wrap;
-    
+    border-radius: 10px;
     /* border: 1px red solid; */
 }

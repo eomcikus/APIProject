@@ -1,7 +1,17 @@
 .login-button {
-    color: #E5E5E5;
+    color: gray;
+    border: 0.5px solid gray;
+}
+.demo-user {
+    border: 0.5px solid gray;
+}
+.form-login-modal {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.login-modal{
-    /* width: 600px; */
+.login-modal-inputs {
+    width: 80%
 }

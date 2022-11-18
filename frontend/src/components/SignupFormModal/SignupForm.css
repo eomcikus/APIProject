@@ -2,7 +2,15 @@
     background-color: #ff385c;
 }
 
-.signup-form {
+.signup-modal {
     padding: 3px;
     
+}
+
+.signup-submit {
+    border: 0.5px solid gray;
+}
+
+.signup-cancel {
+    border: 0.5px solid gray;
 }
