@@ -26,9 +26,10 @@ function LoginForm() {
   }
   const handleDemo = async (e) => {
     e.preventDefault();
-    await dispatch(sessionActions.login({ credential: 'FakeUser4' , password: 'password5' }))
+    await dispatch(sessionActions.login({ credential: 'DougDemodome' , password: 'password' }))
     return 
   }
+  console.log('hi bitch')
   return (
     <form onSubmit={handleSubmit} className='login-modal'>
       <ul>

@@ -6,3 +6,14 @@
     border: 1px solid gray;
     align-items: flex-start;
 }
+
+.review-modal {
+    margin: 0;
+}
+
+.review-stars {
+    width: 80%
+}
+.review-text {
+    width: 80%
+}

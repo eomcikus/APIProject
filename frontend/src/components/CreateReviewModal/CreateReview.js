@@ -53,8 +53,8 @@ setValidationErrors(errors)
     }
     return (
         <section>
-            <form onSubmit={handleSubmit}>
-                Stars:
+            <form onSubmit={handleSubmit} className='review-modal'>
+         
                 {submit && !!validationErrors.length && (
                     <ul className="errors">
                         {validationErrors.map((error) => (
@@ -63,22 +63,24 @@ setValidationErrors(errors)
                 )}
                 <input
                     type="number"
-                    placeholder="Rate your stay"
+                    placeholder="Stars"
                     min={1}
                     max={5}
                     // required
                     value={stars}
+                    className='review-stars'
                     onChange={e => {
                         // setValidationErrors([])
                         setStars(e.target.value)
                     }}
                 />
-                Review:
+                
                 <input
                     type="text"
-                    placeholder="Tell us about it"
+                    placeholder="Write your review here"
                     required
                     value={review}
+                    className='review-text'
                     onChange={e => setReview(e.target.value)} />
                 <button type="submit">Create new Review</button>
                 <button type="button" onClick={cancel}>Cancel</button>

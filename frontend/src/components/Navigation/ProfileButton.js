@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { Redirect, useHistory } from 'react-router-dom'
 import './Navigation.css'
+import SignupFormModal from "../SignupFormModal";
+import LoginFormModal from "../LoginFormModal";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory()
+  const sessionUser = useSelector(state => state.session.user);
+
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -38,7 +42,7 @@ function ProfileButton({ user }) {
         <i className="fa-solid fa-bars"></i>
         <i className="fa-solid fa-user"></i>
       </button>
-      {showMenu && (
+      {showMenu && sessionUser && (
         <div className="profile-dropdown">
           <h3 className='prof-greeting'>   Hello, {user.firstName}</h3>
           <div className='userName'>   {user.username}</div>
@@ -48,6 +52,12 @@ function ProfileButton({ user }) {
           </div>
         </div>
       )}
+      {/* {showMenu && !sessionUser && (
+        <div className='profile-dropdown'>
+          <SignupFormModal />
+          <LoginFormModal />
+        </div> */}
+      {/* )} */}
     </>
   );
 }
