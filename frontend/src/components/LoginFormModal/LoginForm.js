@@ -29,7 +29,7 @@ function LoginForm() {
     await dispatch(sessionActions.login({ credential: 'DougDemodome' , password: 'password' }))
     return 
   }
-  console.log('hi bitch')
+ 
   return (
     <form onSubmit={handleSubmit} className='login-modal'>
       <ul>
