@@ -3,12 +3,29 @@
     "pg": "^8.8.0"
   },
   "scripts": {
-    "heroku-postbuild": "npm run build --prefix frontend",
+    "render-postbuild": "npm run build --prefix frontend",
     "install": "npm --prefix backend install backend && npm --prefix frontend install frontend",
     "dev:backend": "npm install --prefix backend start",
     "dev:frontend": "npm install --prefix frontend start",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
-    "start": "npm start --prefix backend"
-  }
+    "start": "npm start --prefix backend",
+    "build": "npm run build --prefix backend"
+  },
+  "name": "authenticate-me",
+  "description": "erBnB is a website clone, inspired by AirBnB. erBnb can be used for booking a stay at Spots, creating Spots, and updating Spots. Users can leave reviews and upload images for spots.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eomcikus/APIProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eomcikus/APIProject/issues"
+  },
+  "homepage": "https://github.com/eomcikus/APIProject#readme"
 }

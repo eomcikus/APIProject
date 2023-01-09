@@ -2,6 +2,7 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
+  
     await queryInterface.bulkInsert('SpotImages', [
       {
         spotId: 1,
