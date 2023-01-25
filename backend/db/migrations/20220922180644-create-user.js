@@ -23,6 +23,10 @@ module.exports = {
         allowNull: false,
         unique: true
       },
+      userPhoto: {
+        type: Sequelize.STRING(500),
+        allowNull: false,
+      },
       hashedPassword: {
         type: Sequelize.STRING.BINARY,
         allowNull: false

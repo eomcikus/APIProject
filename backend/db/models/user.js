@@ -6,8 +6,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     toSafeObject() {
-      const { id, firstName, lastName, username, email } = this; // context will be the User instance
-      return { id, firstName, lastName, username, email };
+      const { id, firstName, lastName, username, userPhoto, email } = this; // context will be the User instance
+      return { id, firstName, lastName, username, userPhoto, email };
     }
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
@@ -29,12 +29,13 @@ module.exports = (sequelize, DataTypes) => {
         return await User.scope('currentUser').findByPk(user.id);
       }
     }
-    static async signup({ firstName, lastName, username, email, password }) {
+    static async signup({ firstName, lastName, username, userPhoto, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         firstName,
         lastName,
         username,
+        userPhoto,
         email,
         hashedPassword,
       });
@@ -77,6 +78,10 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    userPhoto: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -104,7 +109,7 @@ module.exports = (sequelize, DataTypes) => {
       scopes: {
         currentUser: {
           attributes: { exclude: ["hashedPassword", "createdAt", "updatedAt"],
-                        include: ["id", "firstName", "lastName", "username", "email"] }
+                        include: ["id", "firstName", "lastName", "username", "userPhoto", "email"] }
         },
         loginUser: {
           attributes: {}

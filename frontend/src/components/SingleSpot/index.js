@@ -16,7 +16,7 @@ const SingleSpot = () => {
     
     const spot = useSelector(state => state.spots.singleSpot)
     const sessionUser = useSelector(state => state.session.user)
-    const reviewsObj = useSelector(state => state.reviews.spot)
+    const reviewsObj = useSelector(state => state.reviews)
     const avgStarRating = useSelector(state =>  state.spots.singleSpot.avgStarRating)
     const newestRating = avgStarRating
     const reviewsArr = Object.values(reviewsObj)

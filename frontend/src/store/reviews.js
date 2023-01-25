@@ -53,6 +53,7 @@ export const getUserReviews = () => async dispatch => {
 }
 
 export const createReview = (review, spotId, user) => async dispatch => {
+    console.log('user', user)
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         body: JSON.stringify(review),
@@ -63,6 +64,7 @@ export const createReview = (review, spotId, user) => async dispatch => {
     if (response.ok) {
         const review = await response.json()
         review.User = user
+        review.User['userPhoto'] = user.userPhoto
         // console.log('in response', review)
         dispatch(create(review))
         // console.log('---review after dispatch', review)
@@ -85,8 +87,7 @@ export const removeReview = (reviewId) => async dispatch => {
 
 let initialState = {
 
-    spot: {},
-    user: {}
+    reviews: {}
 
 }
 
@@ -94,9 +95,9 @@ const reviewReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD: {
-            newState = { spot: {}, user: {} }
+            newState = { ...state, reviews: {}}
             action.reviews.forEach(review => {
-                newState.spot[review.id] = review
+                newState.reviews[spotId] = review
             })
             // console.log(action.reviews)
             if (!action.reviews) {
@@ -114,11 +115,12 @@ const reviewReducer = (state = initialState, action) => {
             return newState;
         }
         case CREATE: {
-            newState = { ...state, Spot: { ...state.spot }, User: { ...state.user } }
-            // console.log('action.review', action.review)
+            newState = { ...state }
+            console.log('action.review', action.review)
+            // newState.Spot[action.review.spotId]
+            newState.reviews[action.review.id] = action.review
+            // newState.User[action.review.id] = action.review
 
-            newState.Spot[action.review.id] = action.review
-            newState.User[action.review.id] = action.review
             return newState;
         }
         // case REMOVE: {
@@ -129,10 +131,8 @@ const reviewReducer = (state = initialState, action) => {
         //     return newState
         // }
         case REMOVE: {
-            newState = { ...state, Spot: {...state.spot}, User: {...state.user} }
-            delete newState.user[action.reviewId]
-            delete newState.spot[action.reviewId]
-          
+            newState = { ...state }
+            delete newState.reviews[action.reviewId]
             return newState
         }
         default:

@@ -90,6 +90,11 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     }
     spot = spot[0].toJSON()
     const reviews = await Review.findAll({
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName', 'userPhoto']
+            }],
         where: {
             spotId: req.params.spotId,
             userId: req.user.id
@@ -283,7 +288,7 @@ router.get('/:spotId', async (req, res, next) => {
         {
             model: User,
             as: 'Owner',
-            attributes: ['id', 'firstName', 'lastName']
+            attributes: ['id', 'firstName', 'lastName', 'userPhoto']
 
         }]
     });

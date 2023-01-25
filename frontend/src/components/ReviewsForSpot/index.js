@@ -8,13 +8,23 @@ import './ReviewsForSpot.css';
 import ReviewCard from "../ReviewCard";
 const ReviewsForSpot = () => {
     const { spotId } = useParams();
-    let reviews = useSelector(state => Object.values(state.reviews.spot));
-    // console.log('reviews', reviews)
-    let finalArr = reviews.filter(review => +review.spotId === +spotId);
+    let reviewsobj = useSelector(state=> state.reviews)
+    console.log('reviewsobj', reviewsobj)
+    let reviews = useSelector(state => Object.values(state.reviews));
+    let reviews2 = Object.values(reviews)
+    console.log('reviews', reviews2)
+    let array = []
+    for (let i = 0; i < reviews2.length; i++){
+        let curr = Object.values(reviews2[i])
+        console.log('curr', Object.values(curr))
+        array.push(curr)
+    }
+    console.log('please work', array)
+    // let finalArr = reviews.filter(review => +review.spotId === +spotId);
     // console.log('filteredArr', finalArr)
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
-    const reviewObj = useSelector(state => state.reviews.spot);
+    const reviewObj = useSelector(state => state.reviews);
     const reviewArr = Object.values(reviewObj);
     const spot = useSelector(state => state.spots.singleSpot);
     // console.log(userReview)
@@ -22,13 +32,13 @@ const ReviewsForSpot = () => {
         dispatch(ReviewsActions.getReviews(spotId))
     }, [dispatch]);
     if (reviews.length === 0) return null;
-    if (finalArr.length === 0) return null;
+    // if (array.length === 0) return null;
     return (
         <>
     <div className='spot-avg-reviews'><b>★ {spot.avgStarRating ? parseFloat(spot.avgStarRating).toFixed(2) : 'None'} · {reviewArr ? reviewArr.length : 'No'} reviews </b></div><p></p>
         <div className='whole-r-container'>
             <div className='reviews-layout-contain'>
-                <div className='reviews-contained'>{finalArr.map(review => (<div className='review-card'>
+                <div className='reviews-contained'>{array.map(review => (<div className='review-card'>
                     <ReviewCard key={review.id} review={review} /></div>))}
                 </div>
             </div>
