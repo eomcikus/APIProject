@@ -22,9 +22,9 @@ const SingleSpot = () => {
     const newestRating = avgStarRating
     const reviewsArr = Object.values(reviewsObj)
     let finalArr = Object.values(reviewsArr[0])
-    console.log('reviewsarray', finalArr)
+    // console.log('reviewsarray', finalArr)
     const reviewLength =finalArr.length
-    console.log('review length----', reviewLength)
+    // console.log('review length----', reviewLength)
     let reviewBoo;
     if (sessionUser){
      reviewBoo = finalArr.find(review => sessionUser.id === review.userId)

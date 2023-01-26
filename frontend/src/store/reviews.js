@@ -34,7 +34,7 @@ export const getReviews = (spotId) => async dispatch => {
         const data = await response.json()
         // console.log('--reviews in thunk', data)
         dispatch(load(data.Reviews))
-        // console.log('...after dispatch', reviews)
+        console.log('...after dispatch', data.Reviews)
         // return reviews;
     }    else {
         return null;
@@ -96,6 +96,7 @@ const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD: {
             newState = { ...state, reviews: {}}
+            console.log('action.reviews load', action.reviews)
             action.reviews.forEach(review => {
                 newState.reviews[review.id] = review
             })
