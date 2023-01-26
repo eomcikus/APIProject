@@ -128,7 +128,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
         include: [
             {
                 model: User,
-                attributes: ['id', 'firstName', 'lastName']
+                attributes: ['id', 'firstName', 'lastName', 'userPhoto']
             }]
     })
     let bookList = [];
@@ -256,7 +256,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
         },
         include: [{
             model: User,
-            attributes: ['id', 'firstName', 'lastName']
+            attributes: ['id', 'firstName', 'lastName', 'userPhoto']
         },
         {
             model: ReviewImage,
