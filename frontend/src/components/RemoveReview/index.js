@@ -2,17 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { removeReview } from "../../store/reviews";
 
-const RemoveReview = () => {
+const RemoveReview = ({review}) => {
     const {spotId} = useParams()
     // console.log(spotId)
     const dispatch = useDispatch()
     const history = useHistory()
-    const review = useSelector(state => state.reviews.spot)
+    // const review = useSelector(state => state.reviews)
     // console.log('review', review)
     const sessionUser = useSelector(state => state.session.user)
     // console.log('sessionuser', sessionUser)
-    const reviewArr = Object.values(review)
-    const myReview = reviewArr.find(review => review.User.id === sessionUser.id)
+    // const reviewArr = Object.values(review)
+    // console.log('reviewArr ------------------------', reviewArr)
+    // const myReview = reviewArr.find(review => review.User.id === sessionUser.id)
     // console.log('my review', myReview)
     // let userReview = reviewArr.filter(review => {
     //    return review.User.id === sessionUser.id && review.spotId === spotId
@@ -22,7 +23,7 @@ const RemoveReview = () => {
     // console.log('userReview', userReview)
     const deleteIt = (e) => {
         e.preventDefault()
-        dispatch(removeReview(myReview.id))
+        dispatch(removeReview(review.id))
         history.push(`/`)
     }
     return (

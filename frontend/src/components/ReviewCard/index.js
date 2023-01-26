@@ -7,12 +7,12 @@ const ReviewCard = ({ review }) => {
     const spot = useSelector(state => state.spots.singleSpot)
     const dispatch = useDispatch()
     const reviews = useSelector(state => Object.values(state.reviews))
-    console.log(reviews)
+    console.log('card',review)
     const sessionUser = useSelector(state => state.session.user)
     const newReview = useSelector(state => state.reviews.User)
     // console.log('newReview', newReview)
     // let reviews = useSelector(state => Object.values(state.reviews.spot));
-    console.log(reviews)
+    console.log('reviews', reviews)
     // console.log('sessionUser', sessionUser)
     // const review = useSelector(state => state.review.)
     // if (!newReview) return null;
@@ -21,11 +21,11 @@ const ReviewCard = ({ review }) => {
         <div className='review-container'>
             <div className='review-card-layout'>
                 <div className='review-userName'>
-                    {reviews.User ? reviews.User.firstName : sessionUser.firstName}</div>
+                    {review.User ? review.User.firstName : sessionUser.firstName}</div>
                     <div className='review-content'>
-                        {reviews.review}
-                        {sessionUser && sessionUser.id === reviews.userId && (
-                            <RemoveReview />)}
+                        {review.review}
+                        {sessionUser && sessionUser.id === review.userId && (
+                            <RemoveReview review={review} />)}
                     </div>
                 </div>
             </div>

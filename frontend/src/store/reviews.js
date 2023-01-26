@@ -97,7 +97,7 @@ const reviewReducer = (state = initialState, action) => {
         case LOAD: {
             newState = { ...state, reviews: {}}
             action.reviews.forEach(review => {
-                newState.reviews[spotId] = review
+                newState.reviews[review.id] = review
             })
             // console.log(action.reviews)
             if (!action.reviews) {
@@ -118,7 +118,7 @@ const reviewReducer = (state = initialState, action) => {
             newState = { ...state }
             console.log('action.review', action.review)
             // newState.Spot[action.review.spotId]
-            newState.reviews[action.review.id] = action.review
+            newState.reviews[action.review.spotId] = action.review
             // newState.User[action.review.id] = action.review
 
             return newState;

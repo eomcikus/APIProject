@@ -15,15 +15,19 @@ const SingleSpot = () => {
     const dispatch = useDispatch();
     
     const spot = useSelector(state => state.spots.singleSpot)
+
     const sessionUser = useSelector(state => state.session.user)
     const reviewsObj = useSelector(state => state.reviews)
     const avgStarRating = useSelector(state =>  state.spots.singleSpot.avgStarRating)
     const newestRating = avgStarRating
     const reviewsArr = Object.values(reviewsObj)
-    const reviewLength = reviewsArr.length
+    let finalArr = Object.values(reviewsArr[0])
+    console.log('reviewsarray', finalArr)
+    const reviewLength =finalArr.length
+    console.log('review length----', reviewLength)
     let reviewBoo;
     if (sessionUser){
-     reviewBoo = reviewsArr.find(review => sessionUser.id === review.userId)
+     reviewBoo = finalArr.find(review => sessionUser.id === review.userId)
     }
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
@@ -57,7 +61,7 @@ if (!spot) return null;
         <div className ="single-spot-container" key={spot.id}>
              <div className="singleSpot-card-details">
                     <div className='singleSpot-name'>{spot?.name}</div><p></p>
-                    <div className='single-spot-stars'>★ {spot.avgStarRating ? parseFloat(newestRating).toFixed(2) : 'none'}  ·   {spot?.city}, {spot?.state}, {spot.country} · {reviewsArr ? reviewLength : 'No'} reviews</div>
+                    <div className='single-spot-stars'>★ {spot.avgStarRating ? parseFloat(newestRating).toFixed(2) : 'none'}  ·   {spot?.city}, {spot?.state}, {spot.country} · {finalArr ? reviewLength : 'No'} reviews</div>
                     {/* <div>{spot?.city}, {spot?.state}</div> */}<p></p>
                     {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
                     <div className='hosted-by-content'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>
