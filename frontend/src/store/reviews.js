@@ -64,7 +64,7 @@ export const createReview = (review, spotId, user) => async dispatch => {
     if (response.ok) {
         const review = await response.json()
         review.User = user
-        review.User['userPhoto'] = user.userPhoto
+        // review.User['userPhoto'] = user.userPhoto
         // console.log('in response', review)
         dispatch(create(review))
         // console.log('---review after dispatch', review)
