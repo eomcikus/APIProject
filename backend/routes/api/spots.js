@@ -271,7 +271,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     //         "statusCode": 404
     //     })
     // }
-    res.json({ Reviews: reviews })
+    return res.json({ Reviews: reviews })
 })
 
 //GET details of spot by spotId
