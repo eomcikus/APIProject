@@ -13,6 +13,7 @@ import ReviewsForSpot from "./components/ReviewsForSpot";
 import CreateReviewForm from "./components/CreateReviewModal";
 import RemoveReview from "./components/RemoveReview";
 import CurrentUsersReviews from "./components/CurrentUsersReviews";
+import UserBookings from "./components/Bookings/UserBookings"
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -42,7 +43,7 @@ function App() {
           {/* <Route exact path='/spots/:spotId/reviews'>
             <ReviewsForSpot />
             <CreateReviewForm />
-   
+          
           </Route> */}
           {/* <Route exact path='/reviews/current'>
             <CurrentUsersReviews />
@@ -50,6 +51,9 @@ function App() {
           <Route exact path='/reviews/:reviewId'>
           
           <RemoveReview />
+          </Route>
+          <Route exact path='/bookings/current'>
+            <UserBookings />
           </Route>
         </Switch>
       )}

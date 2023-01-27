@@ -28,18 +28,29 @@ const remove = bookingId => ({
 })
 
 //thunks
-
+export const getUserBookings = () => async (dispatch) => {
+    console.log('here')
+    const response = await csrfFetch(`/api/bookings/current`)
+    if (response.ok){
+        const data = await response.json()
+        dispatch(load(data.Bookings))
+    }
+}
 
 let initialState = {}
 const bookingsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case USER: {
-            newState.bookings.forEach(booking => {
+            newState = {...state, bookings: {}}
+            console.log('action.bookings', action.bookings)
+            action.bookings.forEach(booking => {
                 newState.bookings[booking.id] = booking
             })
+            return newState
         }
         default: 
             return state;
     }
 }
+export default bookingsReducer
