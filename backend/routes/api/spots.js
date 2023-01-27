@@ -263,6 +263,12 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             attributes: ['id', 'url'],
         },],
     })
+    for (review in reviews){
+        const user = await User.findByPk(reviews.userId, {
+            attributes: ['firstName', 'lastName', 'userPhoto']
+        })
+        review.User = user
+    }
     // if (!reviews.length) {
 
     //     res.status(404)
