@@ -1,43 +1,54 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
-import { createReview } from '../../store/reviews';
-
-const EditReview = ({ review, setShowModal }) => {
+import { createReview, editReview, getReviews } from '../../store/reviews';
+import { getSingleSpot } from '../../store/spots';
+const EditReview = ({ setShowModal }) => {
     const dispatch = useDispatch()
     const history= useHistory()
-    const user = useSelector(state => state.session.userId)
-    const reviews = useSelector(state => state.reviews)
-    console.log('reviews --------', reviews)
-    console.log('review passed in-----', review)
+    // const reviewId = useParams()
+
+    const user = useSelector(state => state.session.user)
+    // console.log(user)
+    const reviews = useSelector(state => state.reviews.reviews)
+    const reviewsArr = Object.values(reviews)
+    // console.log(reviewsArr)
+    // console.log('reviews --------', reviews)
+    // console.log('review passed in-----', review)
     let userReview;
-    userReview = reviews.find(review => +review.userId === +user)
-    if (userReview){
-        
+    if (user) {
+    userReview = reviewsArr.find(review => +review.userId == +user.id)
     }
-    const [reviewtext, setReviewtext] = useState(review?.review)
-    const [stars, setStars] = useState(review?.stars)
+    let reviewId = userReview.id
+// console.log('-----------------', userReview)
+    const [reviewtext, setReviewtext] = useState(userReview?.review)
+    const [stars, setStars] = useState(userReview?.stars)
     const [submit, setSubmit] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
     useEffect(() => {
-        setReviewtext(review?.review)
-        setStars(review?.stars)
+        setReviewtext(userReview?.review)
+        setStars(userReview?.stars)
     }, [dispatch])
     const cancel = async (e) => {
         setShowModal(false)
     }
     const handleSubmit = async (e) => {
+        console.log('heeeere')
         e.preventDefault()
         const payload = {
-            id: review.id,
+            id: userReview.id,
             reviewtext,
             stars,
-            spotId: review.spotId,
-            userId: review.userId
+            spotId: userReview.spotId,
+            userId: userReview.userId
         }
         setSubmit(true)
-        let updatedReview = await dispatch(createReview)
-        if (updatedReview) return history.push(`/spots/${payload.spotId}`)
+        let updatedReview = await dispatch(editReview(payload, reviewId, user))
+        if (updatedReview) {
+            await dispatch(getSingleSpot()).then(dispatch(getReviews()))
+            setShowModal(false)
+            return history.push(`/spots/${payload.spotId}`)
+        }
     }
 
 

@@ -134,7 +134,13 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
 
 //Edit a review
 router.put('/:reviewId', requireAuth, async (req, res) => {
-    let review = await Review.findByPk(req.params.reviewId)
+    let review = await Review.findByPk(req.params.reviewId, {
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName', 'userPhoto']
+            }]
+    })
     if (!review) {
         res.status(404)
         res.json({
@@ -142,6 +148,17 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
             "statusCode": 404
         })
     }
+    // const reviews = await Review.findAll({
+    //     include: [
+    //         {
+    //             model: User,
+    //             attributes: ['id', 'firstName', 'lastName', 'userPhoto']
+    //         }],
+    //     where: {
+    //         spotId: req.params.spotId,
+    //         userId: req.user.id
+    //     }
+    // })
     if (req.user.id !== review.userId) {
         res.status(403)
         return res.json('Unauthorized to make these changes')

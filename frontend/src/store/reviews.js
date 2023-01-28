@@ -4,7 +4,7 @@ const LOAD = '/reviews/LOAD'
 const USER = '/reviews/USER'
 const CREATE = '/reviews/NEW'
 const REMOVE = '/reviews/REMOVE'
-
+const UPDATE = '/reviews/UPDATE'
 //actions
 const load = reviews => ({
     type: LOAD,
@@ -24,6 +24,11 @@ const create = review => ({
 const remove = reviewId => ({
     type: REMOVE,
     reviewId
+})
+
+const update = review => ({
+    type: UPDATE,
+    review
 })
 
 //thunks 
@@ -71,7 +76,22 @@ export const createReview = (review, spotId, user) => async dispatch => {
         return review;
     }
 }
-
+export const editReview = (review, reviewId, user) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        body: JSON.stringify(review),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    if (response.ok){
+        const review = await response.json()
+        console.log('review in thunk', review)
+        // review.User = user
+        dispatch(update(review))
+        return review
+    }
+}
 export const removeReview = (reviewId) => async dispatch => {
     // console.log('were in the thunk at least', reviewId)
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
@@ -134,6 +154,11 @@ const reviewReducer = (state = initialState, action) => {
         case REMOVE: {
             newState = { ...state }
             delete newState.reviews[action.reviewId]
+            return newState
+        }
+        case UPDATE: {
+            newState = { ...state, reviews: {...state.reviews} }
+            newState.reviews[action.reviewId] = action.reviewId
             return newState
         }
         default:
