@@ -6,8 +6,9 @@ const CreateBooking = () => {
 
 return (
     <div className='booking-object'>
-        <input type='date'>Start</input>
-        <input type='date'>End</input>
+        
+        {/* <input type='date' value='2023-01-01'>Start</input>
+        <input type='date' value='2023-01-02'>End</input> */}
     </div>
     )
 }
