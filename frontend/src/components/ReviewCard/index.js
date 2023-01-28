@@ -17,6 +17,7 @@ const ReviewCard = ({ review }) => {
     // console.log('sessionUser', sessionUser)
     // const review = useSelector(state => state.review.)
     // if (!newReview) return null;
+    if (!reviews) return null
     return (
         <>
             <div className='review-container'>
