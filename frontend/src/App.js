@@ -14,6 +14,7 @@ import CreateReviewForm from "./components/CreateReviewModal";
 import RemoveReview from "./components/RemoveReview";
 import CurrentUsersReviews from "./components/CurrentUsersReviews";
 import UserBookings from "./components/Bookings/UserBookings"
+import CreateBooking from "./components/CreateBooking/CreateBooking";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -54,6 +55,9 @@ function App() {
           </Route>
           <Route exact path='/bookings/current'>
             <UserBookings />
+          </Route>
+          <Route expact path='/:spotId/bookings'>
+            <CreateBooking />
           </Route>
         </Switch>
       )}

@@ -10,6 +10,7 @@ import reviewReducer from '../../store/reviews';
 import { getUserReviews, getReviews } from '../../store/reviews';
 import { clear, getSingleSpot } from '../../store/spots';
 import './SingleSpot.css'
+import CreateBooking from '../CreateBooking/CreateBooking';
 const SingleSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
@@ -77,7 +78,9 @@ if (!spot) return null;
                 </div>
                 </>
             )}
-
+            <div className='booking'>
+                <CreateBooking />
+            </div>
             {sessionUser && 
             !reviewBoo && 
             spot.ownerId !== sessionUser.id && (
