@@ -23,13 +23,13 @@ button:hover{
     font-size: 16px;
 }
 
-form {
+/* form {
     width: 90%;
     padding: 25px;
     margin: 30px;
     /* border: 1px black solid; */
-    border-radius: 20px;
-}
+    /* border-radius: 20px;
+} */
 form input {
     border: 1px gray solid;
     width: 90%;

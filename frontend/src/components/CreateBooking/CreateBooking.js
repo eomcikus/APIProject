@@ -6,21 +6,26 @@ const CreateBooking = () => {
     const spot = useSelector(state => state.spots.singleSpot)
     const reviews = useSelector(state => state.reviews.reviews)
     console.log('reviews in create booking', reviews)
+    const handleSubmit = () => {
+
+    }
     return (
         <>
+        <form className='booking-form' onSubmit={handleSubmit}>
             <div className='booking-object'>
                 {/* <label>Start</label> */}
                 <div className='booking-spot-info-cont'>
-                    <div className='spot-price-cont'><div className='spot-price'>${spot.price}</div>  night </div>
-                    <div className='booking-spot-review-info'><div>★ {spot.avgStarRating}</div>
-                        <div className='num-reviews'>{spot.numReviews} reviews</div></div></div>
+                    <div className='spot-price-cont'><div className='spot-price'>${spot.price}   </div> <div>{'  '} night </div></div>
+                    <div className='booking-spot-review-info'><div>★    {spot.avgStarRating}        {'        ·   '}</div>   <div className='num-reviews'> {spot.numReviews} reviews</div></div></div>
                 <div className='calendar-cont'>
                     <input type='date' id='calendar-left' />
+                  
                     {/* <label>End</label> */}
                     <input type='date' id='calendar-right' />
                 </div>
-                <button className='reserve-button'>Reserve</button>
+                <button className='reserve-button' type='submit'>Reserve</button>
             </div>
+            </form>
         </>
     )
 }

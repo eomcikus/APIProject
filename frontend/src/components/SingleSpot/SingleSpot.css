@@ -4,7 +4,7 @@
     justify-content: space-between;
     /* align-items: center; */
     flex-wrap: wrap;
-    width: 60%;
+    width: 600px;
     margin: 0 auto;
     margin-top: 20px;
     margin-left: 20%;
@@ -34,9 +34,13 @@
 }
 
 .hosted-by-content {
-    justify-content: space-around;
     font-size: 24px;
     padding-top: 10px;
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     /* border: 1px red solid; */
     /* border: 2px solid black; */
 }
@@ -68,4 +72,17 @@
 
 .edit-delete-buttons {
     width: 100%
+}
+.hosted-by-cont {
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    justify-content: space-around;
+}
+.booking {
+    /* width: 30% */
+    align-items: flex-end;
+}
+.spot-host-sent {
+    width: 300px;
 }
