@@ -37,15 +37,15 @@ const EditReview = ({ setShowModal }) => {
         e.preventDefault()
         const payload = {
             id: userReview.id,
-            reviewtext,
-            stars,
+            review: reviewtext,
+            stars: stars,
             spotId: userReview.spotId,
             userId: userReview.userId
         }
         setSubmit(true)
         let updatedReview = await dispatch(editReview(payload, reviewId, user))
         if (updatedReview) {
-            await dispatch(getSingleSpot()).then(dispatch(getReviews()))
+            await dispatch(getSingleSpot(payload.spotId))
             setShowModal(false)
             return history.push(`/spots/${payload.spotId}`)
         }

@@ -10,7 +10,7 @@ export const EditReviewModal = () => {
         <button onClick={() => setShowModal(true)}>Edit Review</button>
         {showModal && (
             <Modal onClose={() =>  setShowModal(false)}>
-                <EditReview setshowModal={setShowModal} />
+                <EditReview setShowModal={setShowModal} />
             </Modal>
         )}
         </>
