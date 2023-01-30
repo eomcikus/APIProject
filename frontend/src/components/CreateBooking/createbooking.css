@@ -1,3 +1,55 @@
 .booking-object{
-    border: 1px red solid;
+    /* border: 1px red solid; */
+    padding: 10px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0, 0.2);
+    padding: 20px;
+    
+}
+.booking-spot-info-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.spot-price {
+    font-size: 24px
+}
+.spot-price-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.booking-spot-review-info {
+    display: flex;
+    flex-direction: row;
+    /* border: 1px purple solid; */
+    width: 50%;
+    justify-content: space-around;
+    align-items: center;
+}
+#calendar-left {
+    width: 35%;
+    border-radius: 12px 1px 1px 12px;
+}
+#calendar-right {
+    width: 35%;
+    border-radius: 1px 12px 12px 1px;
+}
+.calendar-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.reserve-button {
+    background-color: #ff385c;
+    color: white;
+    border-radius: 12px;
+    border: none;
+    width: ;
+    justify-content: center;
 }
