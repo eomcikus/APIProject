@@ -79,7 +79,7 @@ if (!spot) return null;
                 </>
             )}
             <div className='booking'>
-                <CreateBooking />
+                <CreateBooking spot={spot}/>
             </div>
             {sessionUser && 
             !reviewBoo && 
