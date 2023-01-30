@@ -82,6 +82,7 @@
 .booking {
     /* width: 30% */
     align-items: flex-end;
+    width: 100%;
 }
 .spot-host-sent {
     width: 300px;
