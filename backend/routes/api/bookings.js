@@ -17,6 +17,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 //get all of the current user's bookings
 router.get('/current', requireAuth, async (req, res) => {
     // if (req.user){
+        console.log('here in backend')
     const currentBookings = await Booking.findAll({
         where: {
             userId: req.user.id
