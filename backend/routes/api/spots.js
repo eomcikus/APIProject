@@ -129,6 +129,12 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
             {
                 model: User,
                 attributes: ['id', 'firstName', 'lastName', 'userPhoto']
+            },
+            {
+                model: Spot,
+                attributes: {
+                    exclude: ['description', 'createdAt', 'updatedAt'],
+                }
             }]
     })
     let bookList = [];
@@ -139,7 +145,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
         where: {
             spotId: req.params.spotId
         },
-        attributes: { exclude: [ 'createdAt', 'updatedAt'] }
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
     })
     let spotCheck = await Spot.findByPk(req.params.spotId)
     if (!spotCheck) {
@@ -264,7 +270,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             attributes: ['id', 'url'],
         },],
     })
-    for (review in reviews){
+    for (review in reviews) {
         const user = await User.findByPk(reviews.userId, {
             attributes: ['firstName', 'lastName', 'userPhoto']
         })
@@ -493,7 +499,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
             delete finalPic.createdAt
             delete finalPic.updatedAt
             // delete finalPic.spotId
-            const spotwithImage = await Spot.findByPk(finalPic.spotId, {include: SpotImage})
+            const spotwithImage = await Spot.findByPk(finalPic.spotId, { include: SpotImage })
             return res.json(spotwithImage)
         }
     }

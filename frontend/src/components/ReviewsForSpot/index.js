@@ -34,7 +34,7 @@ const ReviewsForSpot = () => {
     <div className='spot-avg-reviews'><b>★ {spot.avgStarRating ? parseFloat(spot.avgStarRating).toFixed(2) : 'None'} · {reviews2 ? reviews2.length : 'No'} reviews </b></div><p></p>
         <div className='whole-r-container'>
             <div className='reviews-layout-contain'>
-                <div className='reviews-contained'>{reviews2.map(review => (<div className='review-card'>{console.log(review)}
+                <div className='reviews-contained'>{reviews2.map(review => (<div className='review-card'>
                     <ReviewCard key={review.id} review={review} /></div>))}
                 </div>
             </div>

@@ -34,16 +34,17 @@ const remove = bookingId => ({
 
 //thunks
 export const getUserBookings = () => async (dispatch) => {
-    // console.log('is this even being called tho')
+    console.log('is this even being called tho')
     const response = await csrfFetch(`/api/bookings/current`)
     if (response.ok){
         const data = await response.json()
         // console.log('data =========================', data)
-        dispatch(load(data))
+        dispatch(load(data.Bookings))
     }
 }
 //get bookings for spot
 export const getSpotBookings = (spotId) => async (dispatch) => {
+    console.log('hello?')
     const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
     if (response.ok){
         const data = await response.json()
@@ -65,29 +66,45 @@ export const addBooking = ( booking, spotId) => async (dispatch)=> {
         return newBooking;
     }
 }
+
+export const deleteBooking = (bookingId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+        method: 'DELETE'
+    })
+    if (response.ok){
+        dispatch(remove(bookingId))
+    }
+}
 let initialState = {}
 const bookingsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case USER: {
-            newState = {...state, bookings: {...state}}
-            console.log('action.bookings', action.bookings)
+            newState = {...state}
+
             action.bookings.forEach(booking => {
-                newState.bookings[booking.id] = booking
+                newState[booking.id] = booking
             })
             return newState;
         }
         case LOAD: {
-            newState = {...state, bookings: {}}
+            newState = {...state}
             action.bookings.forEach(booking => {
-                newState.bookings[booking.id] = booking
+                newState[booking.id] = booking
             })
             return newState;
         }
         case CREATE: {
-            newState = {...state, bookings: {...state.bookings}}
-            newState.bookings[action.booking.id] = action.booking
+            newState = {...state}
+            console.log('action.booking', action)
+            newState[action.booking.id] = action.booking
             return newState;
+        }
+        case REMOVE: {
+            newState = {...state}
+            delete newState[action.bookingsId]
+            return newState;
+
         }
         default: 
             return state;
