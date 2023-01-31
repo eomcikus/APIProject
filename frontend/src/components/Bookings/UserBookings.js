@@ -10,19 +10,18 @@ const UserBookings = () => {
     let bookings = useSelector(state => state.bookings)
     console.log('bookings', bookings)
     let bookingsArr = Object.values(bookings)
-    let finalArr = bookingsArr[0]
-    console.log('bookingsarr', finalArr)
+    console.log('bookingsarr', bookingsArr)
     useEffect(() => {
         dispatch(getUserBookings())
     }, [dispatch])
     // console.log('bookings', bookingsArr)
-
+    if (!bookings) return null; 
     return (
         <div className='bookings-layout'>
-            {/* {finalArr.map(booking => (
+            {bookingsArr.map(booking => ( 
 
-               <div>{booking.Spot.name}{booking.startDate.slice(1,10)} {booking.endDate.slice(1,10)}</div>
-            ))} */}
+               <div>{booking.spotId} {console.log('booking', booking.Spot)}</div>
+            ))}
             
 
         </div>
