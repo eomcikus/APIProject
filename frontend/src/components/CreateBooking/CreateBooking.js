@@ -23,7 +23,7 @@ const CreateBooking = () => {
             endDate,
         }
         setSubmit(true)
-        console.log('spotid', +spotId)
+        // console.log('spotid', +spotId)
         createdBooking = await dispatch(addBooking(payload, +spotId))
         window.alert('Booking successfully created!')
     }

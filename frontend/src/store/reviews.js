@@ -39,7 +39,7 @@ export const getReviews = (spotId) => async dispatch => {
         const data = await response.json()
         // console.log('--reviews in thunk', data)
         dispatch(load(data.Reviews))
-        console.log('...after dispatch', data.Reviews)
+        // console.log('...after dispatch', data.Reviews)
         // return reviews;
     }    else {
         return null;
@@ -58,7 +58,7 @@ export const getUserReviews = () => async dispatch => {
 }
 
 export const createReview = (review, spotId, user) => async dispatch => {
-    console.log('user', user)
+    // console.log('user', user)
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         body: JSON.stringify(review),
@@ -86,7 +86,7 @@ export const editReview = (review, reviewId, user) => async dispatch => {
     })
     if (response.ok){
         const review = await response.json()
-        console.log('review in thunk', review)
+        // console.log('review in thunk', review)
         // review.User = user
         dispatch(update(review))
         return review

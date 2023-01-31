@@ -33,7 +33,7 @@ const EditReview = ({ setShowModal }) => {
         setShowModal(false)
     }
     const handleSubmit = async (e) => {
-        console.log('heeeere')
+        // console.log('heeeere')
         e.preventDefault()
         const payload = {
             id: userReview.id,

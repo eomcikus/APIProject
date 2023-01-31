@@ -104,7 +104,7 @@ const EditSpot = ({setShowModal}) => {
             price
         }
         updatedSpot = await dispatch(updateSpot(payload, spotId))
-        console.log('made it to if statement with history.push')
+        // console.log('made it to if statement with history.push')
         if (updatedSpot) {
             await dispatch(getSingleSpot(spotId)).then(
                 setShowModal(false))

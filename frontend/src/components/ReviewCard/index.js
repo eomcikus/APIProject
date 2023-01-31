@@ -8,12 +8,12 @@ const ReviewCard = ({ review }) => {
     const spot = useSelector(state => state.spots.singleSpot)
     const dispatch = useDispatch()
     const reviews = useSelector(state => Object.values(state.reviews))
-    console.log('card', review)
+    // console.log('card', review)
     const sessionUser = useSelector(state => state.session.user)
     const newReview = useSelector(state => state.reviews.User)
     // console.log('newReview', newReview)
     // let reviews = useSelector(state => Object.values(state.reviews.spot));
-    console.log('reviews', reviews)
+    // console.log('reviews', reviews)
     // console.log('sessionUser', sessionUser)
     // const review = useSelector(state => state.review.)
     // if (!newReview) return null;
