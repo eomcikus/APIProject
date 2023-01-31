@@ -6,12 +6,13 @@ import { useHistory, Redirect, useParams } from 'react-router-dom';
 
 
 const BookingsForSpot = () => {
-    const {spotId} = useParams();
+    const { spotId } = useParams();
     const dispatch = useDispatch();
-    const bookings = useSelector(state =>  state.bookings.bookings)
+    const bookings = useSelector(state => state.bookings)
+    console.log('bookings state', bookings)
     const spot = useSelector(state => state.spots.singleSpot)
     const bookingsArr = Object.values(bookings)
-    console.log('bookings', bookingsArr)
+    // console.log('bookingsarr', bookingsArr[0])
     useEffect(() => {
         dispatch(getSpotBookings(spotId))
         dispatch(getSingleSpot(spotId))
@@ -21,7 +22,7 @@ const BookingsForSpot = () => {
         <div>
             <h1>{spot.name}</h1>
             {bookingsArr.map(booking => (
-                <div>{booking.startDate.slice(1,10)}</div>
+                <div key={booking.id}>{booking.spotId}</div>
             ))}
         </div>
     )

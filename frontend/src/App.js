@@ -16,14 +16,17 @@ import CurrentUsersReviews from "./components/CurrentUsersReviews";
 import UserBookings from "./components/Bookings/UserBookings"
 import CreateBooking from "./components/CreateBooking/CreateBooking";
 import BookingsForSpot from "./components/SpotBookings/BookingsBySpotId";
+import { getSpotBookings } from "./store/bookings";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+
   }, [dispatch]);
   // useEffect(() => {
   //   dispatch(SpotActions.getSpots())
+      // dispatch(getSpotBookings())
   // }, [dispatch])
   return (
     <>
