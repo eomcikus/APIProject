@@ -29,6 +29,7 @@ router.get('/current', requireAuth, async (req, res) => {
             } 
         }]
     })
+    // console.log('current bookings =================', currentBookings)
     for (let i = 0; i < currentBookings.length; i++) {
         
         let curr = currentBookings[i].toJSON()
@@ -46,6 +47,7 @@ router.get('/current', requireAuth, async (req, res) => {
             currentBookings[i].Spot.dataValues.previewImage = spotImage.url
         }
     }
+
     res.json({ Bookings: currentBookings })
     // }
 })

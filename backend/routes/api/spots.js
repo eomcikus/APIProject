@@ -202,8 +202,9 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
     })
 
     let requestedStart = Date.parse(req.body.startDate)
+    console.log('================', requestedStart)
     let requestedEnd = Date.parse(req.body.endDate)
-
+    console.log('================', requestedEnd)
 
     for (let i = 0; i < bookArray.length; i++) {
         let booking = bookArray[i]
