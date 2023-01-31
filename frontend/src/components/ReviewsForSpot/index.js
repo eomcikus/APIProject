@@ -11,9 +11,9 @@ const ReviewsForSpot = () => {
     let reviewsobj = useSelector(state=> state.reviews)
 
     let reviews = useSelector(state => Object.values(state.reviews));
-    console.log('reviews', reviews)
+    // console.log('reviews', reviews)
     let reviews2 = Object.values(reviews[0])
-    console.log('reviews2', reviews2)
+    // console.log('reviews2', reviews2)
     // console.log('reviews in all for spot', Object.values(reviews2))
     // let finalArr = reviews.filter(review => +review.spotId === +spotId);
     // console.log('filteredArr', finalArr)

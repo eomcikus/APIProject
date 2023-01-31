@@ -15,6 +15,7 @@ import RemoveReview from "./components/RemoveReview";
 import CurrentUsersReviews from "./components/CurrentUsersReviews";
 import UserBookings from "./components/Bookings/UserBookings"
 import CreateBooking from "./components/CreateBooking/CreateBooking";
+import BookingsForSpot from "./components/SpotBookings/BookingsBySpotId";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -56,8 +57,11 @@ function App() {
           <Route exact path='/bookings/current'>
             <UserBookings />
           </Route>
-          <Route expact path='/:spotId/bookings'>
+          <Route exact path='/:spotId/bookings'>
             <CreateBooking />
+          </Route>
+          <Route exact path='/spots/:spotId/bookings'>
+          <BookingsForSpot />
           </Route>
         </Switch>
       )}

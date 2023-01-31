@@ -19,10 +19,10 @@ const UserBookings = () => {
 
     return (
         <div className='bookings-layout'>
-            {finalArr.map(booking => (
+            {/* {finalArr.map(booking => (
 
                <div>{booking.Spot.name}{booking.startDate.slice(1,10)} {booking.endDate.slice(1,10)}</div>
-            ))}
+            ))} */}
             
 
         </div>
