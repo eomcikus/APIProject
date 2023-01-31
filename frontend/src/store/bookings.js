@@ -102,7 +102,7 @@ const bookingsReducer = (state = initialState, action) => {
         }
         case REMOVE: {
             newState = {...state}
-            delete newState[action.bookingsId]
+            delete newState[action.bookingId]
             return newState;
 
         }
