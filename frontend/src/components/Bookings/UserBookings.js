@@ -8,9 +8,9 @@ const UserBookings = () => {
     const user = useSelector(state => state.session.user)
 
     let bookings = useSelector(state => state.bookings)
-    console.log('bookings', bookings)
+    // console.log('bookings', bookings)
     let bookingsArr = Object.values(bookings)
-    console.log('bookingsarr', bookingsArr)
+    // console.log('bookingsarr', bookingsArr)
     useEffect(() => {
         dispatch(getUserBookings())
     }, [dispatch])
@@ -20,7 +20,7 @@ const UserBookings = () => {
         <div className='bookings-layout'>
             {bookingsArr.map(booking => ( 
 
-               <div>{booking.spotId} {console.log('booking', booking.Spot)}</div>
+               <div key={booking.id}>{booking.spotId}{booking.Spot.name} </div>
             ))}
             
 

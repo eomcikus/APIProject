@@ -15,14 +15,14 @@ const BookingsForSpot = () => {
     // console.log('bookingsarr', bookingsArr[0])
     useEffect(() => {
         dispatch(getSpotBookings(spotId))
-        // dispatch(getSingleSpot(spotId))
+        dispatch(getSingleSpot(spotId))
     }, [dispatch])
 
     return (
         <div>
-            {/* <h1>{spot.name}</h1> */}
+            <h1>{spot.name}</h1>
             {bookingsArr.map(booking => (
-                <div>{booking.spotId}</div>
+                <div key={booking.id}>{booking.spotId}</div>
             ))}
         </div>
     )
