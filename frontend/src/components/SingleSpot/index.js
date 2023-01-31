@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as SpotActions from "../../store/spots"; 
+import * as SpotActions from "../../store/spots";
 import EditSpot from '../EditSpotModal';
 import DeleteSpot from '../DeleteSpotModal';
 import CreateReviewModal from '../CreateReviewModal'
@@ -14,33 +14,33 @@ import CreateBooking from '../CreateBooking/CreateBooking';
 const SingleSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
-    
+
     const spot = useSelector(state => state.spots.singleSpot)
 
     const sessionUser = useSelector(state => state.session.user)
     const reviewsObj = useSelector(state => state.reviews)
-    const avgStarRating = useSelector(state =>  state.spots.singleSpot.avgStarRating)
+    const avgStarRating = useSelector(state => state.spots.singleSpot.avgStarRating)
     const newestRating = avgStarRating
     const reviewsArr = Object.values(reviewsObj)
     let finalArr = Object.values(reviewsArr[0])
     // console.log('reviewsarray', finalArr)
-    const reviewLength =finalArr.length
+    const reviewLength = finalArr.length
     // console.log('review length----', reviewLength)
     let reviewBoo;
-    if (sessionUser){
-     reviewBoo = finalArr.find(review => sessionUser.id === review.userId)
+    if (sessionUser) {
+        reviewBoo = finalArr.find(review => sessionUser.id === review.userId)
     }
     useEffect(() => {
         dispatch(getSingleSpot(spotId))
         dispatch(getReviews(spotId))
-        
-    },[dispatch, spotId, avgStarRating])
+
+    }, [dispatch, spotId, avgStarRating])
     // useEffect(() => {
     //     dispatch(getReviews(spotId))
     // }, [reviewLength])
 
     // useEffect(() => {
-        
+
     // }, [reviewLength])
     // useEffect(() => {
     //     reviewLength = reviewsArr.length
@@ -56,38 +56,40 @@ const SingleSpot = () => {
     //         dispatch(clear())
     //     })
     // })
-//   console.log('spot', spot)
-if (!spot) return null;
-     return (
-        <div className ="single-spot-container" key={spot.id}>
-             <div className="singleSpot-card-details">
-                    <div className='singleSpot-name'>{spot?.name}</div><p></p>
-                    <div className='single-spot-stars'>★ {spot.avgStarRating ? parseFloat(newestRating).toFixed(2) : 'none'}  ·   {spot?.city}, {spot?.state}, {spot.country} · {finalArr ? reviewLength : 'No'} reviews</div>
-                    {/* <div>{spot?.city}, {spot?.state}</div> */}<p></p>
-                    {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
-                    <div className='hosted-by-content'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</div>
-                    <div className='singleSpot-description'>{spot?.description}</div> 
-                    <div><b>${spot?.price}</b> per night</div>
+    //   console.log('spot', spot)
+    if (!spot) return null;
+    return (
+        <div className="single-spot-container" key={spot.id}>
+            <div className="singleSpot-card-details">
+                <div className='singleSpot-name'>{spot?.name}</div><p></p>
+                <div className='single-spot-stars'>★ {spot.avgStarRating ? parseFloat(newestRating).toFixed(2) : 'none'}  ·   {spot?.city}, {spot?.state}, {spot.country} · {finalArr ? reviewLength : 'No'} reviews</div>
+                {/* <div>{spot?.city}, {spot?.state}</div> */}<p></p>
+                {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
+                <div className='hosted-by-content'><div className='spot-host-sent'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}  </div>
                 </div>
-       
+
+
+                <div className='singleSpot-description'>{spot?.description}</div>
+            </div>
+            <div className='booking'>
+                <CreateBooking spot={spot} />
+            </div>
+
             {sessionUser && spot.ownerId === sessionUser.id && (
                 <>
-                <div className='edit-delete-buttons'>
-                <EditSpot className='edit' />
-                <DeleteSpot />
-                </div>
+                    <div className='edit-delete-buttons'>
+                        <EditSpot className='edit' />
+                        <DeleteSpot />
+                    </div>
                 </>
             )}
-            <div className='booking'>
-                <CreateBooking />
-            </div>
-            {sessionUser && 
-            !reviewBoo && 
-            spot.ownerId !== sessionUser.id && (
-            <div className='create-review-div'>
-            <CreateReviewModal />
-                </div>
-            )}
+            {sessionUser &&
+                !reviewBoo &&
+                spot.ownerId !== sessionUser.id && (
+                    <div className='create-review-div'>
+                        <CreateReviewModal />
+                    </div>
+                )}
 
             <ReviewsForSpot />
 

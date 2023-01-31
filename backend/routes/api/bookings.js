@@ -17,7 +17,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 //get all of the current user's bookings
 router.get('/current', requireAuth, async (req, res) => {
     // if (req.user){
-        console.log('here in backend')
+        console.log('----------------------------------here in backend')
     const currentBookings = await Booking.findAll({
         where: {
             userId: req.user.id
@@ -29,6 +29,7 @@ router.get('/current', requireAuth, async (req, res) => {
             } 
         }]
     })
+    console.log('current bookings =================', currentBookings)
     for (let i = 0; i < currentBookings.length; i++) {
         
         let curr = currentBookings[i].toJSON()
@@ -46,6 +47,7 @@ router.get('/current', requireAuth, async (req, res) => {
             currentBookings[i].Spot.dataValues.previewImage = spotImage.url
         }
     }
+    console.log('were in the backend ')
     res.json({ Bookings: currentBookings })
     // }
 })

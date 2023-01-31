@@ -139,7 +139,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
         where: {
             spotId: req.params.spotId
         },
-        attributes: { exclude: ['id', 'userId', 'createdAt', 'updatedAt'] }
+        attributes: { exclude: [ 'createdAt', 'updatedAt'] }
     })
     let spotCheck = await Spot.findByPk(req.params.spotId)
     if (!spotCheck) {
@@ -202,8 +202,9 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
     })
 
     let requestedStart = Date.parse(req.body.startDate)
+    // console.log('================', requestedStart)
     let requestedEnd = Date.parse(req.body.endDate)
-
+    // console.log('================', requestedEnd)
 
     for (let i = 0; i < bookArray.length; i++) {
         let booking = bookArray[i]

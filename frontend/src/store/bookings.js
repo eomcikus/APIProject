@@ -34,19 +34,35 @@ const remove = bookingId => ({
 
 //thunks
 export const getUserBookings = () => async (dispatch) => {
-    console.log('here')
+    // console.log('is this even being called tho')
     const response = await csrfFetch(`/api/bookings/current`)
     if (response.ok){
         const data = await response.json()
-        dispatch(load(data.Bookings))
+        // console.log('data =========================', data)
+        dispatch(load(data))
     }
 }
 //get bookings for spot
 export const getSpotBookings = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/${spotId}/bookings`)
+    const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
     if (response.ok){
         const data = await response.json()
         dispatch(loadSpotBook(data.Bookings))
+    }
+}
+export const addBooking = ( booking, spotId) => async (dispatch)=> {
+    const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
+        method: 'POST',
+        body: JSON.stringify(booking),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    if (response.ok){
+        const newBooking = await response.json()
+        console.log('-----------------------', newBooking)
+        dispatch(create(newBooking))
+        return newBooking;
     }
 }
 let initialState = {}
@@ -54,7 +70,7 @@ const bookingsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case USER: {
-            newState = {...state, bookings: {}}
+            newState = {...state, bookings: {...state}}
             console.log('action.bookings', action.bookings)
             action.bookings.forEach(booking => {
                 newState.bookings[booking.id] = booking
