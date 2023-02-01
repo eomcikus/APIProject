@@ -1,16 +1,12 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+
 import { getKey } from '../../store/maps';
 import Maps from './Maps';
-
-
 
 const MapContainer = () => {
   const key = useSelector((state) => state.maps.key);
   const dispatch = useDispatch();
-  const ref = useRef(null);
-
 
   useEffect(() => {
     if (!key) {
@@ -23,9 +19,7 @@ const MapContainer = () => {
   }
 
   return (
-
     <Maps apiKey={key} />
-
   );
 };
 
