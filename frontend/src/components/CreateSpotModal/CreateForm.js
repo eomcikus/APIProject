@@ -12,8 +12,8 @@ const CreateSpotForm = ({ setShowModal }) => {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [country, setCountry] = useState('');
-    // const [lat, setLat] = useState('');
-    // const [lng, setLng] = useState('');
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -67,8 +67,8 @@ const CreateSpotForm = ({ setShowModal }) => {
             city,
             state,
             country,
-            lat: 1,
-            lng: 1,
+            lat,
+            lng,
             name,
             description,
             price,
