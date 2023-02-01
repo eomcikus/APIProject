@@ -27,7 +27,8 @@ const UserBookings = () => {
                <EditBooking booking={booking} /></div>
             )))}
             {!bookingsArr.length && (
-                <h1>You have no bookings at this time.</h1>
+                <h1>No trips booked... yet!</h1>
+                
             )}
             
 
