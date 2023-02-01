@@ -66,7 +66,7 @@ const SingleSpot = () => {
                 <div className='single-spot-stars'>★ {spot.avgStarRating ? parseFloat(newestRating).toFixed(2) : 'none'}  ·   {spot?.city}, {spot?.state}, {spot.country} · {finalArr ? reviewLength : 'No'} reviews</div>
                 {/* <div>{spot?.city}, {spot?.state}</div> */}<p></p>
                 {spot?.SpotImages?.map(image => <img className='ss-preview-img' src={image.url} />)}
-                <div className='hosted-by-content'><div className='spot-host-sent'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}  </div>
+                <div className='hosted-by-content'><div className='spot-host-sent'>Spot hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}  <div><img className='single-spot-owner-pic' src={spot?.Owner?.userPhoto} /></div></div>
                     <div className='booking'>
                         <CreateBooking spot={spot} />
                     </div>

@@ -87,3 +87,12 @@
 .spot-host-sent {
     width: 300px;
 }
+
+.single-spot-owner-pic {
+    width: 75px;
+    height: 75px;
+    border-radius: 70%;
+object-fit: scale-down;
+    align-items: center;
+    justify-content: center;
+}
