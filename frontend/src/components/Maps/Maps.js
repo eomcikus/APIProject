@@ -1,5 +1,5 @@
 import React from 'react';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, InfoWindow, MarkerF } from '@react-google-maps/api';
 import { useSelector } from 'react-redux'
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 const containerStyle = {
@@ -19,10 +19,14 @@ const Maps = ({ apiKey }) => {
     id: 'google-map-script',
     googleMapsApiKey: apiKey,
   });
-  // const marker = new GoogleMap.Marker({
-  //   position: center,
-  //   map: Maps,
-  // });
+  const myMarker = {
+    fillColor: "red",
+    fillOpacity: 0.5,
+    strokeWeight: 0,
+    rotation: 1,
+    scale: 1
+  }
+
   return (
     <>
       {isLoaded && (
@@ -30,8 +34,12 @@ const Maps = ({ apiKey }) => {
           mapContainerStyle={containerStyle}
           center={center}
           zoom={10}
-          // marker={marker}
-        />
+          // marker={svgarker}
+        >
+        <MarkerF 
+          position={center}
+          icon={myMarker} />
+          </GoogleMap>
       )}
     </>
   );
