@@ -13,7 +13,7 @@ const Maps = ({ apiKey }) => {
 
   const center = {
     lat: Number(lat),
-    lng: Number(lng),
+    lng: Number(lng)
   };
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
