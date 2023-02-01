@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserBookings } from "../../store/bookings";
-
-
+import DeleteTheBook from "../DeleteBooking/DeleteBooking";
+import EditBooking from "../EditBooking/EditBooking";
 const UserBookings = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
@@ -17,14 +17,18 @@ const UserBookings = () => {
     // console.log('bookings', bookingsArr)
     if (!bookings) return null; 
     return (
+        <>
         <div className='bookings-layout'>
             {bookingsArr.map(booking => ( 
 
-               <div key={booking.id}>{booking.spotId}{booking.Spot.name} </div>
+               <div key={booking.id}>{booking.spotId}{booking.Spot.name} 
+               <DeleteTheBook booking={booking} />
+               <EditBooking booking={booking} /></div>
             ))}
             
 
         </div>
+    </>
     )
 }
 
