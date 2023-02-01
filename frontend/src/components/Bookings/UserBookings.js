@@ -19,12 +19,16 @@ const UserBookings = () => {
     return (
         <>
         <div className='bookings-layout'>
-            {bookingsArr.map(booking => ( 
+            {bookingsArr && (
+                bookingsArr.map(booking => ( 
 
                <div key={booking.id}>{booking.spotId}{booking.Spot.name} 
                <DeleteTheBook booking={booking} />
                <EditBooking booking={booking} /></div>
-            ))}
+            )))}
+            {!bookingsArr.length && (
+                <h1>You have no bookings at this time.</h1>
+            )}
             
 
         </div>
