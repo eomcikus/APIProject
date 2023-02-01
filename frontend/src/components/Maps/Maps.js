@@ -10,9 +10,10 @@ const containerStyle = {
 const Maps = ({ apiKey }) => {
   const { lat } = useSelector(state=>state.spots.singleSpot)
   const { lng } = useSelector(state=>state.spots.singleSpot)
+
   const center = {
-    lat: lat,
-    lng: lng,
+    lat: Number(lat),
+    lng: Number(lng),
   };
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
