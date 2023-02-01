@@ -93,9 +93,9 @@ const SingleSpot = () => {
                 )}
 
             <ReviewsForSpot />
-
-            <MapContainer />
-
+            <div className='map-container'>
+                <MapContainer />
+            </div>
         </div>
     )
 }
