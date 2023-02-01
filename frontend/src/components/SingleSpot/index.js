@@ -11,6 +11,7 @@ import { getUserReviews, getReviews } from '../../store/reviews';
 import { clear, getSingleSpot } from '../../store/spots';
 import './SingleSpot.css'
 import CreateBooking from '../CreateBooking/CreateBooking';
+import MapContainer from '../Maps';
 const SingleSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
@@ -93,6 +94,7 @@ const SingleSpot = () => {
 
             <ReviewsForSpot />
 
+            <MapContainer />
 
         </div>
     )
