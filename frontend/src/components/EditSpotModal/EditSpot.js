@@ -37,8 +37,8 @@ const EditSpot = ({setShowModal}) => {
     const [city, setCity] = useState(currentSpot?.city)
     const [state, setState] = useState(currentSpot?.state)
     const [country, setCountry] = useState(currentSpot?.country);
-    // const [lat, setLat] = useState(currentSpot?.lat);
-    // const [lng, setLng] = useState(currentSpot?.lng);
+    const [lat, setLat] = useState(currentSpot?.lat);
+    const [lng, setLng] = useState(currentSpot?.lng);
     const [name, setName] = useState(currentSpot?.name);
     const [description, setDescription] = useState(currentSpot?.description);
     const [price, setPrice] = useState(currentSpot?.price);
@@ -97,8 +97,8 @@ const EditSpot = ({setShowModal}) => {
             city,
             state,
             country,
-            lat: 1,
-            lng: 1,
+            lat,
+            lng,
             name,
             description,
             price

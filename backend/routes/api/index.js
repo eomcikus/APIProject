@@ -11,7 +11,9 @@ const { restoreUser } = require("../../utils/auth.js");
 router.post('/test', function (req, res) {
   res.json({ requestBody: req.body });
 });
+const mapsRouter = require('./maps');
 
+router.use('/maps', mapsRouter);
 
 router.use(restoreUser);
 
