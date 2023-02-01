@@ -6,7 +6,10 @@
     flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0,0,0, 0.2);
     padding: 20px;
-    width: 50%;
+    align-items: center;
+    justify-content: center;
+
+    /* width: 50%; */
     
 }
 .booking-spot-info-cont {
@@ -44,12 +47,12 @@ padding-left: 7px;
     width: 30px;
 } */
 #calendar-left {
-    width: 35%;
+    width: 40%;
     border-radius: 12px 1px 1px 12px;
     border: 1px gray solid;
 }
 #calendar-right {
-    width: 35%;
+    width: 40%;
     border-radius: 1px 12px 12px 1px;
     border: 1px gray solid;
 }
@@ -58,12 +61,15 @@ padding-left: 7px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    
 }
 .reserve-button {
     background-color: #ff385c;
     color: white;
     border-radius: 12px;
     border: none;
-    /* width: ; */
+    width: 100%;
+    align-items: center;
     justify-content: center;
+    
 }
