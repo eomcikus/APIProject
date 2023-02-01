@@ -8,8 +8,8 @@ const containerStyle = {
 };
 
 const Maps = ({ apiKey }) => {
-  const { lat } = useSelector(state=>state.spots.singleSpot)
-  const { lng } = useSelector(state=>state.spots.singleSpot)
+  const { lat } = useSelector(state => state.spots.singleSpot)
+  const { lng } = useSelector(state => state.spots.singleSpot)
 
   const center = {
     lat: Number(lat),
@@ -34,13 +34,18 @@ const Maps = ({ apiKey }) => {
           mapContainerStyle={containerStyle}
           center={center}
           zoom={10}
-          // marker={svgarker}
+        // marker={svgarker}
         >
-        <MarkerF 
-          position={center}
-          icon={myMarker} />
-          </GoogleMap>
+          <MarkerF
+            position={center}
+            icon={myMarker}
+            title={'Exact location given at booking.'}>
+          </MarkerF>
+
+        </GoogleMap>
+
       )}
+
     </>
   );
 };

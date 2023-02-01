@@ -94,6 +94,7 @@ const SingleSpot = () => {
 
             <ReviewsForSpot />
             <div className='map-container'>
+                <h2>Where you'll be</h2>
                 <MapContainer />
             </div>
         </div>
