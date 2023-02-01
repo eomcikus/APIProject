@@ -79,7 +79,14 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 })
 
 router.put('/:bookingId', requireAuth, async (req, res) => {
-    let rawBooking = await Booking.findByPk(req.params.bookingId)
+    let rawBooking = await Booking.findByPk(req.params.bookingId,         
+        {include: [{
+        model: Spot,
+        attributes: {
+            exclude: ['description', 'createdAt', 'updatedAt'],
+        } 
+    }]
+})
 
     if (!rawBooking) {
         res.status(404)

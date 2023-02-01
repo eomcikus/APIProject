@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserBookings } from "../../store/bookings";
 import DeleteTheBook from "../DeleteBooking/DeleteBooking";
-
+import EditBooking from "../EditBooking/EditBooking";
 const UserBookings = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
@@ -21,7 +21,9 @@ const UserBookings = () => {
         <div className='bookings-layout'>
             {bookingsArr.map(booking => ( 
 
-               <div key={booking.id}>{booking.spotId}{booking.Spot.name} <DeleteTheBook booking={booking} /></div>
+               <div key={booking.id}>{booking.spotId}{booking.Spot.name} 
+               <DeleteTheBook booking={booking} />
+               <EditBooking booking={booking} /></div>
             ))}
             
 
