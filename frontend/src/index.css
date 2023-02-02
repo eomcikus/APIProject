@@ -10,7 +10,8 @@ button {
     border: 0.5px grey solid;
     border-radius: 15px;
     text-align: center;
-    margin: 10px;
+    margin-top: 10px;
+    margin-right: 5px;
     /* border: none; */
     padding: 10px 20px;
     cursor: pointer;
@@ -23,20 +24,22 @@ button:hover{
     font-size: 16px;
 }
 
-/* form {
+form:not(.booking-form) {
     width: 90%;
     padding: 25px;
     margin: 30px;
     /* border: 1px black solid; */
-    /* border-radius: 20px;
-} */
-/* form input {
+     border-radius: 20px;
+}  
+
+
+ form input {
     border: 1px gray solid;
     width: 90%;
     border-radius: 10px;
     outline: none;
     margin: 10px;
-} */
+} 
 h1 {
     color: #ff385c;
 }
