@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserBookings } from "../../store/bookings";
 import DeleteTheBook from "../DeleteBooking/DeleteBooking";
 import EditBooking from "../EditBooking/EditBooking";
+import './userbookings.css'
 const UserBookings = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
@@ -10,6 +11,7 @@ const UserBookings = () => {
     let bookings = useSelector(state => state.bookings)
     // console.log('bookings', bookings)
     let bookingsArr = Object.values(bookings)
+
     // console.log('bookingsarr', bookingsArr)
     useEffect(() => {
         dispatch(getUserBookings())
@@ -21,11 +23,17 @@ const UserBookings = () => {
         <div className='bookings-layout'>
             {bookingsArr && (
                 bookingsArr.map(booking => ( 
-
-               <div key={booking.id}>{booking.spotId}{booking.Spot.name} 
+                <div className='booking-card'>
+               <div key={booking.id}>
+                <img src={booking.Spot.previewImage} className='img-card' />
+                <div className='booking-card-info'><div id='spot-name'>{booking.Spot.name} </div>
+                <br></br>Check-in: {booking.startDate.slice(0,10)}
+                <br></br>Check-out: {booking.endDate.slice(0,10)}</div>
                <DeleteTheBook booking={booking} />
-               <EditBooking booking={booking} /></div>
+               <EditBooking booking={booking} className='edit-booking-form-on-current'/></div>
+            </div>
             )))}
+            
             {!bookingsArr.length && (
                 <h1>No trips booked... yet!</h1>
                 
