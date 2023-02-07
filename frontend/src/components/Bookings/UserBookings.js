@@ -7,7 +7,7 @@ import './userbookings.css'
 const UserBookings = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
-
+    const dayjs = require('dayjs')
     let bookings = useSelector(state => state.bookings)
     // console.log('bookings', bookings)
     let bookingsArr = Object.values(bookings)
