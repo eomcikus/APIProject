@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Redirect, useParams } from 'react-router-dom';
 import './createbooking.css'
-import { addBooking } from '../../store/bookings';
+import { addBooking, getUserBookings } from '../../store/bookings';
 const CreateBooking = () => {
     const spot = useSelector(state => state.spots.singleSpot)
     const reviews = useSelector(state => state.reviews.reviews)
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
     const {spotId} = useParams()
+    const dayjs = require('dayjs')
+    const history = useHistory()
     const [startDate, setStartDate] = useState('')
     console.log('startdate', startDate)
     const [endDate, setEndDate] = useState('')
@@ -27,6 +29,8 @@ const CreateBooking = () => {
         // console.log('spotid', +spotId)
         createdBooking = await dispatch(addBooking(payload, +spotId))
         window.alert('Booking successfully created!')
+        await dispatch(getUserBookings())
+        history.push('/bookings/current')
     }
     return (
         <>
@@ -39,14 +43,14 @@ const CreateBooking = () => {
                 <div className='calendar-cont'>
                     <input type='date' 
                     id='calendar-left'
-                    value={startDate} 
-                    onChange={e => setStartDate(e.target.value.slice(0, 11))} />
+                    value={dayjs(startDate).format("YYYY-MM-DD")} 
+                    onChange={e => setStartDate(e.target.value)} />
                   
                     {/* <label>End</label> */}
                     <input type='date' 
                     id='calendar-right'
-                    value={endDate}
-                    onChange={e => setEndDate(e.target.value.slice(0, 11))} />
+                    value={dayjs(endDate).format("YYYY-MM-DD")}
+                    onChange={e => setEndDate(e.target.value)} />
                 </div>
                 <button className='reserve-button' type='submit'>Reserve</button>
             </div>
