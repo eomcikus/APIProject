@@ -28,8 +28,8 @@ const UserBookings = () => {
                 bookingsArr.map(booking => ( 
                 <div className='booking-card'>
                <div key={booking.id}>
-                <img src={booking.Spot.previewImage} className='img-card' />
-                <div className='booking-card-info'><div id='spot-name'>{booking.Spot.name} </div>
+                <img src={booking?.Spot?.previewImage} className='img-card' />
+                <div className='booking-card-info'><div id='spot-name'>{booking?.Spot?.name} </div>
                 <br></br>Check-in: {dayjs(booking.startDate).format('MM-DD-YYYY')}
                 <br></br>Check-out: {dayjs(booking.endDate).format('MM-DD-YYYY')}</div>
                <DeleteTheBook booking={booking} />

@@ -29,7 +29,6 @@ router.get('/current', requireAuth, async (req, res) => {
             } 
         }]
     })
-    console.log('current bookings =================', currentBookings)
     for (let i = 0; i < currentBookings.length; i++) {
         
         let curr = currentBookings[i].toJSON()
@@ -47,7 +46,6 @@ router.get('/current', requireAuth, async (req, res) => {
             currentBookings[i].Spot.dataValues.previewImage = spotImage.url
         }
     }
-    console.log('were in the backend ')
     res.json({ Bookings: currentBookings })
     // }
 })
@@ -97,7 +95,6 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     }
    let booking = rawBooking.toJSON()
 
-
     booking.startDate = booking.startDate.toDateString()
     booking.endDate = booking.endDate.toDateString()
     let currentStart = new Date(booking.startDate).getTime()
@@ -105,8 +102,11 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     const { startDate, endDate } = req.body
 
     let requestedStart = new Date(startDate).getTime()
+    console.log('reqstart ============>', requestedStart)
     let requestedEnd = new Date(endDate).getTime()
-    if (requestedStart > requestedEnd) {
+    console.log('reqend ==============>', requestedEnd)
+    console.log((requestedEnd - requestedStart))
+    if ((requestedEnd - requestedStart) < 0) {
         return res.json({
             "message": "Validation error",
             "statusCode": 400,
@@ -121,27 +121,28 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             "statusCode": 403
         })
     }
-    if ((requestedStart >= currentStart && requestedStart <= currentEnd)) {
-        res.status(403)
-        return res.json({
-            "message": "Sorry, this spot is already booked for the specified dates",
-            "statusCode": 403,
-            "errors": {
-                "startDate": "Start date conflicts with an existing booking",
-            }
-        })
-    }
-    // if (requestedEnd <= currentStart && !requestedEnd <= currentEnd) {
-        if (requestedEnd <= currentStart && !requestedEnd <=currentEnd) {
-        res.status(403)
-        return res.json({
-            "message": "Sorry, this spot is already booked for the specified dates",
-            "statusCode": 403,
-            "errors": {
-                "endDate": "End date conflicts with an existing booking"
-            }
-        })
-    } else {
+    // if ((requestedStart <= currentStart && requestedStart >= currentEnd)) {
+    //     res.status(403)
+    //     return res.json({
+    //         "message": "Sorry, this spot is already booked for the specified dates",
+    //         "statusCode": 403,
+    //         "errors": {
+    //             "startDate": "Start date conflicts with an existing booking",
+    //         }
+    //     })
+    // }
+    // // if (requestedEnd <= currentStart && !requestedEnd <= currentEnd) {
+    //     if (requestedEnd <= currentStart && !requestedEnd <=currentEnd) {
+    //     res.status(403)
+    //     return res.json({
+    //         "message": "Sorry, this spot is already booked for the specified dates",
+    //         "statusCode": 403,
+    //         "errors": {
+    //             "endDate": "End date conflicts with an existing booking"
+    //         }
+    //     })
+    // } 
+    else {
 
         rawBooking.update({
 

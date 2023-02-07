@@ -18,7 +18,7 @@ const EditBooking = ({booking, setShowModal}) => {
         setStartDate(booking?.startDate)
         setEndDate(booking?.endDate)
     }, [dispatch])
-
+    console.log('booking', booking.id)
 
         const handleSubmit = async (e) => {
             e.preventDefault()
@@ -47,7 +47,7 @@ const EditBooking = ({booking, setShowModal}) => {
             <div className='booking-object'>
                 {/* <label>Start</label> */}
                 <div className='booking-spot-info-cont'>
-                    <div className='spot-price-cont'><div className='spot-price'>${booking.Spot.price}   </div> <div>{'  '} night </div></div></div>
+                    <div className='spot-price-cont'><div className='spot-price'>${booking.Spot?.price}   </div> <div>{'  '} night </div></div></div>
 
                 <div className='calendar-cont'>
                     <input type='date' 
