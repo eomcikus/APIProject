@@ -88,7 +88,7 @@ export const editBooking = (booking, bookingId) => async (dispatch) => {
         const booking = await response.json()
         dispatch(update(booking))
         return
-    }
+    } 
 }
 let initialState = {}
 const bookingsReducer = (state = initialState, action) => {

@@ -17,6 +17,8 @@ import UserBookings from "./components/Bookings/UserBookings"
 import CreateBooking from "./components/CreateBooking/CreateBooking";
 import BookingsForSpot from "./components/SpotBookings/BookingsBySpotId";
 import { getSpotBookings } from "./store/bookings";
+import EditBooking from "./components/EditBooking/EditBooking";
+import EditBookingModal from "./components/EditBooking";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -59,7 +61,11 @@ function App() {
           </Route>
           <Route exact path='/bookings/current'>
             <UserBookings />
+            
           </Route>
+          {/* <Route exact path='/bookings/:bookingId'>
+            <EditBookingModal />
+          </Route> */}
           <Route exact path='/:spotId/bookings'>
             <CreateBooking />
           </Route>

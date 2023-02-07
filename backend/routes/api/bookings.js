@@ -106,7 +106,6 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
     let requestedStart = new Date(startDate).getTime()
     let requestedEnd = new Date(endDate).getTime()
-
     if (requestedStart > requestedEnd) {
         return res.json({
             "message": "Validation error",
@@ -132,7 +131,8 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             }
         })
     }
-    if (requestedEnd >= currentStart && !requestedEnd <= currentEnd) {
+    // if (requestedEnd <= currentStart && !requestedEnd <= currentEnd) {
+        if (requestedEnd <= currentStart && !requestedEnd <=currentEnd) {
         res.status(403)
         return res.json({
             "message": "Sorry, this spot is already booked for the specified dates",
@@ -150,6 +150,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         })
         res.json(rawBooking)
     }
+
 })
 
 module.exports = router;
