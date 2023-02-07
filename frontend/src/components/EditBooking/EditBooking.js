@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
-import { editBooking } from '../../store/bookings';
+import { editBooking, getUserBookings } from '../../store/bookings';
 import { getSingleSpot } from '../../store/spots';
 import './editbooking.css'
 const EditBooking = ({booking, setShowModal}) => {
@@ -19,7 +19,9 @@ const EditBooking = ({booking, setShowModal}) => {
         setEndDate(booking?.endDate)
     }, [dispatch])
     console.log('booking', booking.id)
-
+    useEffect(() => {
+        
+    })
         const handleSubmit = async (e) => {
             e.preventDefault()
             let createdBooking;
@@ -37,6 +39,7 @@ const EditBooking = ({booking, setShowModal}) => {
                 
             // }
             window.alert('Booking successfully updated!')
+            dispatch(getUserBookings())
     }
     
     // if (!booking) return null
