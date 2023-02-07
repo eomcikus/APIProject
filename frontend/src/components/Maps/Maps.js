@@ -9,8 +9,10 @@ const containerStyle = {
 
 const Maps = ({ apiKey }) => {
 
+
   const { lat } = useSelector(state=>state.spots.singleSpot)
   const { lng } = useSelector(state=>state.spots.singleSpot)
+
 
 
   const center = {
@@ -36,12 +38,14 @@ const Maps = ({ apiKey }) => {
           mapContainerStyle={containerStyle}
           center={center}
           zoom={10}
-          // marker={svgarker}
+        // marker={svgarker}
         >
+
         <MarkerF 
           position={center}
           icon={myMarker} />
           </GoogleMap>
+
 
       )}
 

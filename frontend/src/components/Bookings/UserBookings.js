@@ -6,6 +6,7 @@ import DeleteTheBook from "../DeleteBooking/DeleteBooking";
 import EditBooking from "../EditBooking/EditBooking";
 import EditBookingModal from "../EditBooking";
 
+
 import './userbookings.css'
 const UserBookings = () => {
     const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const UserBookings = () => {
                 bookingsArr.map(booking => ( 
                 <div className='booking-card'>
                <div key={booking.id}>
+
                 <img src={booking?.Spot?.previewImage} className='img-card' />
                 <div className='booking-card-info'><div id='spot-name'>{booking?.Spot?.name} </div>
                 <br></br>Check-in: {dayjs(booking.startDate).format('MM-DD-YYYY')}
@@ -36,6 +38,7 @@ const UserBookings = () => {
                {/* <NavLink to={`/bookings/${booking.id}`}><EditBooking booking={booking.id}/></NavLink> */}
                <EditBooking booking={booking}/>
 </div>
+
             </div>
             )))}
             
