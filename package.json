@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dayjs": "^1.11.7",
     "pg": "^8.8.0"
   },
   "scripts": {
@@ -16,7 +17,6 @@
   "description": "erBnB is a website clone, inspired by AirBnB. erBnb can be used for booking a stay at Spots, creating Spots, and updating Spots. Users can leave reviews and upload images for spots.",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eomcikus/APIProject.git"
