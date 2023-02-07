@@ -27,8 +27,8 @@ const UserBookings = () => {
                <div key={booking.id}>
                 <img src={booking.Spot.previewImage} className='img-card' />
                 <div className='booking-card-info'><div id='spot-name'>{booking.Spot.name} </div>
-                <br></br>Check-in: {booking.startDate.slice(0,10)}
-                <br></br>Check-out: {booking.endDate.slice(0,10)}</div>
+                <br></br>Check-in: {dayjs(booking.startDate).format('MM-DD-YYYY')}
+                <br></br>Check-out: {dayjs(booking.endDate).format('MM-DD-YYYY')}</div>
                <DeleteTheBook booking={booking} />
                <EditBooking booking={booking} className='edit-booking-form-on-current'/></div>
             </div>

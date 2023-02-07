@@ -8,7 +8,7 @@ const EditBooking = ({booking, setShowModal}) => {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     // const {spotId} = useParams()
-
+    const dayjs = require('dayjs')
     const [startDate, setStartDate] = useState(booking?.startDate)
     const [endDate, setEndDate] = useState(booking?.endDate)
     const [submit, setSubmit] = useState(false)
@@ -46,16 +46,16 @@ const EditBooking = ({booking, setShowModal}) => {
                 <div className='calendar-cont'>
                     <input type='date' 
                     id='calendar-left'
-                    value={startDate.slice(0,10).toString()} 
-                    onChange={e => setStartDate(e.target.value.slice(1, 10))} />
+                    value={dayjs(startDate).format('YYYY-MM-DD')} 
+                    onChange={e => setStartDate(e.target.value)} />
                   
                     {/* <label>End</label> */}
                     <input type='date' 
                     id='calendar-right'
-                    value={endDate.slice(0,10).toString()}
-                    onChange={e => setEndDate(e.target.value.slice(1, 10))} />
+                    value={dayjs(endDate).format('YYYY-MM-DD')}
+                    onChange={e => setEndDate(e.target.value)} />
                 </div>
-                <button className='reserve-button' type='submit'>Reserve</button>
+                <button className='reserve-button' type='submit'>Change Booking</button>
             </div>
             </form>
     )
