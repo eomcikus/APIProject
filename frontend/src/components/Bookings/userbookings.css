@@ -18,3 +18,19 @@
     font-size: 18px;
     font-weight: bold;
 }
+
+.bookings-layout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.booking-card {
+    padding: 5px;
+}

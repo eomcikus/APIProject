@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Redirect, useParams } from 'react-router-dom';
 import './createbooking.css'
 import { addBooking, getUserBookings } from '../../store/bookings';
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+dayjs.extend(utc)
+dayjs.extend(timezone)
 const CreateBooking = () => {
     const spot = useSelector(state => state.spots.singleSpot)
     const reviews = useSelector(state => state.reviews.reviews)
@@ -10,6 +15,8 @@ const CreateBooking = () => {
     const dispatch = useDispatch()
     const {spotId} = useParams()
     const dayjs = require('dayjs')
+    const tz = 'America/New_York'
+    dayjs.tz.setDefault('America/New_York')
     const history = useHistory()
     const [startDate, setStartDate] = useState('')
     console.log('startdate', startDate)
@@ -43,13 +50,13 @@ const CreateBooking = () => {
                 <div className='calendar-cont'>
                     <input type='date' 
                     id='calendar-left'
-                    value={dayjs(startDate).format("YYYY-MM-DD")} 
+                    value={dayjs(startDate).tz(tz).format("YYYY-MM-DD")} 
                     onChange={e => setStartDate(e.target.value)} />
                   
                     {/* <label>End</label> */}
                     <input type='date' 
                     id='calendar-right'
-                    value={dayjs(endDate).format("YYYY-MM-DD")}
+                    value={dayjs(endDate).tz(tz).format("YYYY-MM-DD")}
                     onChange={e => setEndDate(e.target.value)} />
                 </div>
                 <button className='reserve-button' type='submit'>Reserve</button>
