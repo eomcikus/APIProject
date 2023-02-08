@@ -34,7 +34,7 @@ const EditBooking = ({booking, setShowModal}) => {
             setSubmit(true)
             // console.log('spotid', +spotId)
             createdBooking = await dispatch(editBooking(payload, +booking.id))
-                // setShowModal(false))
+                setShowModal(false)
             // if (!createdBooking){
                 
             // }
