@@ -47,7 +47,7 @@ function ProfileButton({ user }) {
           <h3 className='prof-greeting'>   Hello, {user.firstName}</h3>
           <div className='userName'>   {user.username}</div>
           <div className='prof-email'>   {user.email}</div>
-          <div className='your-bookings'><NavLink className='your-bookings' to={'/bookings/current'}>Your Bookings</NavLink> </div>
+          <div className='your-bookings'><NavLink className='your-bookings' to={'/bookings/current'}>My Bookings</NavLink> </div>
           <div>
             <button onClick={logout} className='logout-button'>Log Out</button>
           </div>
