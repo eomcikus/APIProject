@@ -13,12 +13,12 @@ const EditBooking = ({booking, setShowModal}) => {
     const [startDate, setStartDate] = useState(booking?.startDate)
     const [endDate, setEndDate] = useState(booking?.endDate)
     const [submit, setSubmit] = useState(false)
-    console.log('booking', booking)
+
     useEffect(() => {
         setStartDate(booking?.startDate)
         setEndDate(booking?.endDate)
     }, [dispatch])
-    console.log('booking', booking.id)
+
     useEffect(() => {
         
     })

@@ -36,7 +36,7 @@ const UserBookings = () => {
                 <br></br>Check-out: {dayjs(booking.endDate).format('MM-DD-YYYY')}</div>
                <DeleteTheBook booking={booking} />
                {/* <NavLink to={`/bookings/${booking.id}`}><EditBooking booking={booking.id}/></NavLink> */}
-               <EditBooking booking={booking}/>
+               <EditBookingModal booking={booking}/>
 </div>
 
             </div>
