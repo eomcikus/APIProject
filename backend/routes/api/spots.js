@@ -137,6 +137,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
                 }
             }]
     })
+
     let bookList = [];
     bookingsOwner.forEach(booking => {
         bookList.push(booking.toJSON())
@@ -175,7 +176,7 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
             id: req.params.spotId
         }
     })
-
+    // console.log('bookings, AAAAAAAAAAAAAAAAA', bookings)
     if (!spot.length) {
 
         res.status(404)
@@ -191,6 +192,7 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
     bookings.forEach(booking => {
         bookArray.push(booking.toJSON())
     })
+    // console.log('boook array ======================', bookArray)
     // making datestrings on each start and end day
     // bookArray.forEach(booking => {
     //     booking.startDate = (booking.startDate.toDateString())
@@ -208,9 +210,9 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
     })
 
     let requestedStart = Date.parse(req.body.startDate)
-    // console.log('================', requestedStart)
+    console.log('================', requestedStart)
     let requestedEnd = Date.parse(req.body.endDate)
-    // console.log('================', requestedEnd)
+    console.log('================', requestedEnd)
 
     for (let i = 0; i < bookArray.length; i++) {
         let booking = bookArray[i]
@@ -252,6 +254,8 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
             startDate: req.body.startDate,
             endDate: req.body.endDate
         })
+        console.log('==============================', req.body.startDate)
+        // console.log('newBooking=;=;=;=;=;=;==;=;=;=;', newBooking )
         return res.json(newBooking)
     }
 })

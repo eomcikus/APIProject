@@ -22,6 +22,7 @@ const UserBookings = () => {
     }, [dispatch])
     // console.log('bookings', bookingsArr)
     if (!bookings) return null; 
+   
     return (
         <>
         <div className='bookings-layout'>
@@ -32,8 +33,8 @@ const UserBookings = () => {
 
                 <img src={booking?.Spot?.previewImage} className='img-card' />
                 <div className='booking-card-info'><div id='spot-name'>{booking?.Spot?.name} </div>
-                <br></br>Check-in: {dayjs(booking.startDate).format('MM-DD-YYYY')}
-                <br></br>Check-out: {dayjs(booking.endDate).format('MM-DD-YYYY')}</div>
+                <br></br>Check-in: {new Date(booking.startDate).toLocaleDateString()}
+                <br></br>Check-out: {new Date(booking.endDate).toLocaleDateString()}</div>
              <div className='button-container'>  <DeleteTheBook booking={booking} />
                {/* <NavLink to={`/bookings/${booking.id}`}><EditBooking booking={booking.id}/></NavLink> */}
                <EditBookingModal booking={booking}/> </div>
