@@ -29,8 +29,8 @@ const CreateBooking = () => {
         const payload = {
             spotId: spot.id,
             userId: user.id,
-            startDate,
-            endDate,
+            startDate: dayjs(startDate).utc().format("YYYY-MM-DD HH:mm:ss"),
+            endDate: dayjs(endDate).utc().format("YYYY-MM-DD HH:mm:ss"),
         }
         setSubmit(true)
         // console.log('spotid', +spotId)
