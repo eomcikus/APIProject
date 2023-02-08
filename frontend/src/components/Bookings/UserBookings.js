@@ -32,9 +32,9 @@ const UserBookings = () => {
                 <div className='booking-card-info'><div id='spot-name'>{booking?.Spot?.name} </div>
                 <br></br>Check-in: {dayjs(booking.startDate).format('MM-DD-YYYY')}
                 <br></br>Check-out: {dayjs(booking.endDate).format('MM-DD-YYYY')}</div>
-               <DeleteTheBook booking={booking} />
+             <div className='button-container'>  <DeleteTheBook booking={booking} />
                {/* <NavLink to={`/bookings/${booking.id}`}><EditBooking booking={booking.id}/></NavLink> */}
-               <EditBookingModal booking={booking}/>
+               <EditBookingModal booking={booking}/> </div>
 </div>
             </div>
             )))}
