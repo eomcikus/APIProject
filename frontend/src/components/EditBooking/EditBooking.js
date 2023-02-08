@@ -4,16 +4,22 @@ import { useHistory, useParams, Redirect } from 'react-router-dom';
 import { editBooking, getUserBookings } from '../../store/bookings';
 import { getSingleSpot } from '../../store/spots';
 import './editbooking.css'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+dayjs.extend(utc)
+dayjs.extend(timezone)
 const EditBooking = ({booking, setShowModal}) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     const {bookingId} = useParams()
     const dayjs = require('dayjs')
+    const tz = 'America/New_York'
+    dayjs.tz.setDefault('America/New_York')
     const [startDate, setStartDate] = useState(booking?.startDate)
     const [endDate, setEndDate] = useState(booking?.endDate)
     const [submit, setSubmit] = useState(false)
-
     useEffect(() => {
         setStartDate(booking?.startDate)
         setEndDate(booking?.endDate)
@@ -55,13 +61,13 @@ const EditBooking = ({booking, setShowModal}) => {
                 <div className='calendar-cont'>
                     <input type='date' 
                     id='calendar-left'
-                    value={dayjs(startDate).format('YYYY-MM-DD')} 
+                    value={dayjs(startDate).tz(tz).format('YYYY-MM-DD')} 
                     onChange={e => setStartDate(e.target.value)} />
                   
                     {/* <label>End</label> */}
                     <input type='date' 
                     id='calendar-right'
-                    value={dayjs(endDate).format('YYYY-MM-DD')}
+                    value={dayjs(endDate).tz(tz).format('YYYY-MM-DD')}
                     onChange={e => setEndDate(e.target.value)} />
                 </div>
                 <button className='reserve-button' type='submit'>Change Booking</button>
