@@ -38,7 +38,7 @@ const CreateBooking = () => {
             <div className='booking-object'>
                 {/* <label>Start</label> */}
                 <div className='booking-spot-info-cont'>
-                    <div className='spot-price-cont'><div className='spot-price'>${spot.price}   </div> <div>{'  '} night </div></div>
+                    <div className='spot-price-cont'><div className='booking-spot-price'>${spot.price}   </div> <div>{'  '} night </div></div>
                     <div className='booking-spot-review-info'><div>★    {spot.avgStarRating}        {'        ·   '}</div>   <div className='num-reviews'> {spot.numReviews} reviews</div></div></div>
                 <div className='calendar-cont'>
                     <input type='date' 

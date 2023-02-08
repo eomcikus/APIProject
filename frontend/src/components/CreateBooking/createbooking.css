@@ -18,8 +18,8 @@
     justify-content: space-between;
 }
 
-.spot-price {
-    font-size: 24px
+.booking-spot-price {
+    font-size: 20px;
 }
 .spot-price-cont {
     display: flex;
