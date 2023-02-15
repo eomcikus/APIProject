@@ -1,28 +1,31 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as reviewActions from "../../store/reviews";
+import {getUserReviews} from "../../store/reviews";
 import RemoveReview from '../RemoveReview';
+import EditReview from '../EditReview.js/EditReview';
 
 
 
 const CurrentUsersReviews = () => {
     const dispatch = useDispatch()
-    const reviews = useSelector(state => Object.values(state.reviews.user))
-    // console.log('get the reviews', reviews)
+    const reviews = useSelector(state => state.reviews['user'])
+    console.log('get the reviews', reviews)
     const sessionUser = useSelector(state => state.session.user)
     // console.log('current user', sessionUser)
-    const finalArr = reviews.filter(review => +review.userId === +sessionUser.id)
+    const finalArr = reviews.filter(review => +review.userId == +sessionUser.id)
+    // console.log('final arr', finalArr)
     useEffect(() => {
-        dispatch(reviewActions.getUserReviews(sessionUser.id))
+        dispatch(getUserReviews())
     }, [dispatch, sessionUser])
     return (
         <div>
             <ul>
-            {finalArr.map(review => (<li key={review.id}>{review.review}, {review.stars}</li>))}
+            {finalArr.map(review => (<li key={review.id}>{review.review}, {review.stars}<EditReview review={review}/><RemoveReview review={review}/></li>))}
             {finalArr.map(review => review.userId === sessionUser.id && (
                 <>
-                <RemoveReview />
+                {/* <EditReview review={review}/> */}
+                <RemoveReview review={review}/>
                 </>
             ))}
             </ul>

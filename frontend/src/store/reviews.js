@@ -49,10 +49,10 @@ export const getReviews = (spotId) => async dispatch => {
 
 export const getUserReviews = () => async dispatch => {
     const response = await csrfFetch(`/api/reviews/current`)
-    // console.log('getUserRes', response)
+    console.log('getUserRes', response)
     if (response.ok) {
         const data = await response.json()
-        // console.log('---data after .json', data)
+        console.log('---data after .json', data)
         dispatch(viewUserRevs(data.Reviews))
     }
 }
@@ -128,11 +128,12 @@ const reviewReducer = (state = initialState, action) => {
             }
         }
         case USER: {
-            newState = {  user: {} }
-            // console.log('action.reviews', action)
-            action.userId.forEach(review => {
-                newState.user[review.id] = review
-            })
+            newState = {  ...state, user: {...state} }
+            console.log('action.reviews', action)
+            // action.userId.forEach(review => {
+            //     newState.user[review.id] = review
+            // })
+            newState.user = action.userId
             return newState;
         }
         case CREATE: {

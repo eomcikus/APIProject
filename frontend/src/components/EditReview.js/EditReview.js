@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
 import { createReview, editReview, getReviews } from '../../store/reviews';
 import { getSingleSpot } from '../../store/spots';
-const EditReview = ({ setShowModal }) => {
+const EditReview = ({ setShowModal, review }) => {
     const dispatch = useDispatch()
     const history= useHistory()
     // const reviewId = useParams()
@@ -16,10 +16,11 @@ const EditReview = ({ setShowModal }) => {
     // console.log('reviews --------', reviews)
     // console.log('review passed in-----', review)
     let userReview;
+    let reviewId;
     if (user) {
     userReview = reviewsArr.find(review => +review.userId == +user.id)
+    reviewId = userReview.id
     }
-    let reviewId = userReview.id
 // console.log('-----------------', userReview)
     const [reviewtext, setReviewtext] = useState(userReview?.review)
     const [stars, setStars] = useState(userReview?.stars)
