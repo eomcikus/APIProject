@@ -54,6 +54,7 @@ export const getUserReviews = () => async dispatch => {
         const data = await response.json()
         console.log('---data after .json', data)
         dispatch(viewUserRevs(data.Reviews))
+        return data.Reviews
     }
 }
 

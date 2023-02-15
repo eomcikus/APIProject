@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
     dispatch(SpotActions.getSpots())
       // dispatch(getSpotBookings())
-      dispatch(getUserReviews())
+      // dispatch(getUserReviews())
   }, [dispatch])
   return (
     <>
