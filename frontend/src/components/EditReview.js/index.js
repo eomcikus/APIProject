@@ -2,7 +2,7 @@ import EditReview from "./EditReview"
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 
-export const EditReviewModal = () => {
+export const EditReviewModal = ({review}) => {
     const [showModal, setShowModal] = useState(false)
     
     return (
@@ -10,7 +10,7 @@ export const EditReviewModal = () => {
         <button onClick={() => setShowModal(true)}>Edit Review</button>
         {showModal && (
             <Modal onClose={() =>  setShowModal(false)}>
-                <EditReview setShowModal={setShowModal} />
+                <EditReview setShowModal={setShowModal} review={review}/>
             </Modal>
         )}
         </>
