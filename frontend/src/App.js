@@ -19,6 +19,7 @@ import BookingsForSpot from "./components/SpotBookings/BookingsBySpotId";
 import { getSpotBookings } from "./store/bookings";
 import EditBooking from "./components/EditBooking/EditBooking";
 import EditBookingModal from "./components/EditBooking";
+import { getUserReviews } from "./store/reviews";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -26,10 +27,11 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
 
   }, [dispatch]);
-  // useEffect(() => {
-  //   dispatch(SpotActions.getSpots())
+  useEffect(() => {
+    dispatch(SpotActions.getSpots())
       // dispatch(getSpotBookings())
-  // }, [dispatch])
+      // dispatch(getUserReviews())
+  }, [dispatch])
   return (
     <>
       <Navigation isLoaded={isLoaded} />
@@ -55,6 +57,9 @@ function App() {
           {/* <Route exact path='/reviews/current'>
             <CurrentUsersReviews />
           </Route> */}
+          <Route exact path='/reviews/current'>
+            <CurrentUsersReviews />
+          </Route>
           <Route exact path='/reviews/:reviewId'>
           
           <RemoveReview />
