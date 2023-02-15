@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { removeReview } from "../../store/reviews";
+import { removeReview, getUserReviews } from "../../store/reviews";
 
 const RemoveReview = ({review}) => {
     const {spotId} = useParams()
@@ -24,6 +24,7 @@ const RemoveReview = ({review}) => {
     const deleteIt = (e) => {
         e.preventDefault()
         dispatch(removeReview(review.id))
+        dispatch(getUserReviews())
         history.push(`/`)
     }
     return (
