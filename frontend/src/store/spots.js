@@ -179,9 +179,9 @@ const spotReducer = (state = initialState, action) => {
             newState = {...state, allSpots: {...state.allSpots}, singleSpot: {}}
             return newState;
         }
-        case USER: {
-            newState
-        }
+        // case USER: {
+        //     newState
+        // }
         default:
             return state;
     }
