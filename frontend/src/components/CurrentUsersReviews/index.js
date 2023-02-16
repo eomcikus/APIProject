@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {getUserReviews} from "../../store/reviews";
 import RemoveReview from '../RemoveReview';
 import EditReviewModal from '../EditReview.js'
-
+import './currentuserreviews.css'
 
 
 const CurrentUsersReviews = () => {
@@ -18,7 +18,7 @@ const CurrentUsersReviews = () => {
     useEffect( async () => {
         const userReviews = await dispatch(getUserReviews())
         setReviews(userReviews.filter(review => +review.userId == +sessionUser.id))
-    }, [dispatch, sessionUser])
+    }, [dispatch,  sessionUser])
     return (
         <div>
             <ul>
