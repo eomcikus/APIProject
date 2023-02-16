@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
-import { createReview, editReview, getReviews } from '../../store/reviews';
+import { createReview, editReview, getReviews, getUserReviews } from '../../store/reviews';
 import { getSingleSpot } from '../../store/spots';
 const EditReview = ({ setShowModal, review }) => {
     const dispatch = useDispatch()
@@ -29,7 +29,7 @@ const EditReview = ({ setShowModal, review }) => {
     useEffect(() => {
         setReviewtext(review.review)
         setStars(review.stars)
-    }, [dispatch])
+    }, [dispatch, review])
     const cancel = async (e) => {
         setShowModal(false)
     }
@@ -45,8 +45,10 @@ const EditReview = ({ setShowModal, review }) => {
         }
         setSubmit(true)
         let updatedReview = await dispatch(editReview(payload, review.id, user))
+        console.log('here')
         if (updatedReview) {
-            await dispatch(getSingleSpot(payload.spotId))
+             dispatch(getSingleSpot(payload.spotId))
+             dispatch(getUserReviews())
             setShowModal(false)
             // return history.push(`/spots/${payload.spotId}`)
         }
@@ -75,7 +77,7 @@ const EditReview = ({ setShowModal, review }) => {
                         value={stars}
                         onChange={e => setStars(e.target.value)}
                         className='stars-input' />
-                    <button type='submit-review-edit' className='edit-review'>Edit Review</button>
+                    <button type='submit-review-edit' className='edit-review' >Edit Review</button>
                 </form>
             </div>
         </>
