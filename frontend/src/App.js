@@ -20,6 +20,8 @@ import { getSpotBookings } from "./store/bookings";
 import EditBooking from "./components/EditBooking/EditBooking";
 import EditBookingModal from "./components/EditBooking";
 import { getUserReviews } from "./store/reviews";
+import CurrentUsersSpots from "./components/CurrentUsersSpots";
+import { getUserSpots } from "./store/spots";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,6 +33,7 @@ function App() {
     dispatch(SpotActions.getSpots())
       // dispatch(getSpotBookings())
       dispatch(getUserReviews())
+      dispatch(getUserSpots())
   }, [dispatch])
   return (
     <>
@@ -40,6 +43,9 @@ function App() {
           <Route exact path="/">
             <AllSpots />
             {/* <CreateSpotForm /> */}
+          </Route>
+          <Route exact path='/spots/current'>
+            <CurrentUsersSpots />
           </Route>
           <Route exact path='/spots/:spotId'>
             <SingleSpot />

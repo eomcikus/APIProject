@@ -1,0 +1,23 @@
+.spotcard-owner {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0, 0.2);
+    border-radius: 15%;
+    padding: 10px;
+}
+
+.owner-spots-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.owner-spot-img {
+    width: 300px;
+    border-radius: 10%;
+    height: 300px;
+    object-fit: cover;
+    padding: 5px;
+}
