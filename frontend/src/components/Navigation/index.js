@@ -16,6 +16,7 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
       <div className='profile-button-container'>
+       <h1 id='header'>Book the Stay of Your Dreams!</h1> 
       <CreateSpotModal className='become-host-button' />
       <ProfileButton  user={sessionUser} />
       </div>
@@ -24,6 +25,7 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
+      <h1 id='header'>Book the Stay of Your Dreams!</h1> 
         <LoginFormModal />
         <SignupFormModal />
       </>

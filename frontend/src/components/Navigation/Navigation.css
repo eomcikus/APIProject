@@ -114,5 +114,13 @@
 .your-reviews {
     text-decoration: none;
     padding-left: 3px;
+<<<<<<< HEAD
+}
 
+#header {
+    align-items: center;
+    padding-right: 250px;
+=======
+
+>>>>>>> 8cca694e523513d6a4d44ef18b43abb7335e7f20
 }
