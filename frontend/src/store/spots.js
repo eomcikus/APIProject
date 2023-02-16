@@ -7,6 +7,7 @@ const UPDATE = '/spots/UPDATE'
 const CREATE = '/spots/CREATE'
 const REMOVE = '/spots/REMOVE'
 const CLEAR = '/spots/CLEAR'
+const USER = '/spots/USER'
 //actions
 const load = spots => ({
     type: LOAD,
@@ -37,6 +38,10 @@ export const clear = ()  =>({
     type: CLEAR,
   
 })
+const user = spots => ({
+    type: USER,
+    spots
+})
 //thunks
 export const getSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`)
@@ -57,7 +62,13 @@ export const getSingleSpot = (spotId) => async dispatch => {
         dispatch(viewOne(oneSpot))
     }
 }
-
+export const getUserSpots = () => async dispatch => {
+    const response = await csrfFetch(`/api/spots/current`)
+    if (response.ok){
+        const userSpots = await response.json()
+        dispatch(user(userSpots))
+    }
+}
 export const updateSpot = (spot, spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
@@ -167,6 +178,9 @@ const spotReducer = (state = initialState, action) => {
         case CLEAR: {
             newState = {...state, allSpots: {...state.allSpots}, singleSpot: {}}
             return newState;
+        }
+        case USER: {
+            newState
         }
         default:
             return state;
