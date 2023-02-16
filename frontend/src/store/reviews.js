@@ -130,10 +130,10 @@ const reviewReducer = (state = initialState, action) => {
         }
         case USER: {
             newState = {  ...state, user: {...state} }
-            console.log('action.reviews', action)
-            // action.userId.forEach(review => {
-            //     newState.user[review.id] = review
-            // })
+
+            action.userId.forEach(review => {
+                newState.user[review.id] = review
+            })
             newState.user = action.userId
             return newState;
         }
@@ -160,8 +160,10 @@ const reviewReducer = (state = initialState, action) => {
         }
         case UPDATE: {
             newState = { ...state, reviews: {...state.reviews} }
+            console.log('NEWSTATE', newState)
             console.log('action reviewid', action.review)
             newState.reviews[action.review.id] = action.review
+            newState.user[action.review.id] = action.review
             return newState
         }
         default:
