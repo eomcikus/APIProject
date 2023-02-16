@@ -12,6 +12,7 @@ const EditReview = ({ setShowModal, review }) => {
     // console.log(user)
     const reviews = useSelector(state => state.reviews.reviews)
     const reviewsArr = Object.values(reviews)
+    const [loading, setLoading] = useState(false)
     // console.log(reviewsArr[0])
     // console.log('reviews --------', reviews)
     console.log('review passed in-----', review)
@@ -29,7 +30,7 @@ const EditReview = ({ setShowModal, review }) => {
     useEffect(() => {
         setReviewtext(review.review)
         setStars(review.stars)
-    }, [dispatch, review])
+    }, [dispatch, review, loading])
     const cancel = async (e) => {
         setShowModal(false)
     }
@@ -44,12 +45,15 @@ const EditReview = ({ setShowModal, review }) => {
             userId: review.userId
         }
         setSubmit(true)
+        setLoading(true)
         let updatedReview = await dispatch(editReview(payload, review.id, user))
         console.log('here')
         if (updatedReview) {
              dispatch(getSingleSpot(payload.spotId))
              dispatch(getUserReviews())
-            setShowModal(false)
+             setLoading(false)
+             setShowModal(false)
+             
             // return history.push(`/spots/${payload.spotId}`)
         }
     }
