@@ -23,6 +23,7 @@ const CreateBooking = () => {
     const [endDate, setEndDate] = useState('')
     const [submit, setSubmit] = useState(false)
     // console.log('reviews in create booking', reviews)
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         let createdBooking;
@@ -45,7 +46,7 @@ const CreateBooking = () => {
             <div className='booking-object'>
                 {/* <label>Start</label> */}
                 <div className='booking-spot-info-cont'>
-                    <div className='spot-price-cont'><div className='booking-spot-price'>${spot.price}   </div> <div>{'  '} night </div></div>
+                    <div className='spot-price-cont'><div className='booking-spot-price'>${spot.price}   </div> <div className='night'>{'  '} night </div></div>
                     <div className='booking-spot-review-info'><div>★    {spot.avgStarRating}        {'        ·   '}</div>   <div className='num-reviews'> {spot.numReviews} reviews</div></div></div>
                 <div className='calendar-cont'>
                     <input type='date' 
