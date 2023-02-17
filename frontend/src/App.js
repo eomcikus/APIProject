@@ -8,7 +8,7 @@ import AllSpots from "./components/AllSpots";
 import SingleSpot from "./components/SingleSpot";
 // import CreateSpotForm from "./components/CreateSpot";
 // import DeleteSpot from "./components/DeleteSpot";
-// import EditSpot from "./components/EditSpot";
+import EditSpot from "./components/EditSpotModal/EditSpot";
 import ReviewsForSpot from "./components/ReviewsForSpot";
 import CreateReviewForm from "./components/CreateReviewModal";
 import RemoveReview from "./components/RemoveReview";
@@ -52,7 +52,7 @@ function App() {
             
             {/* <EditSpot /> */}
           </Route>
-          {/* <Route path='/spots/:spotId/edit'>
+          {/* <Route exact path='/spots/:spotId/edit'>
             <EditSpot />
           </Route> */}
           {/* <Route exact path='/spots/:spotId/reviews'>

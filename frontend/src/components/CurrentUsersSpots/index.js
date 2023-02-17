@@ -8,7 +8,7 @@ import './currentuserspots.css'
 export const CurrentUsersSpots = () => {
     const dispatch = useDispatch()
     const spots = useSelector(state => state.spots.allSpots.Spots)
-    console.log(spots)
+    // console.log(spots)
     useEffect(() => {
         dispatch(getUserSpots())
     }, [dispatch])
@@ -19,7 +19,8 @@ export const CurrentUsersSpots = () => {
         {spots.map(spot => (<div key={spot.id} className='spotcard-owner'>{spot.name}
         <img className='owner-spot-img' src={spot.previewImage}/>
         <div className='owner-desc'>{spot.description}</div>
-        <div className='owner-buttons-container'><EditSpotModal spot={spot}/> <DeleteSpotModal /></div>
+
+        <div className='owner-buttons-container'><EditSpotModal spotId={spot.id}/> <DeleteSpotModal /></div>
         </div>))}
     </div>
     )
