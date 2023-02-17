@@ -18,7 +18,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 // GET spots of current user
 router.get('/current', requireAuth, async (req, res, next) => {
     // if (req.user) {
-
+    console.log('is this even being called tho')
     const spots = await Spot.findAll({
         where: {
             ownerId: req.user.id
@@ -69,6 +69,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         }
 
     }
+    console.log('=-=-=-=-=-=-=-=-=-',res.json({ Spots: spots }))
     res.json({ Spots: spots })
 })
 

@@ -8,7 +8,7 @@ import AllSpots from "./components/AllSpots";
 import SingleSpot from "./components/SingleSpot";
 // import CreateSpotForm from "./components/CreateSpot";
 // import DeleteSpot from "./components/DeleteSpot";
-// import EditSpot from "./components/EditSpot";
+import EditSpot from "./components/EditSpotModal/EditSpot";
 import ReviewsForSpot from "./components/ReviewsForSpot";
 import CreateReviewForm from "./components/CreateReviewModal";
 import RemoveReview from "./components/RemoveReview";
@@ -20,6 +20,8 @@ import { getSpotBookings } from "./store/bookings";
 import EditBooking from "./components/EditBooking/EditBooking";
 import EditBookingModal from "./components/EditBooking";
 import { getUserReviews } from "./store/reviews";
+import CurrentUsersSpots from "./components/CurrentUsersSpots";
+import { getUserSpots } from "./store/spots";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,6 +33,7 @@ function App() {
     dispatch(SpotActions.getSpots())
       // dispatch(getSpotBookings())
       dispatch(getUserReviews())
+      dispatch(getUserSpots())
   }, [dispatch])
   return (
     <>
@@ -41,12 +44,15 @@ function App() {
             <AllSpots />
             {/* <CreateSpotForm /> */}
           </Route>
+          <Route exact path='/spots/current'>
+            <CurrentUsersSpots />
+          </Route>
           <Route exact path='/spots/:spotId'>
             <SingleSpot />
             
             {/* <EditSpot /> */}
           </Route>
-          {/* <Route path='/spots/:spotId/edit'>
+          {/* <Route exact path='/spots/:spotId/edit'>
             <EditSpot />
           </Route> */}
           {/* <Route exact path='/spots/:spotId/reviews'>
