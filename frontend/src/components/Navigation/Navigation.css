@@ -116,7 +116,10 @@
     padding-left: 3px;
 
 }
-
+.your-spots {
+    text-decoration: none;
+    padding-left: 3px;
+}
 #header {
     align-items: center;
     padding-right: 250px;
