@@ -13,7 +13,7 @@ const CurrentUsersReviews = () => {
     // console.log('get the reviews', reviews)
     const reviewz = useSelector(state => state.reviews.user)
     const sessionUser = useSelector(state => state.session.user)
-    console.log('======================', reviewz)
+    // console.log('======================', reviewz)
     // const finalArr = reviews.filter(review => +review.userId == +sessionUser.id)
     // console.log('final arr', finalArr)
     useEffect(() => {

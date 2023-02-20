@@ -18,7 +18,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 // GET spots of current user
 router.get('/current', requireAuth, async (req, res, next) => {
     // if (req.user) {
-    console.log('is this even being called tho')
+    // console.log('is this even being called tho')
     const spots = await Spot.findAll({
         where: {
             ownerId: req.user.id
@@ -69,7 +69,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         }
 
     }
-    console.log('=-=-=-=-=-=-=-=-=-',res.json({ Spots: spots }))
+    // console.log('=-=-=-=-=-=-=-=-=-',res.json({ Spots: spots }))
     res.json({ Spots: spots })
 })
 
@@ -211,9 +211,9 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
     })
 
     let requestedStart = Date.parse(req.body.startDate)
-    console.log('================', requestedStart)
+    // console.log('================', requestedStart)
     let requestedEnd = Date.parse(req.body.endDate)
-    console.log('================', requestedEnd)
+    // console.log('================', requestedEnd)
 
     for (let i = 0; i < bookArray.length; i++) {
         let booking = bookArray[i]
@@ -255,7 +255,7 @@ router.post('/:spotId/bookings', requireAuth, handleValidationErrors, async (req
             startDate: req.body.startDate,
             endDate: req.body.endDate
         })
-        console.log('==============================', req.body.startDate)
+        // console.log('==============================', req.body.startDate)
         // console.log('newBooking=;=;=;=;=;=;==;=;=;=;', newBooking )
         return res.json(newBooking)
     }
@@ -294,7 +294,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
 //GET details of spot by spotId
 router.get('/:spotId', async (req, res, next) => {
-    console.log('print')
+    // console.log('print')
     const spots = await Spot.findAll({
         where: {
             id: req.params.spotId

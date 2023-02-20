@@ -34,7 +34,7 @@ const remove = bookingId => ({
 
 //thunks
 export const getUserBookings = () => async (dispatch) => {
-    console.log('is this even being called tho')
+    // console.log('is this even being called tho')
     const response = await csrfFetch(`/api/bookings/current`)
     if (response.ok){
         const data = await response.json()
@@ -44,7 +44,7 @@ export const getUserBookings = () => async (dispatch) => {
 }
 //get bookings for spot
 export const getSpotBookings = (spotId) => async (dispatch) => {
-    console.log('hello?')
+    // console.log('hello?')
     const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
     if (response.ok){
         const data = await response.json()
@@ -61,7 +61,7 @@ export const addBooking = ( booking, spotId) => async (dispatch)=> {
     })
     if (response.ok){
         const newBooking = await response.json()
-        console.log('-----------------------', newBooking)
+        // console.log('-----------------------', newBooking)
         dispatch(create(newBooking))
         return newBooking;
     }
@@ -111,7 +111,7 @@ const bookingsReducer = (state = initialState, action) => {
         }
         case CREATE: {
             newState = {...state}
-            console.log('action.booking', action)
+            // console.log('action.booking', action)
             newState[action.booking.id] = action.booking
             return newState;
         }

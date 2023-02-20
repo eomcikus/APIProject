@@ -181,7 +181,9 @@ const spotReducer = (state = initialState, action) => {
         }
         case USER: {
             newState = {allSpots: {}, singleSpot: {}}
-            newState.allSpots = action.spots;
+            action.spots.Spots.forEach(spot => {
+                newState.allSpots[spot.id] = spot
+            })
             return newState;
         }
         default:
