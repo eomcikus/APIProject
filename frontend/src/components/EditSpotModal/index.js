@@ -7,7 +7,8 @@ export const EditSpotModal = ({spotId}) => {
     const [showModal, setShowModal] = useState(false);
     // const history = useHistory()
     // const {spotId} = useParams()
-    console.log('spot in modal', spotId)
+
+    // console.log('spot in modal', spotId)
     return (
       <>
         <button onClick={() => setShowModal(true)}>Edit Spot</button>

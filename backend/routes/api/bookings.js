@@ -17,7 +17,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 //get all of the current user's bookings
 router.get('/current', requireAuth, async (req, res) => {
     // if (req.user){
-        console.log('----------------------------------here in backend')
+        // console.log('----------------------------------here in backend')
     const currentBookings = await Booking.findAll({
         where: {
             userId: req.user.id
@@ -102,10 +102,10 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     const { startDate, endDate } = req.body
 
     let requestedStart = new Date(startDate).getTime()
-    console.log('reqstart ============>', requestedStart)
+    // console.log('reqstart ============>', requestedStart)
     let requestedEnd = new Date(endDate).getTime()
-    console.log('reqend ==============>', requestedEnd)
-    console.log((requestedEnd - requestedStart))
+    // console.log('reqend ==============>', requestedEnd)
+    // console.log((requestedEnd - requestedStart))
     if ((requestedEnd - requestedStart) < 0) {
         return res.json({
             "message": "Validation error",

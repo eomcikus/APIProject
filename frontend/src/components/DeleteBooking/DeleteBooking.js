@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { deleteBooking } from "../../store/bookings";
 
 const DeleteTheBook = ({booking}) => {
-    console.log('booking', booking)
+    // console.log('booking', booking)
     const dispatch = useDispatch()
     const history = useHistory()
     const deleteIt = (e) => {

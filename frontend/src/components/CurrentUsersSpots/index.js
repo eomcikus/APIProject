@@ -7,7 +7,7 @@ import DeleteSpotModal from '../DeleteSpotModal'
 import './currentuserspots.css'
 export const CurrentUsersSpots = () => {
     const dispatch = useDispatch()
-    const spots = useSelector(state => state.spots.allSpots.Spots)
+    const spots = useSelector(state => Object.values(state.spots.allSpots))
     // console.log(spots)
     useEffect(() => {
         dispatch(getUserSpots())

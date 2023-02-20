@@ -19,7 +19,7 @@ const CreateBooking = () => {
     dayjs.tz.setDefault('America/New_York')
     const history = useHistory()
     const [startDate, setStartDate] = useState('')
-    console.log('startdate', startDate)
+    // console.log('startdate', startDate)
     const [endDate, setEndDate] = useState('')
     const [submit, setSubmit] = useState(false)
     // console.log('reviews in create booking', reviews)
