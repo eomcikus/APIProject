@@ -9,7 +9,7 @@ const BookingsForSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const bookings = useSelector(state => state.bookings)
-    console.log('bookings state', bookings)
+    // console.log('bookings state', bookings)
     const spot = useSelector(state => state.spots.singleSpot)
     const bookingsArr = Object.values(bookings)
     // console.log('bookingsarr', bookingsArr[0])

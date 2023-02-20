@@ -49,10 +49,10 @@ export const getReviews = (spotId) => async dispatch => {
 
 export const getUserReviews = () => async dispatch => {
     const response = await csrfFetch(`/api/reviews/current`)
-    console.log('getUserRes', response)
+    // console.log('getUserRes', response)
     if (response.ok) {
         const data = await response.json()
-        console.log('---data after .json', data)
+        // console.log('---data after .json', data)
         dispatch(viewUserRevs(data.Reviews))
         return data.Reviews
     }
@@ -117,7 +117,7 @@ const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD: {
             newState = { ...state, reviews: {}}
-            console.log('action.reviews load', action.reviews)
+            // console.log('action.reviews load', action.reviews)
             action.reviews.forEach(review => {
                 newState.reviews[review.id] = review
             })
@@ -139,7 +139,7 @@ const reviewReducer = (state = initialState, action) => {
         }
         case CREATE: {
             newState = { ...state }
-            console.log('action.review', action.review)
+            // console.log('action.review', action.review)
             // newState.Spot[action.review.spotId]
             newState.reviews[action.review.spotId] = action.review
             // newState.User[action.review.id] = action.review
@@ -160,8 +160,8 @@ const reviewReducer = (state = initialState, action) => {
         }
         case UPDATE: {
             newState = { ...state, reviews: {...state.reviews} }
-            console.log('NEWSTATE', newState)
-            console.log('action reviewid', action.review)
+            // console.log('NEWSTATE', newState)
+            // console.log('action reviewid', action.review)
             newState.reviews[action.review.id] = action.review
             newState.user[action.review.id] = action.review
             return newState

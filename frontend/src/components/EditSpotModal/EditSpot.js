@@ -7,12 +7,14 @@ import './EditSpot.css'
 
 const EditSpot = ({setShowModal, spotId}) => {
     const dispatch = useDispatch()
-    // const { spotId } = useParams()
-    console.log('spotId', spotId)
+    // const { spotIdP } = useParams()
+
+    // console.log('spotId', spotId)
     const history = useHistory()
     // console.log(spotId)
-    const currentSpot = useSelector(state => Object.values(state.spots.allSpots));
-    console.log('current spot in edit', currentSpot)
+
+    const currentSpot = useSelector(state => state.spots.allSpots[spotId]);
+    // console.log('current spot in edit', currentSpot)
 
     useEffect(() => {
         dispatch(getSingleSpot(spotId))

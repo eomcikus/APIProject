@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import './DeleteSpot.css'
 
-const DeleteSpot = () => {
-const { spotId } = useParams();
+const DeleteSpot = ({spotId}) => {
+// const { spotId } = useParams();
 const dispatch = useDispatch();
 const history = useHistory()
 const sessionUser = useSelector(state => state.session.user);
-const spot = useSelector(state => state.spots.singleSpot.id)
+const spot = useSelector(state => state.spots.allSpots[spotId])
 // console.log('this is spot in delete spot', spot)
 // console.log(sessionUser)
 // console.log('spot id in deletespot comp', spotId)

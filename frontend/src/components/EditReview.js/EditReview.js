@@ -15,7 +15,7 @@ const EditReview = ({ setShowModal, review }) => {
     const [loading, setLoading] = useState(false)
     // console.log(reviewsArr[0])
     // console.log('reviews --------', reviews)
-    console.log('review passed in-----', review)
+    // console.log('review passed in-----', review)
 //     let userReview;
 //     let reviewId;
     // if (user) {
@@ -47,7 +47,7 @@ const EditReview = ({ setShowModal, review }) => {
         setSubmit(true)
         setLoading(true)
         let updatedReview = await dispatch(editReview(payload, review.id, user))
-        console.log('here')
+        // console.log('here')
         if (updatedReview) {
              dispatch(getSingleSpot(payload.spotId))
              dispatch(getUserReviews())
