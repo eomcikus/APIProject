@@ -25,9 +25,11 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
-      <h1 id='header'>Book the Stay of Your Dreams!</h1> 
-        <LoginFormModal />
-        <SignupFormModal />
+      <div className='loggedout-header-cont'>
+      <h1 id='header-logout'>Book the Stay of Your Dreams!</h1> 
+       <div className='loggedout-button-container'> <LoginFormModal />
+        <SignupFormModal /> </div>
+        </div>
       </>
     );
   }

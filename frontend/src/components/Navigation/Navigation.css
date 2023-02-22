@@ -125,3 +125,15 @@
     padding-right: 250px;
 
 }
+#header-logout {
+    align-items: center;
+    padding-right: 250px;
+}
+.loggedout-button-container {
+
+}
+.loggedout-header-cont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
