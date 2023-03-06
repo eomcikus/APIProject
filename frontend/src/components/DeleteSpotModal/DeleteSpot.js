@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import './DeleteSpot.css'
 
-const DeleteSpot = ({spotId}) => {
-// const { spotId } = useParams();
+const DeleteSpot = () => {
+const { spotId } = useParams();
 const dispatch = useDispatch();
 const history = useHistory()
 const sessionUser = useSelector(state => state.session.user);
