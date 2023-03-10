@@ -16,7 +16,10 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
       <div className='profile-button-container'>
-       <h1 id='header'>Book the Stay of Your Dreams!</h1> 
+       <div className='search-bar-container'>
+       <input type='text' placeholder="Search coming soon!" className='search-bar' />
+        <i className="fa-solid fa-magnifying-glass-location" id='magnifying-glass'/></div>
+       {/* <h1 id='header'>Book the Stay of Your Dreams!</h1>  */}
       <CreateSpotModal className='become-host-button' />
       <ProfileButton  user={sessionUser} />
       </div>
@@ -26,7 +29,8 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
       <div className='loggedout-header-cont'>
-      <h1 id='header-logout'>Book the Stay of Your Dreams!</h1> 
+      {/* <h1 id='header-logout'>Book the Stay of Your Dreams!</h1>  */}
+      <input>Search</input>
        <div className='loggedout-button-container'> <LoginFormModal />
         <SignupFormModal /> </div>
         </div>
