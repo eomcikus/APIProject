@@ -129,11 +129,37 @@
     align-items: center;
     padding-right: 250px;
 }
-.loggedout-button-container {
+/* .loggedout-button-container {
 
+} */
+.search-bar {
+    border: none;
+    border-radius: 25px;
+    cursor: not-allowed;
+    align-items: center;
+    width: 100%;
+    cursor: not-allowed;
+    
+}
+.search-bar-container {
+    border: .5px grey solid;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 5px;
+    border-radius: 25px;
+    
 }
 .loggedout-header-cont {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+#magnifying-glass {
+    background-color: #ff385c;
+    color: white;
+    border-radius: 25px;
+    padding: 5px;
+    cursor: not-allowed;
 }
