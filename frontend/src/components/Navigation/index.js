@@ -17,7 +17,7 @@ function Navigation({ isLoaded }) {
       <>
       <div className='profile-button-container'>
        <div className='search-bar-container'>
-       <input type='text' placeholder="Search coming soon!" className='search-bar' />
+       <input type='text' placeholder="Search coming soon!" className='search-bar' disabled/>
         <i className="fa-solid fa-magnifying-glass-location" id='magnifying-glass'/></div>
        {/* <h1 id='header'>Book the Stay of Your Dreams!</h1>  */}
       <CreateSpotModal className='become-host-button' />
