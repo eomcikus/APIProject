@@ -141,12 +141,13 @@
     cursor: not-allowed;
     
 }
+
 .search-bar-container {
     border: .5px grey solid;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding-right: 5px;
     border-radius: 25px;
     
