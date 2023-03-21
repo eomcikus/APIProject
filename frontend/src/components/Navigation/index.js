@@ -15,9 +15,9 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <>
-       <div className='search-bar-container'>
+       {/* <div className='search-bar-container'>
        <input type='text' placeholder="Search coming soon!" className='search-bar'  disabled />
-      <i className="fa-solid fa-magnifying-glass-location" id='magnifying-glass' /></div>
+      <i className="fa-solid fa-magnifying-glass-location" id='magnifying-glass' /></div> */}
       <div className='profile-button-container'>
        {/* <h1 id='header'>Book the Stay of Your Dreams!</h1>  */}
       <CreateSpotModal className='become-host-button' />
@@ -30,7 +30,7 @@ function Navigation({ isLoaded }) {
       <>
       <div className='loggedout-header-cont'>
       {/* <h1 id='header-logout'>Book the Stay of Your Dreams!</h1>  */}
-      <input type='text' placeholder="Search coming soon!" className='search-bar' disabled />
+      {/* <input type='text' placeholder="Search coming soon!" className='search-bar' disabled /> */}
        <div className='loggedout-button-container'> <LoginFormModal />
         <SignupFormModal /> </div>
         </div>
@@ -44,6 +44,9 @@ function Navigation({ isLoaded }) {
           <div>
             <NavLink exact to="/"><img src={logo}/></NavLink>
           </div>
+          <div className='search-bar-container'>
+       <input type='text' placeholder="Search coming soon!" className='search-bar'  disabled />
+      <i className="fa-solid fa-magnifying-glass-location" id='magnifying-glass' /></div>
           <div>
           {isLoaded && sessionLinks}
           </div>
