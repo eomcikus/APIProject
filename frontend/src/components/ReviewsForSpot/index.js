@@ -8,11 +8,11 @@ import './ReviewsForSpot.css';
 import ReviewCard from "../ReviewCard";
 const ReviewsForSpot = () => {
     const { spotId } = useParams();
-    let reviewsobj = useSelector(state=> state.reviews)
+    let reviewsobj = useSelector(state=> state.reviews);
 
     let reviews = useSelector(state => Object.values(state.reviews));
     // console.log('reviews', reviews)
-    let reviews2 = Object.values(reviews[0])
+    let reviews2 = Object.values(reviews[0]);
 
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const ReviewsForSpot = () => {
     useEffect(() => {
         dispatch(ReviewsActions.getReviews(spotId))
     }, [dispatch]);
-    if (!reviews2) return null
+    if (!reviews2) return null;
     if (reviews.length === 0) return null;
 
     return (
